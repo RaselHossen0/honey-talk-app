@@ -1,0 +1,96 @@
+class SocketParams {
+  static const String data = "data";
+  static const String date = "date";
+  static const String chatTopicId = "chatTopicId";
+  static const String senderId = "senderId";
+  static const String receiverId = "receiverId";
+  static const String message = "message";
+  static const String messageType = "messageType";
+  static const String image = "image";
+  static const String messageId = "messageId";
+  static const String isMediaBanned = "isMediaBanned";
+  static const String callerId = "callerId";
+  static const String callId = "callId";
+  static const String isAccept = "isAccept";
+  static const String agoraUID = "agoraUID";
+  static const String channel = "channel";
+  static const String callerName = "callerName";
+  static const String receiverName = "receiverName";
+  static const String token = "token";
+  static const String callType = "callType";
+  static const String isBusy = "isBusy";
+  static const String receiverImage = "receiverImage";
+  static const String callerImage = "callerImage";
+  static const String liveHistoryId = "liveHistoryId";
+  static const String commentText = "commentText";
+  static const String userId = "userId";
+  static const String senderUserId = "senderUserId";
+  static const String senderName = "senderName";
+  static const String senderImage = "senderImage";
+  static const String senderUniqueId = "senderUniqueId";
+  static const String senderProfilePicBanned = "senderProfilePicBanned";
+  static const String receiverUserId = "receiverUserId";
+  static const String giftId = "giftId";
+  static const String giftCount = "giftCount";
+  static const String liveType = "liveType";
+  static const String giftUrl = "giftUrl";
+  static const String giftType = "giftType";
+  static const String giftData = "giftData";
+  static const String liveUserObjId = "liveUserObjId";
+  static const String position = "position";
+  static const String lock = "lock";
+  static const String name = "name";
+  static const String agoraUid = "agoraUid";
+  static const String isOnline = "isOnline";
+  static const String mute = "mute";
+  static const String hostIsMuted = "hostIsMuted";
+  static const String speaking = "speaking";
+  static const String seatCount = "seatCount";
+  static const String unblockedUserId = "unblockedUserId";
+  static const String blockedUserId = "blockedUserId";
+  static const String seat = "seat";
+  static const String coin = "coin";
+  static const String topGiftersHost1 = "topGiftersHost1";
+  static const String topGiftersHost2 = "topGiftersHost2";
+  static const String isBattleActive = "isBattleActive";
+  static const String seatInfo = "seatInfo";
+  static const String time = "time";
+  static const String avtarFrameType = "avtarFrameType";
+
+  static const String entryRide = "entryRide";
+  static const String entryRideType = "entryRideType";
+  static const String bgTheme = "bgTheme";
+  static const String avtarFrame = "avtarFrame";
+
+  static const String isManualMode = "isManualMode";
+  static const String pkEndUserId = "pkEndUserId";
+  static const String instantCutRequestByHost = "InstantCutRequestByHost";
+
+  static const String host1Id = "host1Id";
+  static const String host1Name = "host1Name";
+  static const String host1UserName = "host1UserName";
+  static const String host1UniqueId = "host1UniqueId";
+  static const String host1Image = "host1Image";
+  static const String host1ProfilePicIsBanned = "host1ProfilePicIsBanned";
+
+  static const String host1LiveHistoryId = "host1LiveHistoryId";
+  static const String host1Token = "host1Token";
+  static const String host1Channel = "host1Channel";
+  static const String host1Uid = "host1Uid";
+
+  static const String host2Id = "host2Id";
+  static const String host2Token = "host2Token";
+  static const String host2LiveId = "host2LiveId";
+
+  static const String host2ProfilePicIsBanned = "host2ProfilePicIsBanned";
+  static const String topGifters = "topGifters";
+  static const String pkConfig = "pkConfig";
+  static const String response = "response";
+  static const String localRank = "localRank";
+  static const String remoteRank = "remoteRank";
+  static const String isWinner = "isWinner";
+  static const String host1Details = "host1Details";
+  static const String host2Details = "host2Details";
+  static const String isProfilePicBanned = "isProfilePicBanned";
+  static const String duration = "duration";
+}
