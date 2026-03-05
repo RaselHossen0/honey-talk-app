@@ -13,62 +13,64 @@ class ButtonWidget extends GetView<LiveController> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: Container(
-        height: Get.height / 2,
-        color: AppColor.transparent,
-        margin: EdgeInsets.only(right: 15),
-        padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              75.height,
-              GetBuilder<LiveController>(
-                id: AppConstant.onSwitchMic,
-                builder: (controller) => IconButtonWidget(
-                  icon: controller.liveModel?.isMute == true ? AppAssets.icMicOff : AppAssets.icMicOn,
+    return GetBuilder<LiveController>(
+      id: AppConstant.onEventHandler,
+      builder: (controller) {
+        // Mic, Camera, Close moved to bottom bar - only show PK button when in PK mode (bottom bar hidden)
+        final isPkMode = controller.liveModel?.isChannelMediaRelay == true;
+        final isHost = controller.liveModel?.isHost == true;
+        if (!isPkMode) return const SizedBox.shrink();
+
+        return Align(
+          alignment: Alignment.topRight,
+          child: Container(
+            height: Get.height / 2,
+            color: AppColor.transparent,
+            margin: EdgeInsets.only(right: 15),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                75.height,
+                GetBuilder<LiveController>(
+                  id: AppConstant.onSwitchMic,
+                  builder: (c) => IconButtonWidget(
+                    icon: c.liveModel?.isMute == true ? AppAssets.icMicOff : AppAssets.icMicOn,
+                    iconColor: AppColor.white,
+                    iconSize: 20,
+                    circleColor: AppColor.white.withValues(alpha: 0.2),
+                    circleBorderColor: AppColor.white.withValues(alpha: 0.3),
+                    visible: isHost,
+                    callback: c.onSwitchMic,
+                  ),
+                ),
+                15.height,
+                IconButtonWidget(
+                  icon: AppAssets.icCameraRotate,
                   iconColor: AppColor.white,
                   iconSize: 20,
                   circleColor: AppColor.white.withValues(alpha: 0.2),
                   circleBorderColor: AppColor.white.withValues(alpha: 0.3),
-                  visible: controller.liveModel?.isHost == true,
-                  callback: controller.onSwitchMic,
+                  visible: isHost,
+                  callback: controller.onSwitchCamera,
                 ),
-              ),
-              15.height,
-              IconButtonWidget(
-                icon: AppAssets.icCameraRotate,
-                iconColor: AppColor.white,
-                iconSize: 20,
-                circleColor: AppColor.white.withValues(alpha: 0.2),
-                circleBorderColor: AppColor.white.withValues(alpha: 0.3),
-                visible: controller.liveModel?.isHost == true,
-                callback: controller.onSwitchCamera,
-              ),
-              15.height,
-              GetBuilder<LiveController>(
-                id: AppConstant.onEventHandler,
-                builder: (controller) => Visibility(
-                  visible: controller.liveModel?.isChannelMediaRelay == false,
-                  child: IconButtonWidget(
-                    icon: AppAssets.icPkUsers,
-                    iconColor: AppColor.white,
-                    iconSize: 18,
-                    margin: EdgeInsets.only(bottom: 15),
-                    circleColor: AppColor.white.withValues(alpha: 0.2),
-                    circleBorderColor: AppColor.white.withValues(alpha: 0.3),
-                    visible: controller.liveModel?.isHost == true,
-                    callback: () => InviteUserForPkBattleBottomSheet.onShow(),
-                  ),
+                15.height,
+                IconButtonWidget(
+                  icon: AppAssets.icPkUsers,
+                  iconColor: AppColor.white,
+                  iconSize: 18,
+                  margin: EdgeInsets.only(bottom: 15),
+                  circleColor: AppColor.white.withValues(alpha: 0.2),
+                  circleBorderColor: AppColor.white.withValues(alpha: 0.3),
+                  visible: isHost,
+                  callback: () => InviteUserForPkBattleBottomSheet.onShow(),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

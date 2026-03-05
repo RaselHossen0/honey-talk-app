@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:tingle/common/widget/stop_live_dialog_widget.dart';
+import 'package:tingle/custom/function/custom_format_number.dart';
+import 'package:tingle/page/audio_room_page/widget/game_bottom_sheet_widget.dart';
 import 'package:tingle/page/fake_live_page/controller/fake_live_controller.dart';
 import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
@@ -15,21 +19,26 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
   @override
   Widget build(BuildContext context) {
     Utils.onChangeStatusBar(brightness: Brightness.light);
+    final isHost = controller.fakeLiveModel?.isHost ?? false;
 
     return Container(
       width: Get.width,
-      decoration: ispklive == false ? BoxDecoration(color: AppColor.transparent) : BoxDecoration(gradient: AppColor.audioRoomGradient),
-      padding: EdgeInsets.all(20),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              height: 45,
+      padding: EdgeInsets.fromLTRB(15, 8, 15, 8 + MediaQuery.of(context).padding.bottom),
+      decoration: ispklive == false
+          ? BoxDecoration(color: AppColor.black.withValues(alpha: 0.3))
+          : BoxDecoration(gradient: AppColor.audioRoomGradient),
+      child: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Upper row: Comment input only
+            Container(
+              height: 40,
               padding: const EdgeInsets.only(left: 15, right: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColor.white.withValues(alpha: 0.2),
-                // color: AppColor.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Row(
@@ -84,39 +93,132 @@ class FakeCommentTextFieldWidget extends GetView<FakeLiveController> {
                 ],
               ),
             ),
-          ),
-          // GestureDetector(
-          //   onTap: () => GameBottomSheetWidget.onShow(),
-          //   child: Container(
-          //     height: 45,
-          //     width: 45,
-          //     alignment: Alignment.center,
-          //     margin: EdgeInsets.only(left: 10),
-          //     decoration: BoxDecoration(
-          //       color: AppColor.white.withValues(alpha: 0.2),
-          //       shape: BoxShape.circle,
-          //     ),
-          //     child: Image.asset(AppAssets.icGame, width: 26),
-          //   ),
-          // ),
-          GestureDetector(
-            onTap: () {
+            6.height,
+            // Lower row: Action buttons - Call button centered
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Gift (left)
+                if (!isHost)
+                  GestureDetector(
+                    onTap: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      controller.onClickGift(context);
+                    },
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColor.white.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Lottie.asset(
+                        AppAssets.lottieCup,
+                        width: 24,
+                        height: 24,
+                        fit: BoxFit.contain,
+                        repeat: true,
+                        errorBuilder: (_, __, ___) => Image.asset(AppAssets.icLightPinkGift, width: 20, color: AppColor.white),
+                      ),
+                    ),
+                  ),
+                // Call button (center) - viewers only
+                if (!isHost)
+                  Expanded(
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: controller.onClickVideoCall,
+                        child: Container(
+                          height: 40,
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            gradient: AppColor.coinPinkGradient,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(
+                                width: 26,
+                                height: 26,
+                                child: Lottie.asset(
+                                  AppAssets.lottieCallReceive,
+                                  width: 26,
+                                  height: 26,
+                                  fit: BoxFit.contain,
+                                  repeat: true,
+                                  errorBuilder: (_, __, ___) => Image.asset(AppAssets.icCallReceive, width: 18, color: AppColor.white),
+                                ),
+                              ),
+                              6.width,
+                              Text(
+                                "${CustomFormatNumber.onConvert(controller.fakeLiveModel?.host1Coin ?? 0)}/min",
+                                style: AppFontStyle.styleW600(AppColor.white, 12),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                // Game button (host)
+                if (isHost)
+                  GestureDetector(
+                    onTap: () => GameBottomSheetWidget.onShow(),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColor.white.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Lottie.asset(
+                        AppAssets.lottieGameController,
+                        width: 24,
+                        height: 24,
+                        fit: BoxFit.contain,
+                        repeat: true,
+                        errorBuilder: (_, __, ___) => Image.asset(AppAssets.icGame, width: 24, color: AppColor.white),
+                      ),
+                    ),
+                  ),
+                if (isHost) 10.width,
+                10.width,
+                // Close button
+                GestureDetector(
+                  onTap: () {
               FocusManager.instance.primaryFocus?.unfocus();
-              controller.onClickGift(context);
+              if (isHost) {
+                StopLiveDialogWidget.onShow(
+                  title: EnumLocal.txtAreYouSureYouWantToStopTheLiveBroadcast.name.tr,
+                  callBack: () => Get.back(),
+                );
+              } else {
+                Get.back();
+              }
             },
             child: Container(
-              height: 45,
-              width: 45,
-              margin: EdgeInsets.only(left: 10),
+              height: 40,
+              width: 40,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: AppColor.white.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(AppAssets.icLightPinkGift, width: 24),
+              child: Image.asset(
+                isHost ? AppAssets.icPowerOnOff : AppAssets.icClose,
+                width: 22,
+                color: AppColor.white,
+              ),
             ),
           ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

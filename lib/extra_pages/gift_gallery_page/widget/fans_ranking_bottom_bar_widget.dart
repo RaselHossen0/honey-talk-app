@@ -30,7 +30,7 @@ class FansRankingBottomBarWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Image.asset(AppAssets.icCoinStar, width: 18),
+                Image.asset(AppAssets.icMyDiamond, width: 18),
                 3.width,
                 Text(
                   "88,874,414",

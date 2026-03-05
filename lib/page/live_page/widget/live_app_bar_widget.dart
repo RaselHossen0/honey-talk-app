@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/common/widget/custom_text_scrolling.dart';
 import 'package:tingle/common/widget/icon_button_widget.dart';
 import 'package:tingle/page/other_user_profile_bottom_sheet/view/other_user_profile_bottom_sheet.dart';
@@ -35,9 +36,9 @@ class LiveAppBarWidget extends StatelessWidget {
               color: AppColor.transparent,
               child: Row(
                 children: [
-                  Container(
-                    height: 50,
-                    width: controller.liveModel?.isHost == true ? 150 : 180,
+                    Container(
+                      height: 50,
+                      width: controller.liveModel?.isHost == true ? 150 : 225,
                     decoration: BoxDecoration(
                       color: AppColor.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(100),
@@ -119,29 +120,41 @@ class LiveAppBarWidget extends StatelessWidget {
                                     color: AppColor.primary,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Image.asset(AppAssets.icManyUser, color: AppColor.white, width: 16),
-                                ),
-                              )
-                            : GetBuilder<LiveController>(
-                                id: AppConstant.onClickFollow,
-                                builder: (controller) => GestureDetector(
-                                  onTap: controller.onClickFollow,
-                                  child: Container(
-                                    height: 38,
-                                    width: 38,
-                                    margin: EdgeInsets.only(left: 3),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: controller.liveModel?.isFollow == true ? AppColor.white : AppColor.primary,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      controller.liveModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
-                                      color: controller.liveModel?.isFollow == true ? AppColor.primary : AppColor.white,
-                                      width: 22,
-                                    ),
+                                  child: Lottie.asset(
+                                    AppAssets.lottieLiveUsers,
+                                    width: 20,
+                                    height: 20,
+                                    fit: BoxFit.contain,
+                                    repeat: true,
+                                    errorBuilder: (_, __, ___) => Image.asset(AppAssets.icManyUser, color: AppColor.white, width: 16),
                                   ),
                                 ),
+                              )
+                            : Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GetBuilder<LiveController>(
+                                    id: AppConstant.onClickFollow,
+                                    builder: (controller) => GestureDetector(
+                                      onTap: controller.onClickFollow,
+                                      child: Container(
+                                        height: 38,
+                                        width: 38,
+                                        margin: EdgeInsets.only(left: 3),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                          color: controller.liveModel?.isFollow == true ? AppColor.white : AppColor.primary,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.asset(
+                                          controller.liveModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
+                                          color: controller.liveModel?.isFollow == true ? AppColor.primary : AppColor.white,
+                                          width: 22,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                       ],
                     ),
@@ -225,7 +238,7 @@ class LiveAppBarWidget extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Image.asset(AppAssets.icCoinStar, width: 18),
+                        Image.asset(AppAssets.icMyDiamond, width: 18),
                         5.width,
                         GetBuilder<LiveController>(
                           id: AppConstant.onUpdateCoin,

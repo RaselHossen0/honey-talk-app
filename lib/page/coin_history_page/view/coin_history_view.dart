@@ -37,7 +37,7 @@ class CoinHistoryView extends GetView<CoinHistoryController> {
             Row(
               children: [
                 Text(
-                  EnumLocal.txtCoinHistory.name.tr,
+                  EnumLocal.txtDiamondHistory.name.tr,
                   style: AppFontStyle.styleW700(AppColor.black, 16),
                 ),
                 Spacer(),
@@ -175,7 +175,7 @@ class HistoryItemUi extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Image.asset(AppAssets.icMyCoin, width: 32),
+              child: Image.asset(AppAssets.icMyDiamond, width: 32),
             ),
           ),
           10.width,

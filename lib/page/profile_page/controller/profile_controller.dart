@@ -30,7 +30,7 @@ class ProfileController extends GetxController with GetTickerProviderStateMixin 
     isLoading = true;
     update([AppConstant.onGetProfile]);
 
-    fetchUserProfileModel = getDummyFetchUserProfile();
+    fetchUserProfileModel = await fetchMyProfile();
 
     Database.onSetMyCoins((fetchUserProfileModel?.user?.coin ?? 0).toInt());
 

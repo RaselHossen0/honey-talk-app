@@ -15,26 +15,20 @@ class PreviewProfileTabBarWidget extends StatelessWidget {
     return GetBuilder<PreviewUserProfileController>(
       id: AppConstant.onChangeTab,
       builder: (controller) => Container(
-        height: 50,
+        height: 44,
         width: Get.width,
-        // padding: EdgeInsets.symmetric(horizontal: 15),
-        color: AppColor.colorBorder.withValues(alpha: 0.5),
+        color: AppColor.white,
         child: Row(
           children: [
             _TabItemWidget(
-              title: EnumLocal.txtData.name.tr,
+              title: EnumLocal.txtInformation.name.tr,
               isSelected: controller.selectedTabIndex == 0,
               callback: () => controller.onChangeTab(0),
             ),
             _TabItemWidget(
-              title: EnumLocal.txtMoments.name.tr,
+              title: "${EnumLocal.txtVideo.name.tr}(${controller.userVideos.length})",
               isSelected: controller.selectedTabIndex == 1,
               callback: () => controller.onChangeTab(1),
-            ),
-            _TabItemWidget(
-              title: EnumLocal.txtWonderfulMoments.name.tr,
-              isSelected: controller.selectedTabIndex == 2,
-              callback: () => controller.onChangeTab(2),
             ),
           ],
         ),
@@ -59,15 +53,20 @@ class _TabItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: callback,
       child: Container(
-        margin: const EdgeInsets.only(right: 10),
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? AppColor.primary : AppColor.transparent,
-          borderRadius: BorderRadius.circular(100),
+          border: Border(
+            bottom: BorderSide(
+              color: isSelected ? AppColor.pink : AppColor.transparent,
+              width: 3,
+            ),
+          ),
         ),
         child: Text(
           title,
-          style: isSelected ? AppFontStyle.styleW600(AppColor.white, 14) : AppFontStyle.styleW500(AppColor.secondary, 14),
+          style: isSelected
+              ? AppFontStyle.styleW600(AppColor.pink, 14)
+              : AppFontStyle.styleW500(AppColor.grayText, 14),
         ),
       ),
     );

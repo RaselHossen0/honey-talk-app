@@ -56,7 +56,7 @@ class CoinBoxWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(100),
                                   ),
                                   child: Text(
-                                    EnumLocal.txtRemainingCoins.name.tr,
+                                    EnumLocal.txtRemainingDiamonds.name.tr,
                                     style: AppFontStyle.styleW500(AppColor.white, 12),
                                   ),
                                 ),
@@ -65,7 +65,7 @@ class CoinBoxWidget extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Image.asset(
-                                      AppAssets.icMyCoin,
+                                      AppAssets.icMyDiamond,
                                       height: 45,
                                       width: 45,
                                     ),

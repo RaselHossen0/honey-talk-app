@@ -14,40 +14,36 @@ class LiveCommentWidget extends StatelessWidget {
     return GetBuilder<LiveController>(
       id: AppConstant.onChangeComment,
       builder: (controller) => Container(
-        height: 250,
+        height: double.infinity,
         width: Get.width / 1.8,
         color: AppColor.transparent,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: ScrollFadeEffectWidget(
-            axis: Axis.vertical,
-            child: SingleChildScrollView(
-              controller: controller.liveModel?.scrollController,
-              child: ListView.builder(
-                itemCount: controller.liveModel?.liveComments.length ?? 0,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  final indexData = controller.liveModel?.liveComments[index];
-                  return indexData?.type == 1
-                      ? LiveCommentTextWidget(
-                          name: indexData?.name ?? "",
-                          comment: indexData?.commentText ?? "",
-                          image: indexData?.image ?? "",
-                          isBanned: indexData?.isBanned ?? false,
-                        )
-                      : indexData?.type == 2
-                          ? LiveRoomNameCommentWidget(roomName: controller.liveModel?.host1Name ?? "")
-                          : indexData?.type == 3
-                              ? LiveAnnouncementCommentWidget()
-                              : LiveEmojiCommentWidget(
-                                  name: indexData?.name ?? "",
-                                  emoji: indexData?.emoji ?? "",
-                                );
-                },
-              ),
-            ),
+        child: ScrollFadeEffectWidget(
+          axis: Axis.vertical,
+          child: ListView.builder(
+            controller: controller.liveModel?.scrollController,
+            itemCount: controller.liveModel?.liveComments.length ?? 0,
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.zero,
+            reverse: true,
+            itemBuilder: (context, index) {
+              final idx = (controller.liveModel!.liveComments.length - 1 - index);
+              final indexData = controller.liveModel?.liveComments[idx];
+              return indexData?.type == 1
+                  ? LiveCommentTextWidget(
+                      name: indexData?.name ?? "",
+                      comment: indexData?.commentText ?? "",
+                      image: indexData?.image ?? "",
+                      isBanned: indexData?.isBanned ?? false,
+                    )
+                  : indexData?.type == 2
+                      ? LiveRoomNameCommentWidget(roomName: controller.liveModel?.host1Name ?? "")
+                      : indexData?.type == 3
+                          ? LiveAnnouncementCommentWidget()
+                          : LiveEmojiCommentWidget(
+                              name: indexData?.name ?? "",
+                              emoji: indexData?.emoji ?? "",
+                            );
+            },
           ),
         ),
       ),

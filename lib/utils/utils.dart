@@ -53,7 +53,9 @@ abstract class Utils {
 
   static void onGetRandomFakeImage() {
     final List fakeProfileImageList = FetchSettingApi.fetchSettingModel?.data?.profilePhotoList ?? [];
-    int randomIndex = math.Random().nextInt(fakeProfileImageList.length);
+    final len = fakeProfileImageList.length;
+    if (len <= 0) return;
+    final randomIndex = math.Random().nextInt(len);
     Database.onSetFakeProfileImage(fakeProfileImageList[randomIndex]);
   }
 

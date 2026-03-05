@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/custom/function/custom_format_number.dart';
 import 'package:tingle/utils/assets.dart';
@@ -16,22 +17,26 @@ class StreamGridviewItemWidget extends StatelessWidget {
     required this.userName,
     required this.image,
     required this.isBanned,
-    required this.isVerify,
     required this.countryFlag,
+    required this.countryCode,
     required this.viewCount,
     required this.callback,
     required this.liveType,
+    required this.callPricePerMin,
+    this.age = 0,
   });
 
   final String name;
   final String userName;
   final String image;
   final bool isBanned;
-  final bool isVerify;
   final String countryFlag;
+  final String countryCode;
   final int viewCount;
   final Callback callback;
   final int liveType;
+  final int callPricePerMin;
+  final int age;
 
   @override
   Widget build(BuildContext context) {
@@ -58,65 +63,25 @@ class StreamGridviewItemWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
+              // Live badge - top right, purple
               Positioned(
-                left: 10,
-                top: 10,
+                top: 8,
+                right: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColor.black.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(15),
+                    color: AppColor.primary,
+                    borderRadius: BorderRadius.circular(6),
                   ),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        AppAssets.icLiveWave,
-                        width: 12,
-                        color: AppColor.white,
-                      ),
-                      5.width,
-                      Text(
-                        CustomFormatNumber.onConvert(viewCount),
-                        style: AppFontStyle.styleW600(AppColor.white, 10),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 0.5,
-                right: 0.5,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: AppColor.black.withValues(alpha: 0.2),
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      topRight: Radius.circular(16),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        liveType == 1
-                            ? AppAssets.icLiveIcon
-                            : liveType == 2
-                                ? AppAssets.icAudioRoomIcon
-                                : AppAssets.icPkIcon,
-                        width: 15,
-                      ),
-                      5.width,
-                      Text(
-                        liveType == 1
-                            ? EnumLocal.txtLive.name.tr
-                            : liveType == 2
-                                ? EnumLocal.txtAudioLive.name.tr
-                                : liveType == 3
-                                    ? EnumLocal.txtPkBattle.name.tr
-                                    : "",
-                        style: AppFontStyle.styleW500(AppColor.white, 10),
-                      ),
-                    ],
+                  child: Text(
+                    liveType == 1
+                        ? EnumLocal.txtLive.name.tr
+                        : liveType == 2
+                            ? EnumLocal.txtAudioLive.name.tr
+                            : liveType == 3
+                                ? EnumLocal.txtPkBattle.name.tr
+                                : EnumLocal.txtLive.name.tr,
+                    style: AppFontStyle.styleW600(AppColor.white, 10),
                   ),
                 ),
               ),
@@ -136,75 +101,83 @@ class StreamGridviewItemWidget extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 2,
-                child: Container(
-                  height: 50,
-                  width: box.maxWidth,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                        height: 32,
-                        width: 32,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: AppColor.white),
-                        ),
-                        child: Container(
-                          height: 32,
-                          width: 32,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(shape: BoxShape.circle),
-                          child: PreviewProfileImageWidget(image: image, isBanned: isBanned),
-                        ),
-                      ),
-                      10.width,
+                      // Left: name, age badge, flag+country, call rate
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(
+                              name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppFontStyle.styleW700(AppColor.white, 12),
+                            ),
+                            4.height,
                             Row(
                               children: [
-                                Flexible(
-                                  fit: FlexFit.loose,
-                                  child: Text(
-                                    name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: AppFontStyle.styleW700(AppColor.white, 11),
+                                if (age > 0)
+                                  Container(
+                                    margin: const EdgeInsets.only(right: 6),
+                                    height: 18,
+                                    width: 18,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: AppColor.pink,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Text(
+                                      "$age",
+                                      style: AppFontStyle.styleW600(AppColor.white, 10),
+                                    ),
                                   ),
-                                ),
-                                Visibility(
-                                  visible: isVerify,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 3),
-                                    child: Image.asset(AppAssets.icAuthoriseIcon, width: 16),
-                                  ),
+                                PreviewCountryFlagIcon(flag: countryFlag, size: 14),
+                                4.width,
+                                Text(
+                                  countryCode,
+                                  style: AppFontStyle.styleW600(AppColor.white, 10),
                                 ),
                               ],
                             ),
-                            Flexible(
-                              fit: FlexFit.loose,
-                              child: Text(
-                                userName,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppFontStyle.styleW500(AppColor.white, 9),
-                              ),
+                            4.height,
+                            Row(
+                              children: [
+                                Image.asset(AppAssets.icDiamondRing, width: 12, color: AppColor.pink),
+                                4.width,
+                                Text(
+                                  "${CustomFormatNumber.onConvert(callPricePerMin)}/min",
+                                  style: AppFontStyle.styleW600(AppColor.white, 10),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                      10.width,
-                      PreviewCountryFlagIcon(flag: countryFlag),
-                      // Text(
-                      //   CountryFlagIcon.onShow(countryFlag),
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      //   style: AppFontStyle.styleW700(AppColor.black, 20),
-                      // ),
+                      // Right: Lottie call receive button
+                      GestureDetector(
+                        onTap: callback,
+                        behavior: HitTestBehavior.opaque,
+                        child: SizedBox(
+                          width: 44,
+                          height: 44,
+                          child: Lottie.asset(
+                            AppAssets.lottieCallReceive,
+                            width: 44,
+                            height: 44,
+                            fit: BoxFit.contain,
+                            repeat: true,
+                            errorBuilder: (_, __, ___) => Image.asset(AppAssets.icVideoCallBorder, width: 28, color: AppColor.white),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

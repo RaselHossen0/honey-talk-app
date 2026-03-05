@@ -163,7 +163,7 @@ class MonthHottestPage extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 Image.asset(
-                  AppAssets.icCoinStar,
+                  AppAssets.icMyDiamond,
                   width: 16,
                 ),
                 const SizedBox(width: 4),

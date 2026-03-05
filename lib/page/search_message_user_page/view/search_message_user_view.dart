@@ -46,7 +46,7 @@ class SearchMessageUserView extends GetView<SearchMessageUserController> {
                           callback: () => Get.toNamed(
                             AppRoutes.chatPage,
                             arguments: {
-                              ApiParams.roomId: indexData.id ?? "",
+                              ApiParams.roomId: indexData.chatTopicId ?? "",
                               ApiParams.receiverUserId: indexData.id ?? "",
                               ApiParams.name: indexData.name ?? "",
                               ApiParams.image: indexData.image ?? "",

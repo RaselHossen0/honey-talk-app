@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/page/audio_room_page/widget/audio_room_gift_bottom_sheet_widget.dart';
+import 'package:tingle/page/audio_room_page/widget/game_bottom_sheet_widget.dart';
 import 'package:tingle/page/audio_room_page/controller/audio_room_controller.dart';
 import 'package:tingle/page/audio_room_page/widget/audio_room_text_field_widget.dart';
 import 'package:tingle/page/audio_room_page/widget/emoji_bottom_sheet_widget.dart';
@@ -29,19 +31,26 @@ class AudioRoomBottomBarWidget extends GetView<AudioRoomController> {
                     // controller.isShowTextField
                     AudioRoomTextFieldWidget()),
             10.width,
-            // GestureDetector(
-            //   onTap: () => GameBottomSheetWidget.onShow(),
-            //   child: Container(
-            //     height: 40,
-            //     width: 40,
-            //     alignment: Alignment.center,
-            //     decoration: BoxDecoration(
-            //       color: AppColor.white.withValues(alpha: 0.2),
-            //       shape: BoxShape.circle,
-            //     ),
-            //     child: Image.asset(AppAssets.icGame, width: 26),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () => GameBottomSheetWidget.onShow(),
+              child: Container(
+                height: 40,
+                width: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: AppColor.white.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                ),
+                child: Lottie.asset(
+                  AppAssets.lottieGameController,
+                  width: 26,
+                  height: 26,
+                  fit: BoxFit.contain,
+                  repeat: true,
+                  errorBuilder: (_, __, ___) => Image.asset(AppAssets.icGame, width: 26, color: AppColor.white),
+                ),
+              ),
+            ),
             10.width,
             GestureDetector(
               onTap: () {

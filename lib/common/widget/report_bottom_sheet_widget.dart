@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:tingle/common/api/submit_report_api.dart';
 import 'package:tingle/common/model/fetch_report_reason_model.dart';
 import 'package:tingle/common/model/send_report_model.dart';
 import 'package:tingle/common/shimmer/report_bottom_sheet_shimmer_widget.dart';
@@ -22,13 +23,19 @@ class ReportBottomSheetWidget {
 
   static Future<void> onSendReport({required String id, required String type}) async {
     Utils.showToast(text: EnumLocal.txtReportSending.name.tr);
-
+    final reasonId = reportTypes.isNotEmpty && selectedReportType.value < reportTypes.length
+        ? reportTypes[selectedReportType.value].id ?? ''
+        : '';
+    sendReportModel = await SubmitReportApi.callApi(
+      type: type,
+      id: id,
+      reportReasonId: reasonId,
+    );
     Get.back();
-
     if (sendReportModel?.status ?? false) {
       Utils.showToast(text: EnumLocal.txtReportSendSuccess.name.tr);
     } else {
-      Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+      Utils.showToast(text: sendReportModel?.message ?? EnumLocal.txtSomeThingWentWrong.name.tr);
     }
   }
 

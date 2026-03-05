@@ -198,7 +198,7 @@ class FrameRecommendationCard extends StatelessWidget {
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Image.asset(
-                          AppAssets.icCoinStar,
+                          AppAssets.icMyDiamond,
                           width: 18,
                         ),
                         4.width,

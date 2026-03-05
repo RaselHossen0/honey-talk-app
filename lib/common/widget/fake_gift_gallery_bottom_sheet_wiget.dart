@@ -293,7 +293,7 @@ class GiftItemWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(AppAssets.icCoinStar, width: 12),
+                          Image.asset(AppAssets.icMyDiamond, width: 12),
                           3.width,
                           Text(
                             CustomFormatNumber.onConvert(gift?.giftCoin ?? 0),

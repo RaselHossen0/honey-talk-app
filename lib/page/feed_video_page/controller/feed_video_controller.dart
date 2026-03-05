@@ -40,7 +40,7 @@ class FeedVideoController extends GetxController {
   }
 
   Future<void> onGetVideo() async {
-    fetchVideoModel = await FetchVideoApi.callApi();
+    fetchVideoModel = await FetchVideoApi.callApi(limit: 20, offset: videos.length);
     videos.addAll(fetchVideoModel?.data ?? []);
 
     isLoading = false;

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "422786461200",
-    "project_id": "tingle-eda4e",
-    "storage_bucket": "tingle-eda4e.firebasestorage.app"
+    "project_number": "1035561747062",
+    "project_id": "honeytalk-53099",
+    "storage_bucket": "honeytalk-53099.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:422786461200:android:75572b7b67db9c9a2e6495",
+        "mobilesdk_app_id": "1:1035561747062:android:67ad678efe47b9bf3b5557",
         "android_client_info": {
-          "package_name": "com.incodes.tingle"
+          "package_name": "com.app.honeytalk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "422786461200-nu43u69hk973073j54pg2oohhdg45vmf.apps.googleusercontent.com",
+          "client_id": "1035561747062-eeg2lkuqd1bkq66nb5f6pa5s4vqil3ai.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyArBo2VawXTMP9pwltU0bs5Ya3vSU1friE"
+          "current_key": "AIzaSyAUNDdqe6rIbdZ2naI_pcqkt-wMSU_P_2Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "422786461200-nu43u69hk973073j54pg2oohhdg45vmf.apps.googleusercontent.com",
+              "client_id": "1035561747062-eeg2lkuqd1bkq66nb5f6pa5s4vqil3ai.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

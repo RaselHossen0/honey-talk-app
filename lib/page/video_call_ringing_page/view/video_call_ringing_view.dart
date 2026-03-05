@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/page/video_call_ringing_page/controller/video_call_ringing_controller.dart';
 import 'package:tingle/utils/assets.dart';
@@ -106,10 +107,13 @@ class VideoCallRingingView extends GetView<VideoCallRingingController> {
                           color: AppColor.red,
                           shape: BoxShape.circle,
                         ),
-                        child: Image.asset(
-                          AppAssets.icCallDecline,
-                          color: AppColor.white,
+                        child: Lottie.asset(
+                          AppAssets.lottieCallReject,
                           width: 35,
+                          height: 35,
+                          fit: BoxFit.contain,
+                          repeat: false,
+                          errorBuilder: (_, __, ___) => Image.asset(AppAssets.icCallDecline, width: 35, color: AppColor.white),
                         ),
                       ),
                     ),

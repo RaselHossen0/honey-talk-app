@@ -30,15 +30,22 @@ class StreamTabItemWidget extends GetView<StreamController> {
         : StreamGridviewItemWidget(
             name: indexData.name ?? "",
             userName: indexData.userName ?? "",
-            isBanned: false,
+            isBanned: indexData.isProfilePicBanned ?? false,
             image: indexData.liveType == 3 ? (indexData.pkThumbnails?[0] ?? "") : indexData.image ?? "",
-            isVerify: indexData.isVerified ?? false,
             countryFlag: indexData.countryFlagImage ?? "",
+            countryCode: _countryCode(indexData.country),
             viewCount: indexData.view ?? 0,
             liveType: indexData.liveType ?? 0,
+            callPricePerMin: indexData.coin ?? 0,
             callback: () => onClickLiveUser(indexData),
           );
   }
+}
+
+String _countryCode(String? country) {
+  if (country == null || country.isEmpty) return "";
+  if (country.length <= 2) return country.toUpperCase();
+  return country.substring(0, 2).toUpperCase();
 }
 
 void onClickLiveUser(LiveUserList indexData) {

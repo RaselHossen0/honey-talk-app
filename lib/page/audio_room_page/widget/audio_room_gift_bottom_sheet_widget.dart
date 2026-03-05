@@ -82,7 +82,7 @@ class AudioRoomGiftBottomSheetWidget {
       if (FetchUserCoin.coin.value > giftCoin) {
         Get.back();
       } else {
-        Utils.showToast(text: EnumLocal.txtYouDonHaveSufficientCoinsToSendTheGift.name.tr);
+        Utils.showToast(text: EnumLocal.txtYouDonHaveSufficientDiamondsToSendTheGift.name.tr);
       }
     } else {
       Utils.showToast(text: "Please select the user who sent the gift.");
@@ -389,7 +389,7 @@ class AudioRoomGiftBottomSheetWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppAssets.icCoinStar, width: 20),
+                        Image.asset(AppAssets.icMyDiamond, width: 20),
                         5.width,
                         Obx(
                           () => Text(
@@ -541,7 +541,7 @@ class GiftItemWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(AppAssets.icCoinStar, width: 12),
+                          Image.asset(AppAssets.icMyDiamond, width: 12),
                           3.width,
                           Text(
                             CustomFormatNumber.onConvert(gift?.coin ?? 0),

@@ -11,12 +11,14 @@ import 'package:tingle/custom/function/custom_text_fade.dart';
 import 'package:tingle/database/fake_data/user_fake_data.dart';
 import 'package:tingle/page/fake_live_page/controller/fake_live_controller.dart';
 import 'package:tingle/page/fake_other_user_profile_bottom_sheet/view/fake_other_user_profile_bottom_sheet.dart';
+import 'package:tingle/page/live_end_page/model/live_end_args.dart';
 import 'package:tingle/page/other_user_profile_bottom_sheet/view/other_user_profile_bottom_sheet.dart';
 import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
+import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/utils.dart';
 
 class FakeLiveAppBarWidget extends StatelessWidget {
@@ -114,26 +116,31 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                             ),
                             Visibility(
                               visible: controller.fakeLiveModel?.isHost == false,
-                              child: GetBuilder<FakeLiveController>(
-                                id: AppConstant.onClickFollow,
-                                builder: (controller) => GestureDetector(
-                                  onTap: controller.onClickFollow,
-                                  child: Container(
-                                    height: 35,
-                                    width: 35,
-                                    margin: EdgeInsets.only(left: 8),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: controller.fakeLiveModel?.isFollow == true ? AppColor.white : AppColor.primary,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: controller.fakeLiveModel?.isFollow == true ? AppColor.white : AppColor.primary)),
-                                    child: Image.asset(
-                                      controller.fakeLiveModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
-                                      color: controller.fakeLiveModel?.isFollow == false ? AppColor.white : AppColor.primary,
-                                      width: 22,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  GetBuilder<FakeLiveController>(
+                                    id: AppConstant.onClickFollow,
+                                    builder: (controller) => GestureDetector(
+                                      onTap: controller.onClickFollow,
+                                      child: Container(
+                                        height: 35,
+                                        width: 35,
+                                        margin: EdgeInsets.only(left: 3),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: controller.fakeLiveModel?.isFollow == true ? AppColor.white : AppColor.primary,
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: controller.fakeLiveModel?.isFollow == true ? AppColor.white : AppColor.primary)),
+                                        child: Image.asset(
+                                          controller.fakeLiveModel?.isFollow == true ? AppAssets.icFollowing : AppAssets.icFollow,
+                                          color: controller.fakeLiveModel?.isFollow == false ? AppColor.white : AppColor.primary,
+                                          width: 22,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ],
@@ -201,7 +208,24 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                       callback: () => controller.fakeLiveModel?.isHost == true
                           ? StopLiveDialogWidget.onShow(
                               title: "Are you sure you want to stop the live broadcast?",
-                              callBack: () => Get.close(2),
+                              callBack: () {
+                                Get.back();
+                                final model = controller.fakeLiveModel;
+                                if (model != null) {
+                                  Get.offNamed(
+                                    AppRoutes.liveEndPage,
+                                    arguments: LiveEndArgs(
+                                      hostImage: model.host1Image,
+                                      hostName: model.host1Name,
+                                      countryFlag: '🇮🇳',
+                                      age: 18,
+                                      likesCount: model.host1Rank,
+                                      liveDurationMinutes: model.liveCountTime ~/ 60,
+                                      audienceCount: model.liveViewers.length,
+                                    ),
+                                  );
+                                }
+                              },
                             )
                           : Get.back(),
                     ),
@@ -221,7 +245,7 @@ class FakeLiveAppBarWidget extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Image.asset(AppAssets.icCoinStar, width: 18),
+                        Image.asset(AppAssets.icMyDiamond, width: 18),
                         3.width,
                         Text(
                           CustomFormatNumber.onConvert(Random.secure().nextInt(100000)),

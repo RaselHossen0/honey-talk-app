@@ -60,7 +60,7 @@ class Hashtags {
 }
 
   Hashtags.fromJson(dynamic json) {
-    _id = json['_id'];
+    _id = json['_id'] ?? json['id'];
     _hashTag = json['hashTag'];
     _usageCount = json['usageCount'];
   }

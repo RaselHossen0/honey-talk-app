@@ -181,7 +181,7 @@ class _UserListTileWidgetState extends State<OtherUserListTileWidget> {
                             ),
                             child: Row(
                               children: [
-                                Image.asset(AppAssets.icCoinStar, width: 15),
+                                Image.asset(AppAssets.icMyDiamond, width: 15),
                                 3.width,
                                 Text(
                                   "${widget.coin}",

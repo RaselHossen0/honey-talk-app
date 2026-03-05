@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
-import 'package:tingle/common/function/gender_icon.dart';
+import 'package:tingle/common/function/country_flag_icon.dart';
 import 'package:tingle/common/model/fatch_other_user_profile_model.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/custom/function/custom_format_number.dart';
@@ -13,246 +13,269 @@ import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
 import 'package:tingle/utils/utils.dart';
 
-//ignore: must_be_immutable
+/// Large profile header + user info row matching preview profile layout.
 class FakeOtherUserProfileDetailsWidget extends StatelessWidget {
-  FakeOtherUserProfileDetailsWidget({
+  const FakeOtherUserProfileDetailsWidget({
     super.key,
     required this.otherUserProfileModel,
+    required this.onClose,
   });
-  OtherUserProfileModel? otherUserProfileModel;
+
+  final OtherUserProfileModel? otherUserProfileModel;
+  final VoidCallback onClose;
+
   @override
   Widget build(BuildContext context) {
+    final user = otherUserProfileModel?.user;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Stack(
+          clipBehavior: Clip.none,
           children: [
-            SizedBox(
-              height: 350,
+            Container(
+              height: Get.height * 0.35,
               width: Get.width,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-                child: PreviewPostImageWidget(
-                  image: otherUserProfileModel?.user?.image ?? "",
-                  isBanned: otherUserProfileModel?.user?.isProfilePicBanned ?? false,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(AppAssets.imgCreateLiveRoomBg),
                   fit: BoxFit.cover,
+                ),
+              ),
+              child: PreviewProfileImageWidget(
+                image: user?.image ?? "",
+                isBanned: user?.isProfilePicBanned ?? false,
+                fit: BoxFit.cover,
+                isShowPlaceHolder: false,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppColor.transparent, AppColor.black.withValues(alpha: 0.6)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
             ),
             Positioned(
-              right: 5,
-              top: 10,
+              left: 15,
+              bottom: 15,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (user?.wealthLevel != null)
+                    SizedBox(
+                      height: 28,
+                      child: PreviewWealthLevelImage(
+                        height: 28,
+                        width: 60,
+                        image: user?.wealthLevel?.levelImage,
+                      ),
+                    ),
+                  if (user?.wealthLevel != null) 6.height,
+                  Row(
+                    children: [
+                      Text(
+                        "${CustomFormatNumber.onConvert((user?.totalFollowers ?? 0).toInt())} ${EnumLocal.txtFans.name.tr}",
+                        style: AppFontStyle.styleW600(AppColor.white, 13),
+                      ),
+                      12.width,
+                      Text(
+                        "${CustomFormatNumber.onConvert((user?.totalFollowing ?? 0).toInt())} ${EnumLocal.txtFollowUp.name.tr}",
+                        style: AppFontStyle.styleW600(AppColor.white, 13),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              right: 15,
+              bottom: 15,
               child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
+                onTap: () {},
                 child: Container(
-                  height: 30,
-                  width: 30,
-                  alignment: Alignment.topRight,
-                  decoration: BoxDecoration(color: AppColor.white, shape: BoxShape.circle),
-                  margin: EdgeInsets.all(5),
-                  child: Center(child: Icon(Icons.close, color: AppColor.black)),
+                  height: 56,
+                  width: 56,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColor.white, width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColor.black.withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: ClipOval(
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        PreviewProfileImageWidget(
+                          image: user?.image ?? "",
+                          isBanned: user?.isProfilePicBanned ?? false,
+                          fit: BoxFit.cover,
+                          isShowPlaceHolder: false,
+                        ),
+                        Container(
+                          color: AppColor.black.withValues(alpha: 0.4),
+                          child: Center(
+                            child: Image.asset(
+                              AppAssets.icCallReceive,
+                              width: 24,
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: MediaQuery.of(context).viewPadding.top + 8,
+              right: 12,
+              child: GestureDetector(
+                onTap: onClose,
+                child: Container(
+                  height: 36,
+                  width: 36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColor.black.withValues(alpha: 0.5),
+                  ),
+                  child: Icon(Icons.close, color: AppColor.white, size: 22),
                 ),
               ),
             ),
           ],
         ),
-        Container(
-          color: AppColor.transparent,
-          height: 50,
-          width: Get.width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Positioned(
-                  top: -40,
-                  child: SizedBox(
-                    width: Get.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 80,
-                          width: 80,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.transparent,
-                            border: Border.all(color: AppColor.white, width: 2),
-                          ),
-                          child: Container(
-                            clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-                            child: PreviewProfileImageWidget(
-                              image: otherUserProfileModel?.user?.image ?? "",
-                              isBanned: otherUserProfileModel?.user?.isProfilePicBanned ?? false,
-                            ),
-                          ),
-                        ),
-                        Spacer(),
-                        Container(
-                          height: 80,
-                          width: 230,
-                          clipBehavior: Clip.antiAlias,
-                          padding: EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              bottomLeft: Radius.circular(15),
-                            ),
-                            color: AppColor.white,
-                            border: Border(
-                              top: BorderSide(color: AppColor.lightGray),
-                              left: BorderSide(color: AppColor.lightGray),
-                              bottom: BorderSide(color: AppColor.lightGray),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              ItemWidget(
-                                title: EnumLocal.txtFollow.name.tr,
-                                count: (otherUserProfileModel?.user?.totalFollowing ?? 0).toInt(),
-                                callback: () {
-                                  Get.toNamed(AppRoutes.connectionPage, arguments: {ApiParams.tabIndex: 1})?.then((value) {
-                                    Utils.onChangeStatusBar(brightness: Brightness.dark, delay: 0);
-                                  });
-                                },
-                              ),
-                              VerticalDivider(
-                                color: AppColor.secondary.withValues(alpha: 0.3),
-                                indent: 15,
-                                endIndent: 15,
-                              ),
-                              ItemWidget(
-                                title: EnumLocal.txtFollowers.name.tr,
-                                count: (otherUserProfileModel?.user?.totalFollowers ?? 0).toInt(),
-                                callback: () {
-                                  Get.toNamed(AppRoutes.connectionPage, arguments: {ApiParams.tabIndex: 2})?.then((value) {
-                                    Utils.onChangeStatusBar(brightness: Brightness.dark, delay: 0);
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: Get.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: Text(
-                        maxLines: 1,
-                        otherUserProfileModel?.user?.name ?? "",
-                        style: AppFontStyle.styleW700(AppColor.black, 18),
-                      ),
-                    ),
-                    Visibility(
-                      visible: otherUserProfileModel?.user?.isVerified ?? false,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 5, top: 6),
-                        child: Image.asset(AppAssets.icAuthoriseIcon, width: 15),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              3.height,
-              Row(
-                children: [
-                  PreviewCountryFlagIcon(
-                    flag: otherUserProfileModel?.user?.countryFlagImage,
-                    size: 22,
-                  ),
-                  // Text(
-                  //   CountryFlagIcon.onShow(otherUserProfileModel?.user?.countryFlagImage ?? ""),
-                  //   style: AppFontStyle.styleW700(AppColor.black, 18),
-                  // ),
-                  5.width,
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: AppColor.primary,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(GenderIcon.onShow(otherUserProfileModel?.user?.gender ?? ""), width: 10),
-                        3.width,
-                        Text(
-                          CustomFormatNumber.onConvert((otherUserProfileModel?.user?.age ?? 0).toInt()),
-                          style: AppFontStyle.styleW600(AppColor.white, 10),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              5.height,
-              Row(
-                children: [
-                  Text(
-                    "ID: ${otherUserProfileModel?.user?.uniqueId ?? 0}",
-                    style: AppFontStyle.styleW400(AppColor.secondary, 13),
-                  ),
-                  5.width,
-                  Image.asset(AppAssets.icCopyId, width: 15),
-                ],
-              ),
-            ],
-          ),
-        ),
+        _UserInfoRow(user: user),
       ],
     );
   }
 }
 
-class ItemWidget extends StatelessWidget {
-  const ItemWidget({super.key, required this.title, required this.count, required this.callback});
+class _UserInfoRow extends StatelessWidget {
+  const _UserInfoRow({this.user});
 
-  final String title;
-  final int count;
-  final Callback callback;
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: callback,
-        child: Container(
-          color: AppColor.transparent,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                CustomFormatNumber.onConvert(count),
-                style: AppFontStyle.styleW700(AppColor.primary, 18),
-              ),
-              3.height,
-              Text(
-                title,
-                style: AppFontStyle.styleW500(AppColor.secondary, 12),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 44,
+            width: 44,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.lightGray, width: 1),
+            ),
+            child: PreviewProfileImageWidget(
+              image: user?.image ?? "",
+              isBanned: user?.isProfilePicBanned ?? false,
+            ),
           ),
-        ),
+          12.width,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        user?.name ?? "",
+                        style: AppFontStyle.styleW700(AppColor.black, 16),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    5.width,
+                    if (user?.isVerified ?? false)
+                      Image.asset(AppAssets.icAuthoriseIcon, width: 14),
+                    5.width,
+                    Flexible(
+                      child: Text(
+                        CountryFlagIcon.onShow(user?.countryFlagImage ?? ""),
+                        style: AppFontStyle.styleW700(AppColor.black, 14),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                4.height,
+                Row(
+                  children: [
+                    Text(
+                      CustomFormatNumber.onConvert((user?.age ?? 0).toInt()),
+                      style: AppFontStyle.styleW600(AppColor.grayText, 12),
+                    ),
+                    Text(" • ", style: AppFontStyle.styleW500(AppColor.grayText, 12)),
+                    if (user?.isVerified ?? false)
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(AppAssets.icAuthoriseIcon, width: 12),
+                          2.width,
+                          Text("100%", style: AppFontStyle.styleW600(AppColor.grayText, 12)),
+                          Text(" • ", style: AppFontStyle.styleW500(AppColor.grayText, 12)),
+                        ],
+                      ),
+                    Flexible(
+                      child: GestureDetector(
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(text: (user?.uniqueId).toString()));
+                          Utils.showToast(text: EnumLocal.txtCopiedOnClipboard.name.tr);
+                        },
+                        child: Text(
+                          "ID:${user?.uniqueId ?? 0}",
+                          style: AppFontStyle.styleW600(AppColor.grayText, 12),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRoutes.connectionPage, arguments: {ApiParams.tabIndex: 1})?.then((_) {
+                Utils.onChangeStatusBar(brightness: Brightness.dark);
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                gradient: AppColor.coinPinkGradient,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                EnumLocal.txtFollowUp.name.tr,
+                style: AppFontStyle.styleW600(AppColor.white, 13),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

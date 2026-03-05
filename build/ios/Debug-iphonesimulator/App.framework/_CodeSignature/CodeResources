@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		gR9eTTpcaFBjcLrArKc+RQmMA7M=
+		ctBEUcLK0PEw73inpAeSd593eME=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		19m0yGhJHAHmT6h29ec9bb4gYCI=
+		sWrYhszWawGVqkXrEtSH2ZyC06s=
 		</data>
 		<key>flutter_assets/NativeAssetsManifest.json</key>
 		<data>
@@ -363,6 +363,10 @@
 		<key>flutter_assets/assets/icons/ic_delete_border.webp</key>
 		<data>
 		adMM6XkGcOia4in915lsQppTcXU=
+		</data>
+		<key>flutter_assets/assets/icons/ic_diamond.png</key>
+		<data>
+		Ep2ddqTcuZs74Olq3FGFiQsrvKE=
 		</data>
 		<key>flutter_assets/assets/icons/ic_diamond_ring.webp</key>
 		<data>
@@ -1312,6 +1316,46 @@
 		<data>
 		nWg9NxwqlokoAsogIQR7KwEeH4E=
 		</data>
+		<key>flutter_assets/assets/lottie/Call%20Recive.json</key>
+		<data>
+		gOVCxcYnZRQ6M+vJO1v7RP7V3ik=
+		</data>
+		<key>flutter_assets/assets/lottie/Call%20reject.json</key>
+		<data>
+		STJAWJ5WzOh+OQ4pj+5P2NfD2uQ=
+		</data>
+		<key>flutter_assets/assets/lottie/Game%20Controller.json</key>
+		<data>
+		5xvrpJK4gKFLYVjvazDDPCkT5/w=
+		</data>
+		<key>flutter_assets/assets/lottie/Gift%20box.json</key>
+		<data>
+		aoIdAFYcdVcM8AZqzTet5SK6yV0=
+		</data>
+		<key>flutter_assets/assets/lottie/Live-Users.json</key>
+		<data>
+		bBuz25JuJ3rw6BSWNlsgjQ8t/6s=
+		</data>
+		<key>flutter_assets/assets/lottie/Phone%20icon%20Home%20Page.json</key>
+		<data>
+		8+Y4MsA3V69dr8JJjVl8yH2yYfg=
+		</data>
+		<key>flutter_assets/assets/lottie/Rank.json</key>
+		<data>
+		hZjEO8PDiLHlS9fyGXKGRDTG6TQ=
+		</data>
+		<key>flutter_assets/assets/lottie/Remix%20of%20LIVESTREAM.json</key>
+		<data>
+		F2xMa40OBg4+kTl8dHjEU/pHZxQ=
+		</data>
+		<key>flutter_assets/assets/lottie/lottie_avatar_border.json</key>
+		<data>
+		8TrfKt1mON8C95FpRxGKekm3NPo=
+		</data>
+		<key>flutter_assets/assets/lottie/lottie_cup.json</key>
+		<data>
+		8TrfKt1mON8C95FpRxGKekm3NPo=
+		</data>
 		<key>flutter_assets/assets/lottie/lottie_gift.json</key>
 		<data>
 		q/P7/sYZRAEX68+t/dlqrCwRNBc=
@@ -1331,6 +1375,10 @@
 		<key>flutter_assets/assets/lottie/lottie_wave_animation.json</key>
 		<data>
 		8TrfKt1mON8C95FpRxGKekm3NPo=
+		</data>
+		<key>flutter_assets/assets/lottie/readme.txt</key>
+		<data>
+		qXAoPkEdkxPPnNBlPM/NTQzik84=
 		</data>
 		<key>flutter_assets/assets/music/music_calling_ring.mp3</key>
 		<data>
@@ -1354,7 +1402,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		u0o6xqOuWscBS9sO37+v78Mf4QI=
+		6sHTfW+k976hszAyr/3YEhRlDvo=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -1391,7 +1439,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			gXwxJpxmFESH8citYF5t3AYEQTpzKHHgUJ9RRhbX2ww=
+			HG2m6+G1nAcJ97dkquaIDpBDDy225z/ekzXsgtgJ134=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -1405,7 +1453,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3DG528w0meAFsoIP2/GCU+JUfawUykhy8Nu4M3iZSFM=
+			ek4Qhcs8MIgMbC2jkmSkCsLNAgX+HaBaGHLQcirSIq0=
 			</data>
 		</dict>
 		<key>flutter_assets/NativeAssetsManifest.json</key>
@@ -1994,6 +2042,13 @@
 			<key>hash2</key>
 			<data>
 			tp2fpU82Z6ElbU80+pT6LVnPFNeyRrhrP238eRTdGds=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/icons/ic_diamond.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			c4Trm1GubXF9tArPqHBdgcpfq1zRcfykt07w+oy0rZE=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/icons/ic_diamond_ring.webp</key>
@@ -3648,6 +3703,76 @@
 			8lTvJx+cQTH+qoBDGCxQrS6mZSVmZNM95F+PoADLCGE=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/lottie/Call%20Recive.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QG930YETDBAhOUFODQ2+I5nMzHyNEaJRo7FTo3UA6ig=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Call%20reject.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Pdlm/Axc3gg26wAmYD6wUjdhhTiSJDOZR5GdU+AD1Eo=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Game%20Controller.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tUI3VDjI/PWbD2pTnhkagYrD0Shj+OdBfE/2hRx5+JY=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Gift%20box.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vvLsoUH+5rFIeF6XA+SNQQbL0SgERdw54B9yeDc/tUk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Live-Users.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sQOHpd4og+Lmt0XAvQLVkrETbafh60StV2oVf2SU7Tc=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Phone%20icon%20Home%20Page.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HhFO06jm3gFcccdMQbzO8JvdroM6w3vdrohVN5+SW9k=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Rank.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hrqk5kmyz2gpuhKLj2eUH5QG3fHxar28Cjy5g8MgSTM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/Remix%20of%20LIVESTREAM.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4aaV9CzmBBhbOKeUH8CYHKO4QwGpHLf+w9dvWWLcKlI=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/lottie_avatar_border.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DgZszbIUgXryaqEGumkPu89XpejZEu/7qbv/s35s8j8=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/lottie_cup.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DgZszbIUgXryaqEGumkPu89XpejZEu/7qbv/s35s8j8=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/lottie/lottie_gift.json</key>
 		<dict>
 			<key>hash2</key>
@@ -3681,6 +3806,13 @@
 			<key>hash2</key>
 			<data>
 			DgZszbIUgXryaqEGumkPu89XpejZEu/7qbv/s35s8j8=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/lottie/readme.txt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3zxOx4YQ8KTYcwOk/HV14ANYGR7WBM2+p+I1gXP3+8g=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/music/music_calling_ring.mp3</key>
@@ -3722,7 +3854,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			exZ/orSjQNpfxWwVVZcua5C45OZRVHQw/vN+gJAULmM=
+			gHG1QDDtQ6pJ2VVcZP5xMkpedyM9ktEQRgieU4O7JmI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

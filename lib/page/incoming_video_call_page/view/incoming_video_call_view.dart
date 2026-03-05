@@ -1,6 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/page/incoming_video_call_page/controller/incoming_video_call_controller.dart';
 import 'package:tingle/utils/assets.dart';
@@ -79,10 +80,13 @@ class IncomingVideoCallView extends GetView<IncomingVideoCallController> {
                           shape: BoxShape.circle,
                           color: AppColor.red,
                         ),
-                        child: Image.asset(
-                          AppAssets.icCallDecline,
+                        child: Lottie.asset(
+                          AppAssets.lottieCallReject,
                           width: 35,
-                          color: AppColor.white,
+                          height: 35,
+                          fit: BoxFit.contain,
+                          repeat: false,
+                          errorBuilder: (_, __, ___) => Image.asset(AppAssets.icCallDecline, width: 35, color: AppColor.white),
                         ),
                       ),
                     ),
@@ -96,10 +100,13 @@ class IncomingVideoCallView extends GetView<IncomingVideoCallController> {
                           shape: BoxShape.circle,
                           color: AppColor.green,
                         ),
-                        child: Image.asset(
-                          AppAssets.icCallReceive,
-                          width: 25,
-                          color: AppColor.white,
+                        child: Lottie.asset(
+                          AppAssets.lottieCallReceive,
+                          width: 28,
+                          height: 28,
+                          fit: BoxFit.contain,
+                          repeat: false,
+                          errorBuilder: (_, __, ___) => Image.asset(AppAssets.icCallReceive, width: 25, color: AppColor.white),
                         ),
                       ),
                     ),

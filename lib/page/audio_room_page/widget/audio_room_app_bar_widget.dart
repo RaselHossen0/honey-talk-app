@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/common/widget/custom_text_scrolling.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
 import 'package:tingle/common/widget/stop_live_dialog_widget.dart';
@@ -127,7 +128,14 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                                     color: AppColor.primary,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Image.asset(AppAssets.icManyUser, color: AppColor.white, width: 16),
+                                  child: Lottie.asset(
+                                    AppAssets.lottieLiveUsers,
+                                    width: 20,
+                                    height: 20,
+                                    fit: BoxFit.contain,
+                                    repeat: true,
+                                    errorBuilder: (_, __, ___) => Image.asset(AppAssets.icManyUser, color: AppColor.white, width: 16),
+                                  ),
                                 ),
                               )
                             : GetBuilder<AudioRoomController>(
@@ -290,7 +298,7 @@ class AudioRoomAppbarWidget extends GetView<AudioRoomController> {
                 ),
                 child: Row(
                   children: [
-                    Image.asset(AppAssets.icCoinStar, width: 18),
+                    Image.asset(AppAssets.icMyDiamond, width: 18),
                     5.width,
                     GetBuilder<AudioRoomController>(
                       id: AppConstant.onUpdateCoin,

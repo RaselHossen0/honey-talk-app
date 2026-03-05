@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tingle/routes/app_routes.dart';
+import 'package:tingle/utils/api_params.dart';
 
 class RecentCallModel {
   RecentCallModel({
@@ -64,7 +65,14 @@ class RecentCallsController extends GetxController {
   }
 
   void onMessageTap(RecentCallModel call) {
-    Get.toNamed(AppRoutes.chatPage, arguments: {'userId': call.userId});
+    Get.toNamed(AppRoutes.chatPage, arguments: {
+      ApiParams.roomId: "",
+      ApiParams.receiverUserId: call.userId,
+      ApiParams.name: call.name,
+      ApiParams.image: call.avatarUrl,
+      ApiParams.isBanned: false,
+      ApiParams.isVerify: false,
+    });
   }
 
   void onCallIconTap() {

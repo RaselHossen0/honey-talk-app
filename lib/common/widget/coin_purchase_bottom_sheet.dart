@@ -223,8 +223,8 @@ class CoinPurchaseBottomSheet {
                     ),
                     child: Row(
                       children: [
-                        Image(
-                          image: AssetImage(AppAssets.icCoinStar),
+                        Image.asset(
+                          AppAssets.icMyDiamond,
                           height: 18,
                           width: 18,
                         ),
@@ -252,7 +252,7 @@ class CoinPurchaseBottomSheet {
                       10.height,
                       Text(
                         // "Choose Image",
-                        EnumLocal.txtTopUpCoins.name.tr,
+                        EnumLocal.txtTopUpDiamonds.name.tr,
                         style: AppFontStyle.styleW700(AppColor.black, 17),
                       ),
                     ],
@@ -281,29 +281,39 @@ class CoinPurchaseBottomSheet {
               ),
             ),
             15.height,
-            Obx(() {
-              return isLoading.value
-                  ? CoinRechargeCoinShimmerWidget()
-                  : SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          paymentGetWayWidget(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Text(
-                              EnumLocal.txtPurchaseCoins.name.tr,
-                              style: AppFontStyle.styleW700(AppColor.black, 16),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Obx(() {
+                  // Ensure observable is read for GetX tracking
+                  final loading = isLoading.value;
+                  return loading
+                      ? SizedBox(
+                          height: 500,
+                          child: CoinRechargeCoinShimmerWidget(),
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            paymentGetWayWidget(),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                EnumLocal.txtPurchaseDiamonds.name.tr,
+                                style: AppFontStyle.styleW700(AppColor.black, 16),
+                              ),
                             ),
-                          ),
-                          15.height,
-                          purchaseCoinWidget(),
-                          const SizedBox(height: 15),
-                        ],
-                      ),
-                    );
-            }),
+                            15.height,
+                            purchaseCoinWidget(),
+                            const SizedBox(height: 15),
+                          ],
+                        );
+                }),
+              ),
+            ),
             Obx(() {
+              // Ensure observable is read for GetX tracking
+              final allowed = isAllowAgreement.value;
               return Container(
                 height: 50,
                 width: Get.width,
@@ -320,13 +330,13 @@ class CoinPurchaseBottomSheet {
                         width: 20,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          border: Border.all(color: isAllowAgreement.value ? AppColor.transparent : AppColor.orange),
-                          gradient: isAllowAgreement.value ? AppColor.orangeYellowGradient : null,
+                          border: Border.all(color: allowed ? AppColor.transparent : AppColor.orange),
+                          gradient: allowed ? AppColor.orangeYellowGradient : null,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.done,
-                          color: isAllowAgreement.value ? AppColor.white : AppColor.transparent,
+                          color: allowed ? AppColor.white : AppColor.transparent,
                           size: 15,
                         ),
                       ),
@@ -434,7 +444,7 @@ class ItemWidget extends StatelessWidget {
               children: [
                 12.height,
                 Center(
-                  child: Image.asset(AppAssets.icMyCoin, width: 58),
+                  child: Image.asset(AppAssets.icMyDiamond, width: 58),
                 ),
                 10.height,
                 Container(
@@ -444,7 +454,7 @@ class ItemWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    "${CustomFormatNumber.onConvert(coin)} Coin",
+                    "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtDiamonds.name.tr}",
                     style: AppFontStyle.styleW700(AppColor.orange.withValues(alpha: 0.6), 11),
                   ),
                 ),

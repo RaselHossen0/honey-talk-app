@@ -7,10 +7,18 @@ import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/font_style.dart';
 
 class SenderMessageWidget extends StatelessWidget {
-  const SenderMessageWidget({super.key, required this.message, required this.time});
+  const SenderMessageWidget({
+    super.key,
+    required this.message,
+    required this.time,
+    this.replyToMessage,
+    this.reactions = const [],
+  });
 
   final String message;
   final String time;
+  final String? replyToMessage;
+  final List<String> reactions;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +41,38 @@ class SenderMessageWidget extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                   ),
                 ),
-                child: Text(
-                  message,
-                  style: AppFontStyle.styleW400(AppColor.white, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (replyToMessage != null && replyToMessage!.isNotEmpty) ...[
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 4),
+                        padding: const EdgeInsets.only(left: 6, bottom: 6),
+                        decoration: BoxDecoration(
+                          border: Border(left: BorderSide(color: AppColor.white.withValues(alpha: 0.7), width: 2)),
+                        ),
+                        child: Text(
+                          replyToMessage!,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppFontStyle.styleW400(AppColor.white.withOpacity(0.7), 13),
+                        ),
+                      ),
+                    ],
+                    Text(
+                      message,
+                      style: AppFontStyle.styleW400(AppColor.white, 16),
+                    ),
+                    if (reactions.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Wrap(
+                        spacing: 4,
+                        runSpacing: 2,
+                        children: reactions.map((e) => Text(e, style: const TextStyle(fontSize: 14))).toList(),
+                      ),
+                    ],
+                  ],
                 ),
               ),
               Positioned(

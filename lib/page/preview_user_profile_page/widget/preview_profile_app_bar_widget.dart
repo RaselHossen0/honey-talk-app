@@ -50,21 +50,30 @@ class PreviewProfileAppBarWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Visibility(
-              visible: Database.loginUserId == controller.userId,
-              child: GestureDetector(
-                onTap: () => Get.toNamed(AppRoutes.editProfilePage),
-                child: Container(
-                  height: 45,
-                  width: 45,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
-                  child: Image.asset(
-                    AppAssets.icEditPen,
-                    color: controller.isShowAppBar ? AppColor.black : AppColor.white,
-                    width: 25,
-                  ),
-                ),
+            GestureDetector(
+              onTap: () {
+                if (Database.loginUserId == controller.userId) {
+                  Get.toNamed(AppRoutes.editProfilePage);
+                } else {
+                  // TODO: Show other user menu (report, block, etc.)
+                }
+              },
+              child: Container(
+                height: 45,
+                width: 45,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColor.transparent),
+                child: Database.loginUserId == controller.userId
+                    ? Image.asset(
+                        AppAssets.icEditPen,
+                        color: controller.isShowAppBar ? AppColor.black : AppColor.white,
+                        width: 25,
+                      )
+                    : Icon(
+                        Icons.more_horiz,
+                        color: controller.isShowAppBar ? AppColor.black : AppColor.white,
+                        size: 28,
+                      ),
               ),
             ),
           ],

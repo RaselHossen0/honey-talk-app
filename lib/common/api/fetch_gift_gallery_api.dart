@@ -1,7 +1,6 @@
 import 'package:tingle/common/model/fetch_gift_gallery_model.dart';
+import 'package:tingle/core/network/api_client.dart';
 import 'package:tingle/utils/utils.dart';
-
-import 'dart:async';
 
 class FetchGiftGalleryApi {
   static int startPagination = 0;
@@ -12,27 +11,26 @@ class FetchGiftGalleryApi {
     required String token,
     required String userId,
   }) async {
-    Utils.showLog("Mock Fetch Gift Gallery API Calling...");
-
-    await Future.delayed(const Duration(milliseconds: 100)); // Simulate API delay
-
-    List<Data> dummyGiftGallery = List.generate(
-        8,
-        (index) => Data(
-              id: "giftGalleryId_$index",
-              totalGiftCount: 5 + index,
-              latestDate: "2025-04-${10 + index}T12:34:56Z",
-              giftId: "gift_$index",
-              giftTitle: "Gift Title #$index",
-              giftImage: "https://example.com/images/gift_$index.png",
-              giftCoin: 100 * (index + 1),
-              giftType: index % 2, // 0 or 1
-            ));
-
-    return FetchGiftGalleryModel(
-      status: true,
-      message: "Gift Gallery fetched successfully",
-      data: dummyGiftGallery,
-    );
+    Utils.showLog("Fetch Gift Gallery API Calling...");
+    try {
+      final res = await ApiClient.instance.get(
+        '/gifts/gallery/$userId',
+        queryParameters: {'limit': limitPagination.toString(), 'offset': startPagination.toString()},
+      );
+      final list = (res['data'] as List?)?.cast<Map<String, dynamic>>() ?? [];
+      final items = list.map((m) {
+        final x = Map<String, dynamic>.from(m);
+        x['_id'] = x['giftId'];
+        return Data.fromJson(x);
+      }).toList();
+      return FetchGiftGalleryModel(
+        status: res['status'] as bool? ?? true,
+        message: res['message'] as String? ?? 'Success',
+        data: items,
+      );
+    } catch (e) {
+      Utils.showLog("Fetch Gift Gallery API Error: $e");
+      return null;
+    }
   }
 }

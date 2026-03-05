@@ -69,12 +69,14 @@ class AppRoutes {
   // >>>>> >>>>> >>>>> FAKE PAGE <<<<< <<<<< <<<<<
   static const String fakeAudioRoomPage = '/fake_audio_room_page';
   static const String fakeLivePage = '/fake_live_page';
+  static const String liveEndPage = '/live_end_page';
   static const String fakeChatPage = '/fake_chat_page';
 
   // >>>>> >>>>> >>>>> SINGLE PAGE <<<<< <<<<< <<<<<
   static const String myChatPricePage = '/my_chat_price_page';
   static const String myProfilePage = '/my_profile_page';
   static const String myIncomePage = '/my_income_page';
+  static const String taskPage = '/task_page';
   static const String incomeDetailsPage = '/income_details_page';
   static const String reportPage = '/report_page';
   static const String charmingLevelPage = '/charming_level_page';

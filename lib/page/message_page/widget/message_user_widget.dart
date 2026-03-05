@@ -19,6 +19,7 @@ class MessageUserWidget extends StatelessWidget {
     required this.isVerified,
     required this.isProfileImageBanned,
     this.wealthLevel,
+    this.isOnline,
   });
 
   final String title;
@@ -30,6 +31,7 @@ class MessageUserWidget extends StatelessWidget {
   final bool isVerified;
   final bool isProfileImageBanned;
   final int? wealthLevel;
+  final bool? isOnline;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,31 @@ class MessageUserWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 55,
-              width: 55,
-              clipBehavior: Clip.antiAlias,
-              decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: PreviewProfileImageWidget(image: leading, isBanned: isProfileImageBanned),
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 55,
+                  width: 55,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  child: PreviewProfileImageWidget(image: leading, isBanned: isProfileImageBanned),
+                ),
+                if (isOnline == true)
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      width: 14,
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: AppColor.green,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColor.white, width: 2),
+                      ),
+                    ),
+                  ),
+              ],
             ),
             12.width,
             Expanded(

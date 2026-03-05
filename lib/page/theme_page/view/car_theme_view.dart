@@ -146,7 +146,7 @@ class RideThemeView extends GetView<ThemeController> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            AppAssets.icCoinStar,
+                                            AppAssets.icMyDiamond,
                                             height: 16,
                                             width: 16,
                                           ),
@@ -205,7 +205,7 @@ class RideThemeView extends GetView<ThemeController> {
                   Row(
                     children: [
                       Image.asset(
-                        AppAssets.icCoinStar,
+                        AppAssets.icMyDiamond,
                         height: 18,
                         width: 18,
                       ),

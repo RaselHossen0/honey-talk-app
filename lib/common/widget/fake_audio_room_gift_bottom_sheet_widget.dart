@@ -103,7 +103,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
 
       Get.back();
     } else {
-      Utils.showToast(text: EnumLocal.txtYouDonHaveSufficientCoinsToSendTheGift.name.tr);
+      Utils.showToast(text: EnumLocal.txtYouDonHaveSufficientDiamondsToSendTheGift.name.tr);
     }
   }
 
@@ -410,7 +410,7 @@ class FakeAudioRoomGiftBottomSheetWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(AppAssets.icCoinStar, width: 20),
+                          Image.asset(AppAssets.icMyDiamond, width: 20),
                           5.width,
                           Obx(
                             () => Text(
@@ -566,7 +566,7 @@ class GiftItemWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(AppAssets.icCoinStar, width: 12),
+                          Image.asset(AppAssets.icMyDiamond, width: 12),
                           3.width,
                           Text(
                             CustomFormatNumber.onConvert(gift?.coin ?? 0),

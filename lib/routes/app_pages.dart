@@ -31,6 +31,8 @@ import 'package:tingle/page/fake_chat_page/binding/fake_chat_binding.dart';
 import 'package:tingle/page/fake_chat_page/view/fake_chat_view.dart';
 import 'package:tingle/page/fake_live_page/binding/fake_live_binding.dart';
 import 'package:tingle/page/fake_live_page/view/fake_live_view.dart';
+import 'package:tingle/page/live_end_page/binding/live_end_binding.dart';
+import 'package:tingle/page/live_end_page/view/live_end_view.dart';
 import 'package:tingle/page/fans_ranking_page/binding/fans_ranking_binding.dart';
 import 'package:tingle/page/fans_ranking_page/view/fans_ranking_view.dart';
 import 'package:tingle/page/feed_page/binding/feed_binding.dart';
@@ -47,6 +49,8 @@ import 'package:tingle/page/my_profile_page/binding/my_profile_binding.dart';
 import 'package:tingle/page/my_profile_page/view/my_profile_view.dart';
 import 'package:tingle/page/my_income_page/binding/my_income_binding.dart';
 import 'package:tingle/page/my_income_page/view/my_income_view.dart';
+import 'package:tingle/page/task_page/binding/task_binding.dart';
+import 'package:tingle/page/task_page/view/task_view.dart';
 import 'package:tingle/page/my_live_pictures_page/binding/my_live_pictures_binding.dart';
 import 'package:tingle/page/my_live_pictures_page/view/my_live_pictures_view.dart';
 import 'package:tingle/page/recent_calls_page/binding/recent_calls_binding.dart';
@@ -295,6 +299,11 @@ class AppPages {
       binding: FakeLiveBinding(),
     ),
     GetPage(
+      name: AppRoutes.liveEndPage,
+      page: () => const LiveEndView(),
+      binding: LiveEndBinding(),
+    ),
+    GetPage(
       name: AppRoutes.fakeChatPage,
       page: () => const FakeChatView(),
       binding: FakeChatBinding(),
@@ -358,6 +367,11 @@ class AppPages {
       name: AppRoutes.myIncomePage,
       page: () => const MyIncomeView(),
       binding: MyIncomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.taskPage,
+      page: () => const TaskView(),
+      binding: TaskBinding(),
     ),
     GetPage(
       name: AppRoutes.incomeDetailsPage,

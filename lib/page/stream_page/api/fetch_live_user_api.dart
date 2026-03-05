@@ -1,7 +1,5 @@
-import 'dart:async';
-import 'dart:math';
-import 'package:tingle/database/fake_data/user_fake_data.dart';
-import 'package:tingle/page/stream_page/model/fetch_live_user_model.dart'; // make sure path is correct
+import 'package:tingle/core/network/api_client.dart';
+import 'package:tingle/page/stream_page/model/fetch_live_user_model.dart';
 import 'package:tingle/utils/utils.dart';
 
 class FetchLiveUserApi {
@@ -12,76 +10,55 @@ class FetchLiveUserApi {
     required int startPage,
     String? country,
   }) async {
-    Utils.showLog("Mock Fetch Live User API Called");
-
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 100));
-    FakeProfilesSet.sampleNames.shuffle();
-    FakeProfilesSet.sampleImages.shuffle();
-    // Return dummy data
-    return FetchLiveUserModel(
-      status: true,
-      message: "Live users fetched successfully",
-      liveUserList: List.generate(
-          5,
-          (index) => LiveUserList(
-                id: "live_id_$index",
-                userId: "user_id_$index",
-                streamSource: index % 2 == 0 ? "" : "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-                pkStreamSources: [
-                  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-                  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-                ],
-                name: FakeProfilesSet.liveNames[index],
-                pkThumbnails: [FakeProfilesSet.womensSampleImages[Random.secure().nextInt(10)], FakeProfilesSet.womensSampleImages[Random.secure().nextInt(10)]],
-                userName: FakeProfilesSet.sampleNames[index],
-                image: FakeProfilesSet.womensSampleImages[index],
-                isProfilePicBanned: false,
-                countryFlagImage: "https://example.com/flags/flag_$index.png",
-                country: "Country $index",
-                isVerified: index % 2 == 0,
-                view: 100 + index * 20,
-                hostIsMuted: 0,
-                channel: "channel_$index",
-                token: "token_$index",
-                liveType: Random().nextBool()
-                    ? 1
-                    : Random().nextBool()
-                        ? 2
-                        : 3,
-                isPkMode: index % 2 == 0,
-                videoUrl: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-                isFake: true,
-                audioLiveType: 0,
-                privateCode: 1111 + index,
-                agoraUid: 5000 + index,
-                roomName: "Room $index",
-                roomWelcome: "Welcome to Room $index",
-                roomImage: FakeProfilesSet.womensSampleImages[index],
-                isAudio: false,
-                liveHistoryId: "history_$index",
-                uniqueId: "unique_host_$index",
-                coin: 500 + index * 50,
-                wealthLevelImage: "https://example.com/wealth/wealth_$index.png",
-                themeId: "theme_$index",
-                theme: "Theme $index",
-                seat: [],
-                requested: [],
-                blockedUsers: [],
-                host2Id: "host_$index",
-                host2IsProfilePicBanned: false,
-                host2Channel: "dfkml",
-                host2Coin: Random().nextInt(1000),
-                host2Image: FakeProfilesSet.womensSampleImages[index],
-                host2IsFollow: false,
-                host2LiveId: "nfv",
-                host2Name: FakeProfilesSet.sampleNames[index + 3],
-                host2Token: "afmdf",
-                host2UniqueId: "11234",
-                host2userName: FakeProfilesSet.sampleNames[index + 3],
-                isFollow: false,
-                viewers: [],
-              )),
-    );
+    Utils.showLog("Fetch Live User API Called");
+    try {
+      final query = <String, String>{};
+      if (country != null && country.isNotEmpty) query['country'] = country;
+      final res = await ApiClient.instance.get('/live', queryParameters: query);
+      final list = (res['data'] as List?)?.cast<Map<String, dynamic>>() ?? [];
+      final liveUserList = list.map((m) {
+        final user = m['user'] as Map<String, dynamic>?;
+        return {
+          '_id': m['id'],
+          'userId': m['userId'],
+          'name': user?['name'],
+          'userName': user?['userName'],
+          'image': user?['image'],
+          'isProfilePicBanned': user?['isProfilePicBanned'],
+          'countryFlagImage': user?['countryFlagImage'],
+          'country': m['country'] ?? user?['country'],
+          'isVerified': user?['isVerified'],
+          'view': m['viewCount'],
+          'hostIsMuted': m['hostIsMuted'],
+          'channel': m['channel'],
+          'token': m['token'],
+          'liveType': m['liveType'],
+          'isPkMode': m['isPkMode'],
+          'videoUrl': m['videoUrl'],
+          'streamSource': m['streamSource'],
+          'isFake': m['isFake'],
+          'audioLiveType': m['audioLiveType'],
+          'privateCode': m['privateCode'],
+          'agoraUid': m['agoraUid'],
+          'roomName': m['roomName'],
+          'roomWelcome': m['roomWelcome'],
+          'roomImage': m['roomImage'],
+          'isAudio': m['isAudio'],
+          'liveHistoryId': m['id'],
+          'host2Id': m['host2Id'],
+          'uniqueId': user?['uniqueId'],
+          'coin': user?['coin'],
+          'wealthLevelImage': user?['wealthLevelImage'],
+        };
+      }).toList();
+      return FetchLiveUserModel(
+        status: res['status'] as bool? ?? true,
+        message: res['message'] as String? ?? 'Success',
+        liveUserList: liveUserList.map((m) => LiveUserList.fromJson(Map<String, dynamic>.from(m))).toList(),
+      );
+    } catch (e) {
+      Utils.showLog("Fetch Live User API Error: $e");
+      return null;
+    }
   }
 }

@@ -6,8 +6,10 @@ import 'package:tingle/custom/widget/custom_light_background_widget.dart';
 import 'package:tingle/page/message_page/controller/message_controller.dart';
 import 'package:tingle/page/message_page/widget/message_app_bar_widget.dart';
 import 'package:tingle/page/message_page/widget/message_banners_widget.dart';
+import 'package:tingle/page/message_page/widget/message_live_females_widget.dart';
 import 'package:tingle/page/message_page/widget/message_user_widget.dart';
 import 'package:tingle/routes/app_routes.dart';
+import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/api_params.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
@@ -45,86 +47,83 @@ class _MessageViewState extends State<MessageView> {
             child: Column(
               children: [
                 const MessageAppBarWidget(),
+                if ((Database.fetchLoginUserProfile()?.user?.gender ?? '').toLowerCase() == 'male')
+                  const MessageLiveFemalesWidget(),
+                const MessageBannersWidget(),
                 Expanded(
-                  child: LayoutBuilder(builder: (context, box) {
-                    return RefreshIndicator(
-                      color: AppColor.primary,
-                      onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
-                      child: SingleChildScrollView(
-                        child: SizedBox(
-                          height: box.maxHeight + 1, // USE TO ACTIVE REFRESH INDICATOR...
-                          child: RefreshIndicator(
-                            color: AppColor.primary,
-                            onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  const MessageBannersWidget(),
-                                  GetBuilder<MessageController>(
-                                    id: AppConstant.onFetchMessageUser,
-                                    builder: (controller) => controller.isLoading
-                                        ? UserListShimmerWidget()
-                                        : controller.messageUsers.isEmpty
-                                            ? SizedBox(
-                                                height: Get.height / 1.5,
-                                                child: NoDataFoundWidget(title: EnumLocal.txtNoChatsYetStartAConversation.name.tr),
-                                              )
-                                            : ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: controller.messageUsers.length,
-                                                padding: EdgeInsets.zero,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                itemBuilder: (context, index) {
-                                                  final indexData = controller.messageUsers[index];
-                                                  final displayName = indexData.isSystemMessage == true
-                                                      ? EnumLocal.txtSystemMessage.name.tr
-                                                      : indexData.isContactCustomer == true
-                                                          ? EnumLocal.txtContactCustomer.name.tr
-                                                          : (indexData.name ?? "");
-                                                  return MessageUserWidget(
-                                                    title: displayName,
-                                                    subTitle: indexData.message ?? "",
-                                                    leading: indexData.image ?? "",
-                                                    dateTime: indexData.time,
-                                                    messageCount: indexData.unreadCount ?? 0,
-                                                    isVerified: indexData.isVerified ?? false,
-                                                    isProfileImageBanned: indexData.isProfilePicBanned ?? false,
-                                                    wealthLevel: indexData.wealthLevel,
-                                                    callback: () => indexData.isFake ?? true
-                                                        ? Get.toNamed(
-                                                            AppRoutes.fakeChatPage,
-                                                            arguments: {
-                                                              ApiParams.roomId: indexData.id ?? "",
-                                                              ApiParams.receiverUserId: indexData.userId ?? "",
-                                                              ApiParams.name: indexData.name ?? "",
-                                                              ApiParams.image: indexData.image ?? "",
-                                                              ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
-                                                              ApiParams.isVerify: indexData.isVerified ?? false,
-                                                            },
-                                                          )?.then((value) => controller.onRefresh(millisecondsDelay: 1000))
-                                                        : Get.toNamed(
-                                                            AppRoutes.chatPage,
-                                                            arguments: {
-                                                              ApiParams.roomId: indexData.id ?? "",
-                                                              ApiParams.receiverUserId: indexData.userId ?? "",
-                                                              ApiParams.name: indexData.name ?? "",
-                                                              ApiParams.image: indexData.image ?? "",
-                                                              ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
-                                                              ApiParams.isVerify: indexData.isVerified ?? false,
-                                                            },
-                                                          )?.then((value) => controller.onRefresh(millisecondsDelay: 1000)),
-                                                  );
-                                                },
-                                              ),
-                                  ),
-                                ],
+                  child: GetBuilder<MessageController>(
+                    id: AppConstant.onFetchMessageUser,
+                    builder: (ctrl) {
+                      if (ctrl.isLoading) {
+                        return UserListShimmerWidget();
+                      }
+                      if (ctrl.messageUsers.isEmpty) {
+                        return RefreshIndicator(
+                          color: AppColor.primary,
+                          onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
+                          child: LayoutBuilder(
+                            builder: (context, constraints) => SingleChildScrollView(
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                                child: NoDataFoundWidget(title: EnumLocal.txtNoChatsYetStartAConversation.name.tr),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  }),
+                        );
+                      }
+                      return RefreshIndicator(
+                        color: AppColor.primary,
+                        onRefresh: () async => await controller.onRefresh(millisecondsDelay: 0),
+                        child: ListView.builder(
+                          itemCount: ctrl.messageUsers.length,
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            final indexData = ctrl.messageUsers[index];
+                            final displayName = indexData.isSystemMessage == true
+                                ? EnumLocal.txtSystemMessage.name.tr
+                                : indexData.isContactCustomer == true
+                                    ? EnumLocal.txtContactCustomer.name.tr
+                                    : (indexData.name ?? "");
+                            return MessageUserWidget(
+                              title: displayName,
+                              subTitle: indexData.message ?? "",
+                              leading: indexData.image ?? "",
+                              dateTime: indexData.time,
+                              messageCount: indexData.unreadCount ?? 0,
+                              isVerified: indexData.isVerified ?? false,
+                              isProfileImageBanned: indexData.isProfilePicBanned ?? false,
+                              wealthLevel: indexData.wealthLevel,
+                              isOnline: indexData.isOnline,
+                              callback: () => indexData.isFake ?? true
+                                  ? Get.toNamed(
+                                      AppRoutes.fakeChatPage,
+                                      arguments: {
+                                        ApiParams.roomId: indexData.id ?? "",
+                                        ApiParams.receiverUserId: indexData.userId ?? "",
+                                        ApiParams.name: indexData.name ?? "",
+                                        ApiParams.image: indexData.image ?? "",
+                                        ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
+                                        ApiParams.isVerify: indexData.isVerified ?? false,
+                                      },
+                                    )?.then((value) => controller.onRefresh(millisecondsDelay: 1000))
+                                  : Get.toNamed(
+                                      AppRoutes.chatPage,
+                                      arguments: {
+                                        ApiParams.roomId: indexData.id ?? "",
+                                        ApiParams.receiverUserId: indexData.userId ?? "",
+                                        ApiParams.name: indexData.name ?? "",
+                                        ApiParams.image: indexData.image ?? "",
+                                        ApiParams.isBanned: indexData.isProfilePicBanned ?? false,
+                                        ApiParams.isVerify: indexData.isVerified ?? false,
+                                      },
+                                    )?.then((value) => controller.onRefresh(millisecondsDelay: 1000)),
+                            );
+                          },
+                                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

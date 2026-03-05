@@ -73,7 +73,7 @@ class Data {
   }
 
   Data.fromJson(dynamic json) {
-    _id = json['_id'];
+    _id = json['_id'] ?? json['id'];
     _coin = json['coin'];
     _createdAt = json['createdAt'];
     _payoutStatus = json['payoutStatus'];

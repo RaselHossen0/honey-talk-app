@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tingle/custom/function/custom_image_picker.dart';
 import 'package:tingle/custom/widget/custom_image_picker_bottom_sheet_widget.dart';
-import 'package:tingle/firebase/authentication/firebase_access_token.dart';
 import 'package:tingle/firebase/authentication/firebase_uid.dart';
+import 'package:tingle/utils/database.dart';
+import 'package:tingle/common/widget/loading_widget.dart';
+import 'package:tingle/page/fill_profile_page/api/edit_profile_api.dart';
 import 'package:tingle/page/fill_profile_page/model/edit_profile_model.dart';
 import 'package:tingle/page/login_page/api/fetch_login_user_profile_api.dart';
 import 'package:tingle/page/login_page/model/check_user_name_model.dart';
@@ -34,6 +36,17 @@ class EditProfileController extends GetxController {
   String? pickImage;
 
   bool? isValidUserName;
+
+  /// Gender and country are locked once set—cannot be changed.
+  bool get isGenderLocked {
+    final g = (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.gender ?? '').trim().toLowerCase();
+    return g == 'male' || g == 'female';
+  }
+
+  bool get isCountryLocked {
+    final c = (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.country ?? '').trim();
+    return c.isNotEmpty;
+  }
   RxBool isCheckingUserName = false.obs;
   CheckUserNameModel? checkUserNameModel;
 
@@ -58,11 +71,12 @@ class EditProfileController extends GetxController {
   }
 
   void init() async {
-    uid = FirebaseUid.onGet() ?? "";
-    token = await FirebaseAccessToken.onGet() ?? "";
+    uid = FirebaseUid.onGet() ?? Database.loginUserId;
+    token = Database.accessToken;
   }
 
   void onChangeGender(bool isMale) {
+    if (isGenderLocked) return;
     this.isMale = isMale;
     update([AppConstant.onChangeGender]);
   }
@@ -102,27 +116,52 @@ class EditProfileController extends GetxController {
     }
   }
 
-  void onSaveProfile() async {
+  Future<void> onSaveProfile() async {
+    if (token.isEmpty || uid.isEmpty) {
+      uid = Database.loginUserId;
+      token = Database.accessToken;
+    }
     await onChangeUserName();
 
     if (nameController.text.trim().isEmpty) {
       Utils.showToast(text: EnumLocal.txtPleaseEnterYourName.name.tr);
-    } else if (userNameController.text.trim().isEmpty) {
+      return;
+    }
+    if (userNameController.text.trim().isEmpty) {
       Utils.showToast(text: EnumLocal.txtPleaseEnterUserName.name.tr);
-    } else if (ageController.text.trim().isEmpty) {
+      return;
+    }
+    if (ageController.text.trim().isEmpty) {
       Utils.showToast(text: EnumLocal.txtPleaseEnterAge.name.tr);
+      return;
     }
 
-    if (editProfileModel?.status == true) {
-      Get.back();
+    Get.dialog(const LoadingWidget(), barrierDismissible: false);
 
-      FetchLoginUserProfileApi.callApi(token: token, uid: uid);
+    editProfileModel = await EditProfileApi.callApi(
+      token: token,
+      uid: uid,
+      name: nameController.text.trim(),
+      userName: userNameController.text.trim(),
+      gender: isMale ? "Male" : "Female",
+      age: ageController.text.trim(),
+      bio: bioController.text.trim().isNotEmpty ? bioController.text.trim() : null,
+      country: countryNameController.text.trim().isNotEmpty ? countryNameController.text.trim() : null,
+      countryFlagImage: countryFlagController.text.trim().isNotEmpty ? countryFlagController.text.trim() : null,
+    );
+
+    Get.back();
+
+    if (editProfileModel?.status == true) {
+      await FetchLoginUserProfileApi.callApi(token: Database.accessToken, uid: uid);
+      Get.back();
     } else {
       Utils.showToast(text: editProfileModel?.message ?? "");
     }
   }
 
   Future<void> onChangeCountry(BuildContext context) async {
+    if (isCountryLocked) return;
     showCountryPicker(
       context: context,
       countryListTheme: CountryListThemeData(

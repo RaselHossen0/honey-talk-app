@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tingle/page/party_page/controller/party_controller.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/assets.dart';
@@ -106,7 +107,14 @@ class PartyAppBarWidget extends StatelessWidget {
                 color: AppColor.transparent,
                 shape: BoxShape.circle,
               ),
-              child: Image.asset(AppAssets.icCup, width: 30),
+              child: Lottie.asset(
+                AppAssets.lottieCup,
+                width: 32,
+                height: 32,
+                fit: BoxFit.contain,
+                repeat: true,
+                errorBuilder: (_, __, ___) => Image.asset(AppAssets.icCup, width: 30),
+              ),
             ),
           ),
         ],

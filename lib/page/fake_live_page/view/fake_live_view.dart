@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tingle/common/function/show_received_gift.dart';
-import 'package:tingle/common/widget/scroll_fade_effect_widget.dart';
 import 'package:tingle/page/fake_live_page/controller/fake_live_controller.dart';
 import 'package:tingle/page/fake_live_page/widget/fake_button_widget.dart';
 import 'package:tingle/page/fake_live_page/widget/fake_camera_widget.dart';
@@ -15,7 +14,6 @@ import 'package:tingle/page/fake_live_page/widget/show_live_gift.dart';
 import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
-import 'package:tingle/utils/utils.dart';
 
 class FakeLiveView extends GetView<FakeLiveController> {
   const FakeLiveView({super.key});
@@ -29,62 +27,30 @@ class FakeLiveView extends GetView<FakeLiveController> {
         children: [
           FakeLiveCameraWidget(),
           ShadowWidget(),
-          controller.fakeLiveModel?.isChannelMediaRelay == false
-              ? ScrollFadeEffectWidget(
-                  axis: Axis.vertical,
-                  child: SingleChildScrollView(
-                    // physics: const NeverScrollableScrollPhysics(),
-                    child: Container(
-                      color: AppColor.transparent,
-                      height: Get.height,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              GetBuilder<FakeLiveController>(
-                                id: AppConstant.onToggleComment,
-                                builder: (controller) => GestureDetector(
-                                  behavior: HitTestBehavior.translucent, // Important!
-                                  // Make sure this is active
-                                  child: Container(
-                                    color: Colors.transparent, // Use Flutter's built-in transparent
-                                    height: Get.height / 3.3,
-                                    width: Get.width,
-                                    alignment: AlignmentDirectional.topStart,
-                                    child: Visibility(
-                                      visible: true,
-                                      child: Container(
-                                        height: Get.height / 3.3,
-                                        width: Get.width / 1.8,
-                                        color: Colors.transparent, // Also updated
-                                        child: FakeLiveCommentWidget(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              70.height,
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : SizedBox(),
+          GetBuilder<FakeLiveController>(
+            id: AppConstant.onEventHandler,
+            builder: (c) => Visibility(
+              visible: c.fakeLiveModel?.isChannelMediaRelay != true,
+              child: Positioned(
+                left: 0,
+                bottom: 115,
+                child: Container(
+                  height: Get.height / 2.5,
+                  width: Get.width / 1.8,
+                  color: AppColor.transparent,
+                  child: FakeLiveCommentWidget(),
+                ),
+              ),
+            ),
+          ),
           FakePkCameraWidget(),
           FakeButtonWidget(),
           GetBuilder<FakeLiveController>(
             id: AppConstant.onEventHandler,
-            builder: (controller) => Visibility(
-              visible: controller.fakeLiveModel?.isChannelMediaRelay == false,
-              child: Positioned(
-                bottom: 0,
-                child: FakeCommentTextFieldWidget(
-                  ispklive: false,
-                ),
+            builder: (controller) => Positioned(
+              bottom: 0,
+              child: FakeCommentTextFieldWidget(
+                ispklive: controller.fakeLiveModel?.isChannelMediaRelay == true,
               ),
             ),
           ),

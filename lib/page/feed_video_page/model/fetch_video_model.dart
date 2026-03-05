@@ -117,7 +117,7 @@ class VideoData {
   }
 
   VideoData.fromJson(dynamic json) {
-    _id = json['_id'];
+    _id = json['_id'] ?? json['id'];
     _songId = json['songId'];
     _caption = json['caption'];
     _videoTime = json['videoTime'];

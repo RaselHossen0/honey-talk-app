@@ -5,8 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tingle/custom/function/custom_image_picker.dart';
 import 'package:tingle/custom/widget/custom_image_picker_bottom_sheet_widget.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
-import 'package:tingle/firebase/authentication/firebase_access_token.dart';
 import 'package:tingle/firebase/authentication/firebase_uid.dart';
+import 'package:tingle/page/fill_profile_page/api/check_username_api.dart';
+import 'package:tingle/page/fill_profile_page/api/edit_profile_api.dart';
+import 'package:tingle/page/fill_profile_page/api/suggest_username_api.dart';
 import 'package:tingle/page/fill_profile_page/model/edit_profile_model.dart';
 import 'package:tingle/page/login_page/api/fetch_login_user_profile_api.dart';
 import 'package:tingle/page/login_page/model/check_user_name_model.dart';
@@ -16,6 +18,7 @@ import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
+import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/utils.dart';
 
 class FillProfileController extends GetxController {
@@ -36,9 +39,9 @@ class FillProfileController extends GetxController {
   EditProfileModel? editProfileModel;
   String? pickImage;
 
-  bool? isValidUserName;
+  final Rx<bool?> isValidUserName = Rx<bool?>(null);
   RxBool isCheckingUserName = false.obs;
-  CheckUserNameModel? checkUserNameModel;
+  final Rx<CheckUserNameModel?> checkUserNameModel = Rx<CheckUserNameModel?>(null);
 
   @override
   void onInit() {
@@ -61,8 +64,8 @@ class FillProfileController extends GetxController {
   }
 
   void init() async {
-    uid = FirebaseUid.onGet() ?? "";
-    token = await FirebaseAccessToken.onGet() ?? "";
+    uid = FirebaseUid.onGet() ?? Database.loginUserId;
+    token = Database.accessToken;
   }
 
   void onChangeGender(bool isMale) {
@@ -91,53 +94,72 @@ class FillProfileController extends GetxController {
   }
 
   Future<void> onChangeUserName() async {
-    if (userNameController.text.trim().isNotEmpty) {
-      await 500.milliseconds.delay();
-
-      isCheckingUserName.value = true;
-
-      isValidUserName = true;
-
+    final text = userNameController.text.trim();
+    if (text.isEmpty) {
+      isValidUserName.value = false;
       isCheckingUserName.value = false;
-    } else {
-      isValidUserName = false;
-      isCheckingUserName.value = false;
+      return;
+    }
+    await 500.milliseconds.delay();
+    isCheckingUserName.value = true;
+    checkUserNameModel.value = await CheckUsernameApi.callApi(
+      token: Database.accessToken,
+      username: text,
+    );
+    isCheckingUserName.value = false;
+    isValidUserName.value = checkUserNameModel.value?.available ?? false;
+  }
+
+  Future<void> onSuggestUsername() async {
+    isCheckingUserName.value = true;
+    final suggested = await SuggestUsernameApi.callApi(token: Database.accessToken);
+    isCheckingUserName.value = false;
+    if (suggested != null && suggested.isNotEmpty) {
+      userNameController.text = suggested;
+      checkUserNameModel.value = await CheckUsernameApi.callApi(token: Database.accessToken, username: suggested);
+      isValidUserName.value = checkUserNameModel.value?.available ?? true;
     }
   }
 
-  void onSaveProfile() async {
+  Future<void> onSaveProfile() async {
+    if (token.isEmpty || uid.isEmpty) {
+      uid = Database.loginUserId;
+      token = Database.accessToken;
+    }
     await onChangeUserName();
 
     if (nameController.text.trim().isEmpty) {
       Utils.showToast(text: EnumLocal.txtPleaseEnterYourName.name.tr);
-    } else if (userNameController.text.trim().isEmpty) {
+      return;
+    }
+    if (userNameController.text.trim().isEmpty) {
       Utils.showToast(text: EnumLocal.txtPleaseEnterUserName.name.tr);
-    } else if (ageController.text.trim().isEmpty) {
+      return;
+    }
+    if (ageController.text.trim().isEmpty) {
       Utils.showToast(text: EnumLocal.txtPleaseEnterAge.name.tr);
-    } else {
-      Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-
-      // editProfileModel = await EditProfileApi.callApi(
-      //   name: nameController.text.trim(),
-      //   userName: userNameController.text.trim(),
-      //   uid: uid,
-      //   token: token,
-      //   gender: isMale ? "Male" : "Female",
-      //   age: ageController.text.trim(),
-      //   image: pickImage,
-      //   country: countryNameController.text,
-      //   countryFlagImage: countryFlagController.text,
-      //   bio: bioController.text,
-      // );
-
-      Get.back(); // Stop Loading...
-
-      Get.offAllNamed(AppRoutes.bottomBarPage);
+      return;
     }
 
+    Get.dialog(const LoadingWidget(), barrierDismissible: false);
+
+    editProfileModel = await EditProfileApi.callApi(
+      token: Database.accessToken,
+      uid: uid.isEmpty ? Database.loginUserId : uid,
+      name: nameController.text.trim(),
+      userName: userNameController.text.trim(),
+      gender: isMale ? "Male" : "Female",
+      age: ageController.text.trim(),
+      bio: bioController.text.trim().isNotEmpty ? bioController.text.trim() : null,
+      country: countryNameController.text.trim().isNotEmpty ? countryNameController.text.trim() : null,
+      countryFlagImage: countryFlagController.text.trim().isNotEmpty ? countryFlagController.text.trim() : null,
+    );
+
+    Get.back();
+
     if (editProfileModel?.status == true) {
-      // Get.offAllNamed(AppRoutes.bottomBarPage);
-      FetchLoginUserProfileApi.callApi(token: token, uid: uid);
+      await FetchLoginUserProfileApi.callApi(token: Database.accessToken, uid: uid);
+      Get.offAllNamed(AppRoutes.bottomBarPage);
     } else {
       Utils.showToast(text: editProfileModel?.message ?? "");
     }

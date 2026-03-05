@@ -65,6 +65,7 @@ class MessageData {
     int? wealthLevel,
     bool? isSystemMessage,
     bool? isContactCustomer,
+    bool? isOnline,
   }) {
     _id = id;
     _chatTopicId = chatTopicId;
@@ -82,6 +83,7 @@ class MessageData {
     _wealthLevel = wealthLevel;
     _isSystemMessage = isSystemMessage;
     _isContactCustomer = isContactCustomer;
+    _isOnline = isOnline;
   }
 
   MessageData.fromJson(dynamic json) {
@@ -101,6 +103,8 @@ class MessageData {
     _wealthLevel = json['wealthLevel'];
     _isSystemMessage = json['isSystemMessage'];
     _isContactCustomer = json['isContactCustomer'];
+    // API-ready: supports isOnline, is_online
+    _isOnline = json['isOnline'] ?? json['is_online'];
   }
   String? _id;
   String? _chatTopicId;
@@ -118,10 +122,12 @@ class MessageData {
   int? _wealthLevel;
   bool? _isSystemMessage;
   bool? _isContactCustomer;
+  bool? _isOnline;
 
   int? get wealthLevel => _wealthLevel;
   bool? get isSystemMessage => _isSystemMessage;
   bool? get isContactCustomer => _isContactCustomer;
+  bool? get isOnline => _isOnline;
 
   MessageData copyWith({
     String? id,
@@ -140,6 +146,7 @@ class MessageData {
     int? wealthLevel,
     bool? isSystemMessage,
     bool? isContactCustomer,
+    bool? isOnline,
   }) =>
       MessageData(
         id: id ?? _id,
@@ -158,6 +165,7 @@ class MessageData {
     wealthLevel: wealthLevel ?? _wealthLevel,
     isSystemMessage: isSystemMessage ?? _isSystemMessage,
     isContactCustomer: isContactCustomer ?? _isContactCustomer,
+    isOnline: isOnline ?? _isOnline,
   );
   String? get id => _id;
   String? get chatTopicId => _chatTopicId;
@@ -191,6 +199,7 @@ class MessageData {
     map['wealthLevel'] = _wealthLevel;
     map['isSystemMessage'] = _isSystemMessage;
     map['isContactCustomer'] = _isContactCustomer;
+    map['isOnline'] = _isOnline;
     return map;
   }
 }

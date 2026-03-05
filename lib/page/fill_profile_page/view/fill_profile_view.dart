@@ -119,15 +119,41 @@ class FillProfileView extends GetView<FillProfileController> {
                                           padding: const EdgeInsets.all(15),
                                           child: CircularProgressIndicator(color: AppColor.primary, strokeWidth: 3),
                                         )
-                                      : controller.isValidUserName == null
+                                      : controller.isValidUserName.value == null
                                           ? Offstage()
-                                          : controller.isValidUserName == true
+                                          : controller.isValidUserName.value == true
                                               ? Icon(
                                                   Icons.done_all,
                                                   color: AppColor.green,
                                                 )
                                               : Image.asset(AppAssets.icClose, color: Colors.red, height: 20, width: 20),
                                 ),
+                              ),
+                            ),
+                          ),
+                          5.height,
+                          Obx(
+                            () {
+                              final msg = controller.checkUserNameModel.value?.message;
+                              final valid = controller.isValidUserName.value;
+                              return msg != null && msg.isNotEmpty
+                                  ? Text(
+                                      msg,
+                                      style: AppFontStyle.styleW400(
+                                        valid == true ? AppColor.green : AppColor.red,
+                                        12,
+                                      ),
+                                    )
+                                  : const SizedBox.shrink();
+                            },
+                          ),
+                          5.height,
+                          Obx(
+                            () => TextButton(
+                              onPressed: controller.isCheckingUserName.value ? null : () => controller.onSuggestUsername(),
+                              child: Text(
+                                'Generate username',
+                                style: AppFontStyle.styleW500(AppColor.primary, 14),
                               ),
                             ),
                           ),

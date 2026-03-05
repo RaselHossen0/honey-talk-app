@@ -3,12 +3,15 @@ import 'package:get/get.dart';
 import 'package:tingle/firebase/authentication/firebase_access_token.dart';
 import 'package:tingle/firebase/authentication/firebase_uid.dart';
 import 'package:tingle/page/bottom_bar_page/controller/bottom_bar_controller.dart';
+import 'package:tingle/page/message_page/api/fetch_live_female_api.dart';
 import 'package:tingle/page/message_page/api/fetch_message_user_api.dart';
+import 'package:tingle/page/message_page/model/fetch_live_female_model.dart';
 import 'package:tingle/page/message_page/model/fetch_message_user_model.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/api_params.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/enums.dart';
+import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/utils.dart';
 
 class MessageController extends GetxController {
@@ -26,6 +29,7 @@ class MessageController extends GetxController {
   FetchMessageUserModel? fetchMessageUserModel;
   bool isPagination = false;
   List<MessageData> messageUsers = [];
+  List<LiveFemaleData> liveFemales = [];
 
   int get totalUnreadCount =>
       messageUsers.fold<int>(0, (sum, m) => sum + (m.unreadCount ?? 0));
@@ -40,7 +44,19 @@ class MessageController extends GetxController {
     final bottomBarController = Get.find<BottomBarController>();
     if (Get.currentRoute == AppRoutes.bottomBarPage && bottomBarController.selectedTabIndex == 3) {
       onChangeMessageType(0);
+      if (_isMaleUser) onFetchLiveFemales();
     }
+  }
+
+  bool get _isMaleUser =>
+      (Database.fetchLoginUserProfile()?.user?.gender ?? '').toLowerCase() == 'male';
+
+  Future<void> onFetchLiveFemales() async {
+    final uid = FirebaseUid.onGet() ?? "";
+    final token = await FirebaseAccessToken.onGet() ?? "";
+    final model = await FetchLiveFemaleApi.callApi(uid: uid, token: token);
+    liveFemales = model.data ?? [];
+    update([AppConstant.onFetchLiveFemales]);
   }
 
   void onChangeMessageType(int value) {
@@ -56,6 +72,7 @@ class MessageController extends GetxController {
     FetchMessageUserApi.startPagination = 0;
     await millisecondsDelay.milliseconds.delay();
     await onFetchMessageUser(type: _messageType());
+    if (_isMaleUser) onFetchLiveFemales();
   }
 
   Future<void> onFetchMessageUser({required String type}) async {

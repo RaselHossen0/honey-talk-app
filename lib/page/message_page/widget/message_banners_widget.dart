@@ -28,7 +28,7 @@ class _MessageBannersWidgetState extends State<MessageBannersWidget> {
 
   Widget _buildBonusRewardBanner() {
     return Container(
-      margin: const EdgeInsets.fromLTRB(15, 12, 15, 8),
+      margin: const EdgeInsets.fromLTRB(15, 0, 15, 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(

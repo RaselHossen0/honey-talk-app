@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/gift_gallery_bottom_sheet_widget.dart';
 import 'package:tingle/page/preview_user_profile_page/controller/preview_user_profile_controller.dart';
+import 'package:tingle/utils/assets.dart';
 import 'package:tingle/utils/color.dart';
 import 'package:tingle/utils/enums.dart';
 import 'package:tingle/utils/font_style.dart';
@@ -12,37 +13,77 @@ class PreviewProfileGiftGalleryWidget extends GetView<PreviewUserProfileControll
 
   @override
   Widget build(BuildContext context) {
+    final giftIcons = [
+      AppAssets.icGiftToy,
+      AppAssets.icGiftCat,
+      AppAssets.icGiftLove,
+      AppAssets.icLightPinkGift,
+      AppAssets.icChatGift,
+      AppAssets.icDiamondRing,
+    ];
+    final counts = [5, 1, 3, 1, 1, 47, 2, 1, 6, 4];
+
     return GestureDetector(
       onTap: () => GiftGalleryBottomSheetWidget.show(context: context, userId: controller.userId),
-      child: Container(
-        height: 80,
-        width: Get.width,
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        decoration: BoxDecoration(
-          color: AppColor.colorBorder.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Row(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  EnumLocal.txtGiftGallery.name.tr,
+                  EnumLocal.txtGift.name.tr,
                   style: AppFontStyle.styleW700(AppColor.black, 16),
                 ),
-                3.height,
-                Text(
-                  "${EnumLocal.txtTotalReceivedGift.name.tr} ${controller.fetchUserProfileModel?.user?.receivedGifts ?? 0}",
-                  style: AppFontStyle.styleW500(AppColor.grayText, 12),
-                ),
+                Image.asset(AppAssets.icArrowRight, width: 18, color: AppColor.grayText),
               ],
+            ),
+            10.height,
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 5,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 0.85,
+              children: List.generate(
+                10,
+                (i) => _GiftGridItem(
+                  icon: giftIcons[i % giftIcons.length],
+                  count: counts[i % counts.length],
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _GiftGridItem extends StatelessWidget {
+  const _GiftGridItem({required this.icon, required this.count});
+
+  final String icon;
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.asset(icon, width: 40, height: 40, fit: BoxFit.cover),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          "x$count",
+          style: AppFontStyle.styleW500(AppColor.grayText, 11),
+        ),
+      ],
     );
   }
 }

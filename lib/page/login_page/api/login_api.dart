@@ -1,6 +1,6 @@
-import 'dart:async';
-import 'dart:math';
+import 'package:tingle/core/network/api_client.dart';
 import 'package:tingle/page/login_page/model/login_model.dart';
+import 'package:tingle/utils/database.dart';
 
 class LoginApi {
   static Future<LoginModel> callApi({
@@ -15,56 +15,78 @@ class LoginApi {
     required String uid,
     required int loginType,
   }) async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
+    final client = ApiClient.instance;
 
-    final random = Random();
-    final now = DateTime.now();
+    // 1) Backend login (Firebase UID) -> accessToken
+    final loginRes = await client.post('/auth/login', body: {
+      'firebaseUid': uid,
+      'token': token,
+    });
+    final accessToken = loginRes['accessToken'] as String?;
+    if (accessToken == null || accessToken.isEmpty) {
+      return LoginModel(
+        status: false,
+        message: loginRes['message'] as String? ?? 'Login failed',
+        signUp: false,
+        user: null,
+      );
+    }
+    await Database.onSetAccessToken(accessToken);
 
-    // Create dummy user data
+    // 2) Get profile -> map to UserData
+    final meRes = await client.get('/users/me', token: accessToken);
+    if (meRes['id'] == null) {
+      return LoginModel(
+        status: false,
+        message: 'Failed to load profile',
+        signUp: false,
+        user: null,
+      );
+    }
+
+    final u = meRes;
     final userData = UserData(
-      name: name ?? "John Doe ${random.nextInt(1000)}",
-      userName: userName ?? "johndoe_${random.nextInt(10000)}",
-      gender: (random.nextBool()) ? "Male" : "Female",
-      bio: "This is a bio for demo user.",
-      age: 18 + random.nextInt(30),
-      image: image ?? "https://example.com/profiles/user${random.nextInt(100)}.jpg",
-      isProfilePicBanned: random.nextBool(),
-      email: email,
-      mobileNumber: mobileNumber ?? "98765${random.nextInt(100000).toString().padLeft(5, '0')}",
-      countryFlagImage: "🇮🇳",
-      country: "India",
-      ipAddress: "192.168.${random.nextInt(255)}.${random.nextInt(255)}",
+      name: u['name'] as String?,
+      userName: u['userName'] as String?,
+      gender: u['gender'] as String?,
+      bio: u['bio'] as String?,
+      age: (u['age'] as num?)?.toInt(),
+      image: u['image'] as String?,
+      isProfilePicBanned: u['isProfilePicBanned'] as bool? ?? false,
+      email: u['email'] as String? ?? email,
+      mobileNumber: u['mobileNumber'] as String? ?? mobileNumber,
+      countryFlagImage: u['countryFlagImage'] as String?,
+      country: u['country'] as String?,
       identity: identity,
       fcmToken: fcmToken,
-      uniqueId: "UNIQUE_${random.nextInt(999999)}",
+      uniqueId: u['uniqueId'] as String?,
       uid: uid,
-      provider: (loginType == 3) ? "google" : "mobile",
-      coin: 5000 + random.nextInt(5000),
-      consumedCoins: 1000 + random.nextInt(4000),
-      purchasedCoin: 2000 + random.nextInt(3000),
-      receivedCoin: 1500 + random.nextInt(2000),
-      receivedGift: 100 + random.nextInt(300),
-      totalWithdrawalCoin: 300 + random.nextInt(700),
-      totalWithdrawalAmount: 100 + random.nextInt(500),
-      isLive: random.nextBool(),
-      liveHistoryId: "live_${random.nextInt(10000)}",
-      isBlock: false,
-      isOnline: true,
-      isFake: random.nextBool(),
-      isVerified: random.nextBool(),
-      lastlogin: now.subtract(Duration(days: random.nextInt(10))).toIso8601String(),
-      date: now.toIso8601String(),
-      sId: "id_${random.nextInt(9999)}",
+      provider: loginType == 3 ? 'google' : 'mobile',
+      coin: (u['coin'] as num?)?.toInt() ?? 0,
+      consumedCoins: 0,
+      purchasedCoin: 0,
+      receivedCoin: (u['receivedGifts'] as num?)?.toInt() ?? 0,
+      receivedGift: (u['receivedGifts'] as num?)?.toInt() ?? 0,
+      totalWithdrawalCoin: 0,
+      totalWithdrawalAmount: 0,
+      isLive: u['isLive'] as bool? ?? false,
+      liveHistoryId: null,
+      isBlock: u['isBlock'] as bool? ?? false,
+      isOnline: u['isOnline'] as bool? ?? false,
+      isFake: false,
+      isVerified: u['isVerified'] as bool? ?? false,
+      lastlogin: null,
+      date: DateTime.now().toIso8601String(),
+      sId: u['id'] as String?,
       loginType: loginType,
-      createdAt: now.subtract(Duration(days: random.nextInt(30))).toIso8601String(),
-      updatedAt: now.toIso8601String(),
+      createdAt: (u['createdAt'] as String?) ?? DateTime.now().toIso8601String(),
+      updatedAt: (u['updatedAt'] as String?) ?? DateTime.now().toIso8601String(),
     );
 
     return LoginModel(
       status: true,
-      message: "Login successful",
-      signUp: random.nextBool(),
+      message: 'Login successful',
+      signUp: false,
       user: userData,
     );
   }

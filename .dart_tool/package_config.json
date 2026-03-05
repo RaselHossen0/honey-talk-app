@@ -866,6 +866,18 @@
       "languageVersion": "3.9"
     },
     {
+      "name": "socket_io_client",
+      "rootUri": "file:///Users/md.raselhossen/.pub-cache/hosted/pub.dev/socket_io_client-3.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "socket_io_common",
+      "rootUri": "file:///Users/md.raselhossen/.pub-cache/hosted/pub.dev/socket_io_common-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///Users/md.raselhossen/.pub-cache/hosted/pub.dev/source_span-1.10.2",
       "packageUri": "lib/",

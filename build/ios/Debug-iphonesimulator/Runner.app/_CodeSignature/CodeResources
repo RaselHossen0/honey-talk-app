@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		pmd1hzy3zMO8rjHJx7JTLdNljJI=
+		8jSiCKayysaNaLVMqeMaLG1pKNQ=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		BadpuxUyjzHzmQVgPS1XMVoOD/I=
+		6F9rR0l3WTl8itnwg8oUgnXaiK8=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		8JUd54gDu+jfk2hNuFk/cisEr84=
+		m9iw8IE5yGpdtrHwebhn2ysz/8A=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		gR9eTTpcaFBjcLrArKc+RQmMA7M=
+		ctBEUcLK0PEw73inpAeSd593eME=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		19m0yGhJHAHmT6h29ec9bb4gYCI=
+		sWrYhszWawGVqkXrEtSH2ZyC06s=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NativeAssetsManifest.json</key>
 		<data>
@@ -403,6 +403,10 @@
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/ic_delete_border.webp</key>
 		<data>
 		adMM6XkGcOia4in915lsQppTcXU=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/ic_diamond.png</key>
+		<data>
+		Ep2ddqTcuZs74Olq3FGFiQsrvKE=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/ic_diamond_ring.webp</key>
 		<data>
@@ -1348,6 +1352,46 @@
 		<data>
 		nWg9NxwqlokoAsogIQR7KwEeH4E=
 		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Call%20Recive.json</key>
+		<data>
+		gOVCxcYnZRQ6M+vJO1v7RP7V3ik=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Call%20reject.json</key>
+		<data>
+		STJAWJ5WzOh+OQ4pj+5P2NfD2uQ=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Game%20Controller.json</key>
+		<data>
+		5xvrpJK4gKFLYVjvazDDPCkT5/w=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Gift%20box.json</key>
+		<data>
+		aoIdAFYcdVcM8AZqzTet5SK6yV0=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Live-Users.json</key>
+		<data>
+		bBuz25JuJ3rw6BSWNlsgjQ8t/6s=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Phone%20icon%20Home%20Page.json</key>
+		<data>
+		8+Y4MsA3V69dr8JJjVl8yH2yYfg=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Rank.json</key>
+		<data>
+		hZjEO8PDiLHlS9fyGXKGRDTG6TQ=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Remix%20of%20LIVESTREAM.json</key>
+		<data>
+		F2xMa40OBg4+kTl8dHjEU/pHZxQ=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_avatar_border.json</key>
+		<data>
+		8TrfKt1mON8C95FpRxGKekm3NPo=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_cup.json</key>
+		<data>
+		8TrfKt1mON8C95FpRxGKekm3NPo=
+		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_gift.json</key>
 		<data>
 		q/P7/sYZRAEX68+t/dlqrCwRNBc=
@@ -1367,6 +1411,10 @@
 		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_wave_animation.json</key>
 		<data>
 		8TrfKt1mON8C95FpRxGKekm3NPo=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/readme.txt</key>
+		<data>
+		qXAoPkEdkxPPnNBlPM/NTQzik84=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/music/music_calling_ring.mp3</key>
 		<data>
@@ -1390,7 +1438,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		u0o6xqOuWscBS9sO37+v78Mf4QI=
+		6sHTfW+k976hszAyr/3YEhRlDvo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -2568,11 +2616,11 @@
 		</data>
 		<key>GoogleService-Info.plist</key>
 		<data>
-		2MDZ+w1HnR1vVAxwtOuh2pPVQP4=
+		5l3doQjpvgI9jTKU43PzNTXVwpk=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		r6Ka2DSJ0zY+tp7DXmE3Pzv3oxQ=
+		KxvfsKIAUf0Y3OAHmNn3OnqrrOQ=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -2634,7 +2682,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Vn45cfj4QOnJ0iN/BZnbponDU/8ytIWlKqfnxiHD2Ik=
+			sNdgqz/NUetqMJvKGHkHSXh++D0HlYZ2tBZqSjjwU8g=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -2683,7 +2731,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gw9TR9KeybJ2NKl8Z/lxlPndD/NGH4Bg4jbVsRQXWj8=
+			2c+7nWqjtJ591rxx/sfuxTYCntmyJ3szJJOzmCzjYYs=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -2697,14 +2745,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AHxAkiEb19mp2lEriGk3/sHvp35FMk2FAe9lokjFzAQ=
+			L5pX48y72p69MGXrIjDyJt7R5f3mL+5X6hAL2S/gh+k=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gXwxJpxmFESH8citYF5t3AYEQTpzKHHgUJ9RRhbX2ww=
+			HG2m6+G1nAcJ97dkquaIDpBDDy225z/ekzXsgtgJ134=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -2718,7 +2766,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3DG528w0meAFsoIP2/GCU+JUfawUykhy8Nu4M3iZSFM=
+			ek4Qhcs8MIgMbC2jkmSkCsLNAgX+HaBaGHLQcirSIq0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NativeAssetsManifest.json</key>
@@ -3307,6 +3355,13 @@
 			<key>hash2</key>
 			<data>
 			tp2fpU82Z6ElbU80+pT6LVnPFNeyRrhrP238eRTdGds=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/ic_diamond.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			c4Trm1GubXF9tArPqHBdgcpfq1zRcfykt07w+oy0rZE=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/ic_diamond_ring.webp</key>
@@ -4961,6 +5016,76 @@
 			8lTvJx+cQTH+qoBDGCxQrS6mZSVmZNM95F+PoADLCGE=
 			</data>
 		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Call%20Recive.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QG930YETDBAhOUFODQ2+I5nMzHyNEaJRo7FTo3UA6ig=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Call%20reject.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Pdlm/Axc3gg26wAmYD6wUjdhhTiSJDOZR5GdU+AD1Eo=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Game%20Controller.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tUI3VDjI/PWbD2pTnhkagYrD0Shj+OdBfE/2hRx5+JY=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Gift%20box.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vvLsoUH+5rFIeF6XA+SNQQbL0SgERdw54B9yeDc/tUk=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Live-Users.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sQOHpd4og+Lmt0XAvQLVkrETbafh60StV2oVf2SU7Tc=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Phone%20icon%20Home%20Page.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HhFO06jm3gFcccdMQbzO8JvdroM6w3vdrohVN5+SW9k=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Rank.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hrqk5kmyz2gpuhKLj2eUH5QG3fHxar28Cjy5g8MgSTM=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/Remix%20of%20LIVESTREAM.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4aaV9CzmBBhbOKeUH8CYHKO4QwGpHLf+w9dvWWLcKlI=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_avatar_border.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DgZszbIUgXryaqEGumkPu89XpejZEu/7qbv/s35s8j8=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_cup.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DgZszbIUgXryaqEGumkPu89XpejZEu/7qbv/s35s8j8=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/lottie/lottie_gift.json</key>
 		<dict>
 			<key>hash2</key>
@@ -4994,6 +5119,13 @@
 			<key>hash2</key>
 			<data>
 			DgZszbIUgXryaqEGumkPu89XpejZEu/7qbv/s35s8j8=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/lottie/readme.txt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3zxOx4YQ8KTYcwOk/HV14ANYGR7WBM2+p+I1gXP3+8g=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/music/music_calling_ring.mp3</key>
@@ -5035,7 +5167,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			exZ/orSjQNpfxWwVVZcua5C45OZRVHQw/vN+gJAULmM=
+			gHG1QDDtQ6pJ2VVcZP5xMkpedyM9ktEQRgieU4O7JmI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -6840,7 +6972,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cLUbbP9XZk8V3e1vQ0y98lqshAApa5hJJuwhhUL6oM0=
+			v0lMzRq9JUCSRXVv5F609RhoxdEEH50XNxayKS5mZ74=
 			</data>
 		</dict>
 		<key>Runner.debug.dylib</key>

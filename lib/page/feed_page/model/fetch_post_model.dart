@@ -103,7 +103,7 @@ class Post {
   }
 
   Post.fromJson(dynamic json) {
-    _id = json['_id'];
+    _id = json['_id'] ?? json['id'];
     _caption = json['caption'];
     if (json['postImage'] != null) {
       _postImage = [];
@@ -286,7 +286,7 @@ class PostImage {
   PostImage.fromJson(dynamic json) {
     _url = json['url'];
     _isBanned = json['isBanned'];
-    _id = json['_id'];
+    _id = json['_id'] ?? json['id'];
   }
   String? _url;
   bool? _isBanned;

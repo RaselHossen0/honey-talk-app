@@ -29,6 +29,17 @@ class MyProfileController extends GetxController {
     return g;
   }
 
+  /// Gender and country cannot be changed once set.
+  bool get isGenderLocked {
+    final g = (_user?.gender ?? '').toString().trim().toLowerCase();
+    return g == 'male' || g == 'female';
+  }
+
+  bool get isCountryLocked {
+    final c = (_user?.country ?? '').toString().trim();
+    return c.isNotEmpty;
+  }
+
   String get maskedEmail {
     final e = email;
     if (e.isEmpty || !e.contains("@")) return "";

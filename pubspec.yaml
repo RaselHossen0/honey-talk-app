@@ -66,6 +66,9 @@ dependencies:
 # API CALLING
   http: any
 
+# REAL-TIME (Socket.IO for chat)
+  socket_io_client: any
+
 # COMMON PACKAGES
   intl: any
   fluttertoast: any

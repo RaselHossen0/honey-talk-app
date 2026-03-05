@@ -14,31 +14,27 @@ class FakeLiveCommentWidget extends StatelessWidget {
     return GetBuilder<FakeLiveController>(
       id: AppConstant.onChangeComment,
       builder: (controller) => Container(
-        height: 250,
+        height: double.infinity,
         width: Get.width / 1.8,
         color: AppColor.transparent,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: ScrollFadeEffectWidget(
-            axis: Axis.vertical,
-            child: SingleChildScrollView(
-              controller: controller.fakeLiveModel?.scrollController,
-              child: ListView.builder(
-                itemCount: controller.fakeCommentList.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  final indexData = controller.fakeCommentList[index];
-                  return LiveCommentTextWidget(
-                    name: indexData.user,
-                    comment: indexData.message,
-                    image: indexData.image,
-                    isBanned: false,
-                  );
-                },
-              ),
-            ),
+        child: ScrollFadeEffectWidget(
+          axis: Axis.vertical,
+          child: ListView.builder(
+            controller: controller.fakeLiveModel?.scrollController,
+            itemCount: controller.fakeCommentList.length,
+            physics: const BouncingScrollPhysics(),
+            padding: EdgeInsets.zero,
+            reverse: true,
+            itemBuilder: (context, index) {
+              final idx = controller.fakeCommentList.length - 1 - index;
+              final indexData = controller.fakeCommentList[idx];
+              return LiveCommentTextWidget(
+                name: indexData.user,
+                comment: indexData.message,
+                image: indexData.image,
+                isBanned: false,
+              );
+            },
           ),
         ),
       ),

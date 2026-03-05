@@ -21,7 +21,7 @@ class PurchaseCoinWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            EnumLocal.txtPurchaseCoins.name.tr,
+            EnumLocal.txtPurchaseDiamonds.name.tr,
             style: AppFontStyle.styleW700(AppColor.black, 16),
           ),
           15.height,
@@ -78,7 +78,7 @@ class _ItemWidget extends StatelessWidget {
               children: [
                 12.height,
                 Center(
-                  child: Image.asset(AppAssets.icMyCoin, width: 58),
+                  child: Image.asset(AppAssets.icMyDiamond, width: 58),
                 ),
                 10.height,
                 Container(
@@ -88,7 +88,7 @@ class _ItemWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    "${CustomFormatNumber.onConvert(coin)} Coin",
+                    "${CustomFormatNumber.onConvert(coin)} ${EnumLocal.txtDiamonds.name.tr}",
                     style: AppFontStyle.styleW700(AppColor.orange.withValues(alpha: 0.6), 11),
                   ),
                 ),

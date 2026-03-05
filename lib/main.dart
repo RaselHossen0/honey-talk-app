@@ -35,13 +35,18 @@ void main() async {
   NotificationServices.firebaseInit();
   FirebaseMessaging.onBackgroundMessage(NotificationServices.onShowBackgroundNotification);
 
-  final identity = await PlatformDeviceId.getDeviceId;
-  final fcmToken = await FirebaseMessaging.instance.getToken();
+  final identity = await PlatformDeviceId.getDeviceId ?? "";
+  String fcmToken = "";
+  try {
+    fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
+  } catch (e) {
+    Utils.showLog("FCM token not available yet (e.g. APNS not set on iOS): $e");
+  }
 
   Utils.showLog("Device Id => $identity");
-  Utils.showLog("FCM Token => $fcmToken");
+  Utils.showLog("FCM Token => ${fcmToken.isEmpty ? '(empty)' : 'ok'}");
 
-  if (identity != null && fcmToken != null) {
+  if (identity.isNotEmpty) {
     await Database.init(identity, fcmToken);
   }
 

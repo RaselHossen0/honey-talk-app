@@ -46,6 +46,7 @@
         "readmore",
         "share_plus",
         "shimmer",
+        "socket_io_client",
         "text_scroll",
         "vibration",
         "video_player",
@@ -327,6 +328,15 @@
         "clock",
         "meta",
         "path"
+      ]
+    },
+    {
+      "name": "socket_io_client",
+      "version": "3.1.4",
+      "dependencies": [
+        "logging",
+        "socket_io_common",
+        "web"
       ]
     },
     {
@@ -1003,6 +1013,18 @@
       ]
     },
     {
+      "name": "socket_io_common",
+      "version": "3.1.1",
+      "dependencies": [
+        "logging"
+      ]
+    },
+    {
+      "name": "logging",
+      "version": "1.3.0",
+      "dependencies": []
+    },
+    {
       "name": "synchronized",
       "version": "3.4.0",
       "dependencies": []
@@ -1664,11 +1686,6 @@
         "meta",
         "pub_semver"
       ]
-    },
-    {
-      "name": "logging",
-      "version": "1.3.0",
-      "dependencies": []
     },
     {
       "name": "hooks",

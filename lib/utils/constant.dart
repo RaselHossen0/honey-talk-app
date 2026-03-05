@@ -18,6 +18,7 @@ abstract class AppConstant {
 
   // >>>>> >>>>> >>>>> FILL PROFILE PAGE <<<<< <<<<< <<<<<
   static const String onChangeGender = "onChangeGender";
+  static const String onChangeUserName = "onChangeUserName";
   static const String onPickImage = "onPickImage";
 
   // >>>>> >>>>> >>>>> STEAM PAGE <<<<< <<<<< <<<<<
@@ -72,6 +73,7 @@ abstract class AppConstant {
   // >>>>> >>>>> >>>>> CHAT PAGE <<<<< <<<<< <<<<<
   static const String onPaginationMessageUser = "onPaginationMessageUser";
   static const String onFetchMessageUser = "onFetchMessageUser";
+  static const String onFetchLiveFemales = "onFetchLiveFemales";
   static const String onFetchUserChat = "onFetchUserChat";
   static const String onPaginationUserChat = "onPaginationUserChat";
 
@@ -87,6 +89,8 @@ abstract class AppConstant {
 
   static const String onChangeSearchHistory = "onChangeSearchHistory";
   static const String onToggleAppBar = "onToggleAppBar";
+
+  static const String onGetTaskPage = "onGetTaskPage";
 
   static const String onGetFeed = "onGetFeed";
   static const String onFetchPost = "onFetchPost";

@@ -7,10 +7,7 @@ import 'package:tingle/common/shimmer/other_user_profile_shimmer_widget.dart';
 import 'package:tingle/database/fake_data/user_fake_data.dart';
 import 'package:tingle/page/fake_other_user_profile_bottom_sheet/widget/fake_other_user_profile_data_tab_widget.dart';
 import 'package:tingle/page/fake_other_user_profile_bottom_sheet/widget/fake_other_user_profile_details_widget.dart';
-import 'package:tingle/page/fake_other_user_profile_bottom_sheet/widget/fake_other_user_profile_moments_tab_widget.dart';
-import 'package:tingle/page/fake_other_user_profile_bottom_sheet/widget/fake_other_user_profile_tab_bar_widget.dart';
 import 'package:tingle/page/fake_other_user_profile_bottom_sheet/widget/fake_other_user_profile_won_mom_tab_widget.dart';
-import 'package:tingle/page/feed_page/model/fetch_post_model.dart';
 import 'package:tingle/page/feed_video_page/model/fetch_video_model.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/api_params.dart';
@@ -26,7 +23,7 @@ class FakeOtherUserProfileBottomSheet {
   static void show({
     required BuildContext context,
     required String userId,
-    bool? isFake,
+    bool isFake = true,
   }) async {
     if (_isDialogOpen) return;
     _isDialogOpen = true;
@@ -44,26 +41,13 @@ class FakeOtherUserProfileBottomSheet {
 
     try {
       // Local state variables
-      final scrollController = ScrollController();
       int selectedTabIndex = 0;
       bool isLoading = true;
-      bool isFollowed = false;
       OtherUserProfileModel? otherUserProfileModel;
-      List<Post> userPosts = [];
       bool isLoadingPost = false;
       bool isInitialized = false;
       List<VideoData> userVideos = [];
 
-      // Fetch profile data
-
-      // Follow/unfollow function
-      onClickFollow() async {
-        if (otherUserProfileModel?.user?.id != Database.loginUserId) {
-          isFollowed = !isFollowed;
-        }
-      }
-
-      // Fetch posts
       onFakeDataFiler() async {
         if (userId.isNotEmpty) {
           FakeProfilesSet().generateUserProfiles(100).forEach(
@@ -91,6 +75,7 @@ class FakeOtherUserProfileBottomSheet {
         }
       }
 
+      final scrollController = ScrollController();
       await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -121,6 +106,17 @@ class FakeOtherUserProfileBottomSheet {
                   ),
                   child: Column(
                     children: [
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 12, bottom: 4),
+                          height: 4,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            color: AppColor.grayText.withValues(alpha: 0.5),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
                       Expanded(
                         child: isLoading
                             ? const OtherUserProfileShimmerWidget()
@@ -137,70 +133,32 @@ class FakeOtherUserProfileBottomSheet {
                                                 children: [
                                                   FakeOtherUserProfileDetailsWidget(
                                                     otherUserProfileModel: otherUserProfileModel,
+                                                    onClose: () => Navigator.of(context).pop(),
                                                   ),
-                                                  15.height,
-                                                  Container(
-                                                    height: 50,
-                                                    width: Get.width,
-                                                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                                                    color: AppColor.colorBorder.withValues(alpha: 0.5),
-                                                    child: Row(
-                                                      children: [
-                                                        TabItemWidget(
-                                                          title: EnumLocal.txtData.name.tr,
-                                                          isSelected: selectedTabIndex == 0,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedTabIndex = 0;
-                                                            });
-                                                          },
-                                                        ),
-                                                        TabItemWidget(
-                                                          title: EnumLocal.txtMoments.name.tr,
-                                                          isSelected: selectedTabIndex == 1,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedTabIndex = 1;
-                                                            });
-                                                          },
-                                                        ),
-                                                        TabItemWidget(
-                                                          title: EnumLocal.txtWonderfulMoments.name.tr,
-                                                          isSelected: selectedTabIndex == 2,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedTabIndex = 2;
-                                                            });
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
+                                                  8.height,
+                                                  _TabBar(
+                                                    selectedIndex: selectedTabIndex,
+                                                    videoCount: userVideos.length,
+                                                    onTab: (i) => setState(() => selectedTabIndex = i),
                                                   ),
-                                                  15.height,
+                                                  8.height,
                                                   selectedTabIndex == 0
                                                       ? FakeOtherUserProfileDataTabWidget(
                                                           userID: userId,
                                                           giftCount: otherUserProfileModel?.user?.receivedGifts ?? 0,
                                                           isFake: true,
                                                         )
-                                                      // OtherUserProfileDataTabWidget(posts: userPosts)
-
-                                                      : selectedTabIndex == 1
-                                                          ? FakeOtherUserProfileMomentsTabWidget(
-                                                              isLoadingPost: isLoadingPost,
-                                                              userPosts: userPosts,
-                                                            )
-                                                          : FakeOtherUserProfileWonMomTabWidget(
-                                                              isLoadingVideo: isLoadingPost,
-                                                              onClickVideo: (int index) {
-                                                                Get.toNamed(
-                                                                  AppRoutes.previewShortsVideoPage,
-                                                                  arguments: {"index": index, "videos": userVideos},
-                                                                );
-                                                              },
-                                                              userVideos: userVideos,
-                                                            ),
-                                                  selectedTabIndex == 0 ? 0.height : 60.height,
+                                                      : FakeOtherUserProfileWonMomTabWidget(
+                                                          isLoadingVideo: isLoadingPost,
+                                                          onClickVideo: (int index) {
+                                                            Get.toNamed(
+                                                              AppRoutes.previewShortsVideoPage,
+                                                              arguments: {"index": index, "videos": userVideos},
+                                                            );
+                                                          },
+                                                          userVideos: userVideos,
+                                                        ),
+                                                  selectedTabIndex == 0 ? 0.height : 80.height,
                                                 ],
                                               ),
                                             ),
@@ -213,166 +171,198 @@ class FakeOtherUserProfileBottomSheet {
                                 ],
                               ),
                       ),
-                      Container(
-                        height: 60,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: AppColor.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withAlpha(26),
-                              blurRadius: 10,
-                              offset: Offset.zero,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            5.height,
-                            Row(
-                              children: [
-                                20.width,
-                                Expanded(
-                                  child: !isFollowed
-                                      ? GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              onClickFollow();
-                                            });
-                                          },
-                                          child: Container(
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: AppColor.primary,
-                                              borderRadius: BorderRadius.circular(25),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    AppAssets.icFollow,
-                                                    height: 20,
-                                                    width: 20,
-                                                    color: AppColor.white,
-                                                  ),
-                                                  10.width,
-                                                  Text(
-                                                    EnumLocal.txtFollowMe.name.tr,
-                                                    style: AppFontStyle.styleW600(AppColor.white, 16),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              onClickFollow();
-                                            });
-                                          },
-                                          child: Container(
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: AppColor.white,
-                                              borderRadius: BorderRadius.circular(25),
-                                              border: Border.all(color: AppColor.primary, width: 2),
-                                            ),
-                                            child: Center(
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    AppAssets.icFollowing,
-                                                    height: 20,
-                                                    width: 20,
-                                                    color: AppColor.primary,
-                                                  ),
-                                                  10.width,
-                                                  Text(
-                                                    EnumLocal.txtFollowing.name.tr,
-                                                    style: AppFontStyle.styleW600(AppColor.primary, 16),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                ),
-                                const SizedBox(width: 20),
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Get.back();
-                                      if (otherUserProfileModel?.user?.id!.contains("user") == true) {
-                                        Get.toNamed(
-                                          AppRoutes.fakeChatPage,
-                                          arguments: {
-                                            ApiParams.roomId: "",
-                                            ApiParams.receiverUserId: otherUserProfileModel?.user?.id ?? "",
-                                            ApiParams.name: otherUserProfileModel?.user?.name ?? "",
-                                            ApiParams.image: otherUserProfileModel?.user?.image ?? "",
-                                            ApiParams.isBanned: otherUserProfileModel?.user?.isProfilePicBanned ?? false,
-                                            ApiParams.isVerify: otherUserProfileModel?.user?.isVerified ?? false,
-                                          },
-                                        );
-                                      } else {
-                                        Get.toNamed(
-                                          AppRoutes.chatPage,
-                                          arguments: {
-                                            ApiParams.roomId: "",
-                                            ApiParams.receiverUserId: otherUserProfileModel?.user?.id ?? "",
-                                            ApiParams.name: otherUserProfileModel?.user?.name ?? "",
-                                            ApiParams.image: otherUserProfileModel?.user?.image ?? "",
-                                            ApiParams.isBanned: otherUserProfileModel?.user?.isProfilePicBanned ?? false,
-                                            ApiParams.isVerify: otherUserProfileModel?.user?.isVerified ?? false,
-                                          },
-                                        );
-                                      }
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        gradient: AppColor.coinPinkGradient,
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              AppAssets.icHello,
-                                              height: 20,
-                                              width: 20,
-                                              color: AppColor.white,
-                                            ),
-                                            10.width,
-                                            Text(
-                                              EnumLocal.txtSayHello.name.tr,
-                                              style: AppFontStyle.styleW600(AppColor.white, 16),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                20.width,
-                              ],
-                            ),
-                            5.height,
-                          ],
-                        ),
+                      _BottomActionBar(
+                        otherUserProfileModel: otherUserProfileModel,
+                        isFake: isFake,
                       ),
                     ],
                   ));
             },
           );
         },
-      );
+      ).whenComplete(() {
+        scrollController.dispose();
+      });
     } finally {
       _isDialogOpen = false;
     }
+  }
+}
+
+class _TabBar extends StatelessWidget {
+  const _TabBar({
+    required this.selectedIndex,
+    required this.videoCount,
+    required this.onTab,
+  });
+
+  final int selectedIndex;
+  final int videoCount;
+  final ValueChanged<int> onTab;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 44,
+      width: Get.width,
+      color: AppColor.white,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () => onTab(0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: selectedIndex == 0 ? AppColor.pink : AppColor.transparent,
+                    width: 3,
+                  ),
+                ),
+              ),
+              child: Text(
+                EnumLocal.txtInformation.name.tr,
+                style: selectedIndex == 0
+                    ? AppFontStyle.styleW600(AppColor.pink, 14)
+                    : AppFontStyle.styleW500(AppColor.grayText, 14),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => onTab(1),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: selectedIndex == 1 ? AppColor.pink : AppColor.transparent,
+                    width: 3,
+                  ),
+                ),
+              ),
+              child: Text(
+                "${EnumLocal.txtVideo.name.tr}($videoCount)",
+                style: selectedIndex == 1
+                    ? AppFontStyle.styleW600(AppColor.pink, 14)
+                    : AppFontStyle.styleW500(AppColor.grayText, 14),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BottomActionBar extends StatelessWidget {
+  const _BottomActionBar({
+    required this.otherUserProfileModel,
+    required this.isFake,
+  });
+
+  final OtherUserProfileModel? otherUserProfileModel;
+  final bool isFake;
+
+  static const _callPricePerMin = 3500;
+
+  @override
+  Widget build(BuildContext context) {
+    final user = otherUserProfileModel?.user;
+    return Container(
+      padding: EdgeInsets.only(
+        left: 15,
+        right: 15,
+        top: 12,
+        bottom: 12 + MediaQuery.of(context).padding.bottom,
+      ),
+      decoration: BoxDecoration(
+        color: AppColor.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.black.withValues(alpha: 0.08),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Get.back();
+              if (isFake) {
+                Get.toNamed(
+                  AppRoutes.fakeChatPage,
+                  arguments: {
+                    ApiParams.roomId: "",
+                    ApiParams.receiverUserId: user?.id ?? "",
+                    ApiParams.name: user?.name ?? "",
+                    ApiParams.image: user?.image ?? "",
+                    ApiParams.isBanned: user?.isProfilePicBanned ?? false,
+                    ApiParams.isVerify: user?.isVerified ?? false,
+                  },
+                );
+              } else {
+                Get.toNamed(
+                  AppRoutes.chatPage,
+                  arguments: {
+                    ApiParams.roomId: "",
+                    ApiParams.receiverUserId: user?.id ?? "",
+                    ApiParams.name: user?.name ?? "",
+                    ApiParams.image: user?.image ?? "",
+                    ApiParams.isBanned: user?.isProfilePicBanned ?? false,
+                    ApiParams.isVerify: user?.isVerified ?? false,
+                  },
+                );
+              }
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColor.pink.withValues(alpha: 0.2),
+                border: Border.all(color: AppColor.pink.withValues(alpha: 0.5)),
+              ),
+              child: Center(
+                child: Image.asset(
+                  AppAssets.icMessageBorder,
+                  width: 24,
+                  color: AppColor.pink,
+                ),
+              ),
+            ),
+          ),
+          12.width,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  gradient: AppColor.coinPinkGradient,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      AppAssets.icCallReceive,
+                      width: 22,
+                      color: AppColor.white,
+                    ),
+                    10.width,
+                    Text(
+                      "$_callPricePerMin Token${EnumLocal.txtPerMinute.name.tr}",
+                      style: AppFontStyle.styleW600(AppColor.white, 15),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

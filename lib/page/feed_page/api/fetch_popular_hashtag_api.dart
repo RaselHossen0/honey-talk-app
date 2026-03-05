@@ -1,44 +1,21 @@
+import 'package:tingle/core/network/api_client.dart';
 import 'package:tingle/page/feed_page/model/fetch_popular_hashtag_model.dart';
-
-import 'dart:async';
-import 'dart:math';
-
-// adjust path if needed
+import 'package:tingle/utils/utils.dart';
 
 class FetchPopularHashtagApi {
-  static Future<FetchPopularHashtagModel?> callApi() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 100));
-
-    final random = Random();
-
-    // Sample hashtags
-    final sampleHashtags = [
-      'sunset',
-      'life',
-      'vibes',
-      'dream',
-      'chill',
-      'travel',
-      'music',
-      'fitness',
-      'love',
-      'friends',
-    ];
-
-    // Generate dummy hashtags
-    final hashtags = List.generate(sampleHashtags.length, (index) {
-      return Hashtags(
-        id: 'hashtag_${index + 1}',
-        hashTag: '#${sampleHashtags[index]}',
-        usageCount: 1000 + random.nextInt(90000), // 1K to 90K usage
+  static Future<FetchPopularHashtagModel?> callApi({int limit = 20}) async {
+    try {
+      final res = await ApiClient.instance.get('/hashtags/popular', queryParameters: {'limit': limit.toString()});
+      final list = (res['hashtags'] as List?)?.cast<Map<String, dynamic>>() ?? [];
+      final hashtags = list.map((h) => Hashtags.fromJson(Map<String, dynamic>.from(h))).toList();
+      return FetchPopularHashtagModel(
+        success: res['success'] as bool? ?? res['status'] as bool? ?? true,
+        message: res['message'] as String? ?? 'Success',
+        hashtags: hashtags,
       );
-    });
-
-    return FetchPopularHashtagModel(
-      success: true,
-      message: 'Popular hashtags fetched successfully',
-      hashtags: hashtags,
-    );
+    } catch (e) {
+      Utils.showLog('FetchPopularHashtagApi error: $e');
+      return null;
+    }
   }
 }

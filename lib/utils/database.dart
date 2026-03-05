@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tingle/common/model/fetch_setting_model.dart';
 import 'package:tingle/routes/app_routes.dart';
@@ -39,6 +41,10 @@ class Database {
   static onSetIsNewUser(bool isNewUser) async => await localStorage.write("isNewUser", isNewUser);
   static onSetLoginType(int loginType) async => localStorage.write("loginType", loginType);
   static onSetLoginUserId(String loginUserId) async => localStorage.write("loginUserId", loginUserId);
+
+  static String get accessToken => localStorage.read("accessToken") ?? "";
+  static onSetAccessToken(String token) async => await localStorage.write("accessToken", token);
+  static onClearAccessToken() async => await localStorage.remove("accessToken");
 
   static int get onGetMyCoins => localStorage.read("coins") ?? 0;
   static onSetMyCoins(int coins) async => localStorage.write("coins", coins);
@@ -91,10 +97,21 @@ class Database {
     final backUpIdentity = identity;
     final backUpFcmToken = fcmToken;
 
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      Utils.showLog("Firebase signOut error: $e");
+    }
+    try {
+      await GoogleSignIn.instance.signOut();
+    } catch (e) {
+      Utils.showLog("Google SignOut error: $e");
+    }
+
     localStorage.erase();
 
-    onSetFcmToken(backUpIdentity);
-    onSetIdentity(backUpFcmToken);
+    await onSetFcmToken(backUpFcmToken);
+    await onSetIdentity(backUpIdentity);
 
     Get.offAllNamed(AppRoutes.loginPage);
   }

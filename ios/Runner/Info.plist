@@ -28,10 +28,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.incodes.tingle</string>
+			<string>com.app.honeytalk</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.422786461200-qesrtharn2vk3iurdstrs1pvt3cied8a</string>
+				<string>com.googleusercontent.apps.1035561747062-posfpblbn79psl85gvr4l2944vmf2pqb</string>
 			</array>
 		</dict>
 	</array>

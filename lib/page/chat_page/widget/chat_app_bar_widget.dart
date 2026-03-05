@@ -16,6 +16,7 @@ class ChatAppBarWidget {
     required String image,
     required bool isVerify,
     required bool isBanned,
+    bool isOnline = false,
   }) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(90),
@@ -84,28 +85,28 @@ class ChatAppBarWidget {
                               ),
                             ),
                             3.height,
-
-                            // Row(
-                            //   children: [
-                            //     Container(
-                            //       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                            //       decoration: BoxDecoration(
-                            //         color: AppColor.green.withValues(alpha: 0.1),
-                            //         borderRadius: BorderRadius.circular(100),
-                            //       ),
-                            //       child: Row(
-                            //         children: [
-                            //           const Icon(Icons.circle, size: 10, color: AppColor.green),
-                            //           3.width,
-                            //           Text(
-                            //             "Online",
-                            //             style: AppFontStyle.styleW600(AppColor.green, 10),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: (isOnline ? AppColor.green : AppColor.secondary).withValues(alpha: 0.15),
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.circle, size: 8, color: isOnline ? AppColor.green : AppColor.secondary),
+                                      3.width,
+                                      Text(
+                                        isOnline ? "Online" : "Offline",
+                                        style: AppFontStyle.styleW600(isOnline ? AppColor.green : AppColor.secondary, 10),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),

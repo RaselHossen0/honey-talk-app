@@ -91,6 +91,7 @@ class FeedSquareController extends GetxController {
   // >>>>> >>>>> >>>>> TOPICS TAB <<<<< <<<<< <<<<<
 
   Future<void> onGetTopics() async {
+    if (popularHashtag.isEmpty) return;
     isLoadingTopic = true;
     update([AppConstant.onChangeHashtag]);
     await onGetToken();
@@ -113,7 +114,7 @@ class FeedSquareController extends GetxController {
   Future<void> onGetMoment() async {
     await onGetToken();
 
-    fetchMomentModel = await FetchPostApi.callApi();
+    fetchMomentModel = await FetchPostApi.callApi(limit: 20, offset: moments.length);
     moments.addAll(fetchMomentModel?.post ?? []);
 
     isLoadingMoment = false;

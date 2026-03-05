@@ -23,11 +23,22 @@ class CoinAndPointDetailsWidget extends GetView<ProfileController> {
         child: Row(
           children: [
             ItemWidget(
-              title: EnumLocal.txtMyCoins.name.tr,
+              title: EnumLocal.txtMyDiamonds.name.tr,
               count: (controller.fetchUserProfileModel?.user?.coin ?? 0).toInt(),
-              image: AppAssets.icMyCoin,
+              image: AppAssets.icMyDiamond,
               gradient: AppColor.orangeYellowGradient,
               callback: () => Get.toNamed(AppRoutes.coinHistoryPage)?.then((value) {
+                Utils.onChangeStatusBar(brightness: Brightness.dark);
+                controller.scrollController.jumpTo(0.0);
+              }),
+            ),
+            8.width,
+            ItemWidget(
+              title: EnumLocal.txtMyCoins.name.tr,
+              count: (controller.fetchUserProfileModel?.user?.incomeCoin ?? 0).toInt(),
+              image: AppAssets.icMyCoin,
+              gradient: AppColor.coinPinkGradient,
+              callback: () => Get.toNamed(AppRoutes.myIncomePage)?.then((value) {
                 Utils.onChangeStatusBar(brightness: Brightness.dark);
                 controller.scrollController.jumpTo(0.0);
               }),
@@ -62,7 +73,7 @@ class ItemWidget extends StatelessWidget {
         onTap: callback,
         child: Container(
           height: 72,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
             gradient: gradient,
             borderRadius: BorderRadius.circular(16),
@@ -73,38 +84,31 @@ class ItemWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Image.asset(image, width: 48),
-              15.width,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      Text(
-                        "Available My Coins",
-                        style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.8), 10),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          height: 1,
-                          color: AppColor.white.withValues(alpha: 0.8),
-                        ),
-                      ),
-                    ],
-                  ),
-                  8.height,
-                  Text(
-                    (count).toStringAsFixed(2),
-                    style: AppFontStyle.styleW900(AppColor.white, 18),
-                  ),
-                ],
+              Image.asset(image, width: 40),
+              8.width,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: AppFontStyle.styleW600(AppColor.white.withValues(alpha: 0.8), 9),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    6.height,
+                    Text(
+                      (count).toStringAsFixed(2),
+                      style: AppFontStyle.styleW900(AppColor.white, 16),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
               ),
-              const Spacer(),
-              Image.asset(AppAssets.icDoubleArrowRight, width: 20),
+              Image.asset(AppAssets.icDoubleArrowRight, width: 16),
             ],
           ),
         ),

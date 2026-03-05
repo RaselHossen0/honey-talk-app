@@ -14,6 +14,7 @@ import 'package:tingle/page/other_user_profile_bottom_sheet/widget/other_user_ta
 import 'package:tingle/page/profile_page/api/fetch_other_user_profile_api.dart';
 import 'package:tingle/page/profile_page/model/fetch_user_profile_model.dart';
 
+import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/utils.dart';
 
@@ -103,6 +104,13 @@ class OtherUserProfileBottomSheet {
     required BuildContext context,
     required String userId,
   }) async {
+    if (userId.isEmpty || userId == Database.loginUserId) {
+      if (userId == Database.loginUserId) {
+        Get.toNamed(AppRoutes.previewUserProfilePage, arguments: userId);
+      }
+      return;
+    }
+
     userid.value = userId;
 
     loadInitialData();

@@ -55,6 +55,7 @@ class User {
     String? country,
     String? uniqueId,
     int? coin,
+    int? incomeCoin,
     int? receivedGifts,
     WealthLevel? wealthLevel,
     ActiveAvtarFrame? activeAvtarFrame,
@@ -75,6 +76,7 @@ class User {
     _country = country;
     _uniqueId = uniqueId;
     _coin = coin;
+    _incomeCoin = incomeCoin;
     _receivedGifts = receivedGifts;
     _wealthLevel = wealthLevel;
     _activeAvtarFrame = activeAvtarFrame;
@@ -97,6 +99,7 @@ class User {
     _country = json['country'];
     _uniqueId = json['uniqueId'];
     _coin = json['coin'];
+    _incomeCoin = json['incomeCoin'];
     _receivedGifts = json['receivedGifts'];
     _wealthLevel = json['wealthLevel'] != null ? WealthLevel.fromJson(json['wealthLevel']) : null;
     _activeAvtarFrame = json['activeAvtarFrame'] != null ? ActiveAvtarFrame.fromJson(json['activeAvtarFrame']) : null;
@@ -117,6 +120,7 @@ class User {
   String? _country;
   String? _uniqueId;
   int? _coin;
+  int? _incomeCoin;
   int? _receivedGifts;
   WealthLevel? _wealthLevel;
   ActiveAvtarFrame? _activeAvtarFrame;
@@ -137,6 +141,7 @@ class User {
     String? country,
     String? uniqueId,
     int? coin,
+    int? incomeCoin,
     int? receivedGifts,
     WealthLevel? wealthLevel,
     ActiveAvtarFrame? activeAvtarFrame,
@@ -157,8 +162,9 @@ class User {
         countryFlagImage: countryFlagImage ?? _countryFlagImage,
         country: country ?? _country,
         uniqueId: uniqueId ?? _uniqueId,
-        coin: coin ?? _coin,
-        receivedGifts: receivedGifts ?? _receivedGifts,
+    coin: coin ?? _coin,
+    incomeCoin: incomeCoin ?? _incomeCoin,
+    receivedGifts: receivedGifts ?? _receivedGifts,
         wealthLevel: wealthLevel ?? _wealthLevel,
         activeAvtarFrame: activeAvtarFrame ?? _activeAvtarFrame,
         isVerified: isVerified ?? _isVerified,
@@ -178,6 +184,7 @@ class User {
   String? get country => _country;
   String? get uniqueId => _uniqueId;
   int? get coin => _coin;
+  int? get incomeCoin => _incomeCoin;
   int? get receivedGifts => _receivedGifts;
   WealthLevel? get wealthLevel => _wealthLevel;
   ActiveAvtarFrame? get activeAvtarFrame => _activeAvtarFrame;
@@ -200,6 +207,7 @@ class User {
     map['country'] = _country;
     map['uniqueId'] = _uniqueId;
     map['coin'] = _coin;
+    map['incomeCoin'] = _incomeCoin;
     map['receivedGifts'] = _receivedGifts;
     if (_wealthLevel != null) {
       map['wealthLevel'] = _wealthLevel?.toJson();

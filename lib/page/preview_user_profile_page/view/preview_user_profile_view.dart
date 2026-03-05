@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:tingle/page/preview_user_profile_page/controller/preview_user_profile_controller.dart';
 import 'package:tingle/page/preview_user_profile_page/shimmer/preview_user_profile_shimmer_widget.dart';
 import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_app_bar_widget.dart';
+import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_bottom_action_bar_widget.dart';
 import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_data_tab_widget.dart';
 import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_details_widget.dart';
-import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_moments_tab_widget.dart';
 import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_tab_bar_widget.dart';
 import 'package:tingle/page/preview_user_profile_page/widget/preview_profile_won_mom_tab_widget.dart';
 import 'package:tingle/utils/color.dart';
@@ -42,18 +42,16 @@ class PreviewUserProfileView extends GetView<PreviewUserProfileController> {
                             child: Column(
                               children: [
                                 PreviewProfileDetailsWidget(),
-                                15.height,
                                 PreviewProfileTabBarWidget(),
-                                15.height,
+                                8.height,
                                 GetBuilder<PreviewUserProfileController>(
                                   id: AppConstant.onChangeTab,
-                                  builder: (controller) => controller.selectedTabIndex == 0
+                                  builder: (c) => c.selectedTabIndex == 0
                                       ? PreviewProfileDataTabWidget()
-                                      : controller.selectedTabIndex == 1
-                                          ? PreviewProfileMomentsTabWidget()
-                                          : PreviewProfileWonMomTabWidget(),
+                                      : PreviewProfileWonMomTabWidget(),
                                 ),
-                                15.height,
+                                // Extra padding for bottom bar
+                                SizedBox(height: 80 + MediaQuery.of(context).padding.bottom),
                               ],
                             ),
                           ),
@@ -64,12 +62,12 @@ class PreviewUserProfileView extends GetView<PreviewUserProfileController> {
                   Positioned(
                     top: 0,
                     child: Container(
-                      height: 200,
+                      height: 160,
                       width: Get.width,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppColor.black.withValues(alpha: 0.7),
+                            AppColor.black.withValues(alpha: 0.5),
                             AppColor.transparent,
                           ],
                           begin: Alignment.topCenter,
@@ -79,6 +77,12 @@ class PreviewUserProfileView extends GetView<PreviewUserProfileController> {
                     ),
                   ),
                   PreviewProfileAppBarWidget(),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: PreviewProfileBottomActionBarWidget(),
+                  ),
                 ],
               ),
       ),

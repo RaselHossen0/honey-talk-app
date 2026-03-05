@@ -150,11 +150,20 @@ class EditProfileView extends GetView<EditProfileController> {
                           5.height,
                           GetBuilder<EditProfileController>(
                             id: AppConstant.onChangeCountry,
-                            builder: (controller) => CountryTextFieldWidget(
-                              flag: controller.countryFlagController.text,
-                              country: controller.countryNameController.text,
-                              callback: () => controller.onChangeCountry(context),
-                            ),
+                            builder: (controller) {
+                              final locked = controller.isCountryLocked;
+                              return IgnorePointer(
+                                ignoring: locked,
+                                child: Opacity(
+                                  opacity: locked ? 0.6 : 1,
+                                  child: CountryTextFieldWidget(
+                                    flag: controller.countryFlagController.text,
+                                    country: controller.countryNameController.text,
+                                    callback: () => controller.onChangeCountry(context),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           20.height,
                           Text(
@@ -164,23 +173,32 @@ class EditProfileView extends GetView<EditProfileController> {
                           5.height,
                           GetBuilder<EditProfileController>(
                             id: AppConstant.onChangeGender,
-                            builder: (controller) => Row(
-                              children: [
-                                GenderButtonWidget(
-                                  title: EnumLocal.txtMale.name.tr,
-                                  image: AppAssets.imgMale,
-                                  isSelected: controller.isMale,
-                                  callback: () => controller.onChangeGender(true),
+                            builder: (controller) {
+                              final locked = controller.isGenderLocked;
+                              return IgnorePointer(
+                                ignoring: locked,
+                                child: Opacity(
+                                  opacity: locked ? 0.6 : 1,
+                                  child: Row(
+                                    children: [
+                                      GenderButtonWidget(
+                                        title: EnumLocal.txtMale.name.tr,
+                                        image: AppAssets.imgMale,
+                                        isSelected: controller.isMale,
+                                        callback: () => controller.onChangeGender(true),
+                                      ),
+                                      15.width,
+                                      GenderButtonWidget(
+                                        title: EnumLocal.txtFemale.name.tr,
+                                        image: AppAssets.imgFemale,
+                                        isSelected: !controller.isMale,
+                                        callback: () => controller.onChangeGender(false),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                15.width,
-                                GenderButtonWidget(
-                                  title: EnumLocal.txtFemale.name.tr,
-                                  image: AppAssets.imgFemale,
-                                  isSelected: !controller.isMale,
-                                  callback: () => controller.onChangeGender(false),
-                                ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
                           20.height,
                           BioTextFieldWidget(

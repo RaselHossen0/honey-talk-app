@@ -16,8 +16,7 @@ class BenefitBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      padding: EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         color: AppColor.white,
         borderRadius: BorderRadius.circular(20),
@@ -30,54 +29,49 @@ class BenefitBoxWidget extends StatelessWidget {
         ],
       ),
       child: GetBuilder<ProfileController>(builder: (logic) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ItemWidget(
-                  title: EnumLocal.txtReward.name.tr,
-                  gradient: AppColor.rewardGradient,
-                  image: AppAssets.icRewardIcon,
-                  callback: () {},
-                ),
-                ItemWidget(
-                  title: EnumLocal.txtRanking.name.tr,
-                  gradient: AppColor.rankingGradient,
-                  image: AppAssets.icRankingIcon,
-                  callback: () => Get.toNamed(AppRoutes.rankingPage)?.then((value) {
-                    Utils.onChangeStatusBar(brightness: Brightness.dark);
-                    logic.scrollController.jumpTo(0.0);
-                  }),
-                ),
-                ItemWidget(
-                  title: EnumLocal.txtMyStore.name.tr,
-                  gradient: AppColor.storeGradient,
-                  image: AppAssets.icMyStoreIcon,
-                  callback: () => Get.toNamed(AppRoutes.storePage)?.then((value) {
-                    logic.scrollController.jumpTo(0.0);
-                    Utils.onChangeStatusBar(brightness: Brightness.dark);
-                  }),
-                ),
-                ItemWidget(
-                  title: EnumLocal.txtInvite.name.tr,
-                  gradient: AppColor.inviteGradient,
-                  image: AppAssets.icInviteIcon,
-                  callback: () {},
-                ),
-              ],
-            ),
-          ],
+        final items = [
+          _BenefitItem(EnumLocal.txtReward.name.tr, AppAssets.icRewardIcon, AppColor.rewardGradient, () {}),
+          _BenefitItem(EnumLocal.txtRanking.name.tr, AppAssets.icRankingIcon, AppColor.rankingGradient, () => Get.toNamed(AppRoutes.rankingPage)?.then((value) {
+            Utils.onChangeStatusBar(brightness: Brightness.dark);
+            logic.scrollController.jumpTo(0.0);
+          })),
+          _BenefitItem(EnumLocal.txtMyStore.name.tr, AppAssets.icMyStoreIcon, AppColor.storeGradient, () => Get.toNamed(AppRoutes.storePage)?.then((value) {
+            logic.scrollController.jumpTo(0.0);
+            Utils.onChangeStatusBar(brightness: Brightness.dark);
+          })),
+          _BenefitItem(EnumLocal.txtInvite.name.tr, AppAssets.icInviteIcon, AppColor.inviteGradient, () {}),
+        ];
+        return ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          itemCount: items.length,
+          separatorBuilder: (_, __) => Divider(height: 1, color: AppColor.secondary.withValues(alpha: 0.08)),
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return _BenefitListTile(
+              title: item.title,
+              image: item.image,
+              gradient: item.gradient,
+              callback: item.callback,
+            );
+          },
         );
       }),
     );
   }
 }
 
-class ItemWidget extends StatelessWidget {
-  const ItemWidget({
-    super.key,
+class _BenefitItem {
+  final String title;
+  final String image;
+  final Gradient gradient;
+  final Callback callback;
+  _BenefitItem(this.title, this.image, this.gradient, this.callback);
+}
+
+class _BenefitListTile extends StatelessWidget {
+  const _BenefitListTile({
     required this.title,
     required this.image,
     required this.gradient,
@@ -85,45 +79,38 @@ class ItemWidget extends StatelessWidget {
   });
 
   final String title;
-
   final String image;
   final Gradient gradient;
   final Callback callback;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return ListTile(
       onTap: callback,
-      child: Column(
-        children: [
-          Container(
-            height: 54,
-            width: 54,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              gradient: gradient,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(width: 1, color: AppColor.white),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.secondary.withValues(alpha: 0.05),
-                  spreadRadius: 2,
-                  blurRadius: 2,
-                ),
-              ],
+      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+      leading: Container(
+        height: 44,
+        width: 44,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: gradient,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(width: 1, color: AppColor.white),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.secondary.withValues(alpha: 0.05),
+              spreadRadius: 1,
+              blurRadius: 2,
             ),
-            child: Image.asset(
-              image,
-              width: 26,
-            ),
-          ),
-          5.height,
-          Text(
-            title,
-            style: AppFontStyle.styleW600(AppColor.lightGreyPurple, 11),
-          )
-        ],
+          ],
+        ),
+        child: Image.asset(image, width: 22),
       ),
+      title: Text(
+        title,
+        style: AppFontStyle.styleW600(AppColor.lightGreyPurple, 14),
+      ),
+      trailing: Icon(Icons.chevron_right, color: AppColor.secondary.withValues(alpha: 0.5), size: 24),
     );
   }
 }

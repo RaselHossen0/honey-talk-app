@@ -324,7 +324,7 @@ class FakeAudioRoomSendGiftBottomSheetWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppAssets.icCoinStar, width: 20),
+                        Image.asset(AppAssets.icMyDiamond, width: 20),
                         5.width,
                         Text(
                           "65k",
@@ -451,7 +451,7 @@ class GiftItemWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(AppAssets.icCoinStar, width: 12),
+                        Image.asset(AppAssets.icMyDiamond, width: 12),
                         3.width,
                         Text(
                           "5000",

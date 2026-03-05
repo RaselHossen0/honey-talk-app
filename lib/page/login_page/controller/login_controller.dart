@@ -99,20 +99,34 @@ class LoginController extends GetxController {
   }
 
   void onGetProfile({required String token, required String uid}) async {
-    await FetchSettingApi.callApi(uid: uid, token: token); // CALL ADMIN SETTING API
+    await FetchSettingApi.callApi(uid: uid, token: token);
 
     if (FetchSettingApi.fetchSettingModel?.data != null) {
       await FetchLoginUserProfileApi.callApi(token: token, uid: uid);
 
       if (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.id != null) {
-        // >>>> >>>>> Store In Local Database <<<<< <<<<<
-
         Database.onSetIsNewUser(false);
         Database.onSetLoginUserId(FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.id ?? "");
         Database.onSetLoginType(FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.loginType ?? 0);
 
-        Get.toNamed(AppRoutes.fillProfilePage)?.then((value) => Utils.onChangeStatusBar(brightness: Brightness.light));
+        if (_isProfileComplete) {
+          Get.offAllNamed(AppRoutes.bottomBarPage);
+        } else {
+          Get.offAllNamed(AppRoutes.fillProfilePage);
+          Utils.onChangeStatusBar(brightness: Brightness.light);
+        }
       }
     }
+  }
+
+  /// True if user has already filled their profile (not first-time / default placeholder).
+  bool get _isProfileComplete {
+    final user = FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user;
+    if (user == null) return false;
+    final un = (user.userName ?? '').trim();
+    final age = user.age ?? 0;
+    if (un.isEmpty || age <= 0) return false;
+    if (RegExp(r'^user_\d+$').hasMatch(un)) return false;
+    return true;
   }
 }

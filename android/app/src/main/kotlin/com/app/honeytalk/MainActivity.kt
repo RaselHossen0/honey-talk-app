@@ -1,4 +1,4 @@
-package com.incodes.tingle
+package com.app.honeytalk
 
 import io.flutter.embedding.android.FlutterActivity
 

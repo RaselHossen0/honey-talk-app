@@ -146,6 +146,7 @@ class AppAssets {
   static const icShareText = "${getIconsPath}ic_share_text.webp";
 
   static const icMyCoin = "${getIconsPath}ic_my_coin.webp";
+  static const icMyDiamond = "${getIconsPath}ic_diamond.png";
   static const icMyPoint = "${getIconsPath}ic_my_point.webp";
 
   // >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> ICONS <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<<
@@ -367,8 +368,19 @@ class AppAssets {
   // >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> LOTTIE <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<<
 
   static const lottiePk = "${getLottiePath}lottie_pk.json";
+  static const lottieWaveAnimation = "${getLottiePath}lottie_wave_animation.json";
+  /// Animated border for message female user avatars. Use a gradient circle/ring from LottieFiles for best effect.
+  static const lottieMessageAvatarBorder = "${getLottiePath}lottie_avatar_border.json";
+  /// Cup/trophy icon for leaderboard (party room, stream/live page).
+  static const lottieCup = "${getLottiePath}Gift box.json";
+  static const lottieCallReject = "${getLottiePath}Call reject.json";
+  static const lottieCallReceive = "${getLottiePath}Call Recive.json";
+  static const lottieGameController = "${getLottiePath}Game Controller.json";
+  static const lottieLiveUsers = "${getLottiePath}Live-Users.json";
+  /// Animated call button (phone icon with pulsing rings) for live page female users.
+  static const lottieCallButton = "${getLottiePath}Phone icon Home Page.json";
 
-  // >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> MUSIC <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<<
+  // >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> >>>>> MUSIC <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<< <<<<<
 
   static const musicRing_1 = "${getMusicPath}music_ring_1.mp3";
   static const musicRing_2 = "${getMusicPath}music_ring_2.mp3";

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:tingle/page/charming_level_page/api/fetch_charming_level_api.dart';
 import 'package:tingle/page/charming_level_page/model/fetch_charming_level_model.dart';
 import 'package:tingle/utils/constant.dart';
+import 'package:tingle/utils/database.dart';
+import 'package:tingle/utils/utils.dart';
 
 class CharmingLevelController extends GetxController {
   bool isLoading = true;
@@ -23,6 +25,12 @@ class CharmingLevelController extends GetxController {
 
   @override
   void onInit() {
+    final gender = (Database.fetchLoginUserProfile()?.user?.gender ?? '').toLowerCase();
+    if (gender == 'male') {
+      Get.back();
+      Utils.showToast(text: 'Charming Level is only available for female users.');
+      return;
+    }
     init();
     super.onInit();
   }

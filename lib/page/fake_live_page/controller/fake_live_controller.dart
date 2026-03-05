@@ -21,7 +21,9 @@ import 'package:tingle/page/live_page/pk_battle_widget/you_win_pk_bottom_sheet.d
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/socket_params.dart';
+import 'package:tingle/utils/permission.dart';
 import 'package:tingle/utils/utils.dart';
+import 'package:vibration/vibration.dart';
 import 'package:video_player/video_player.dart';
 
 class FakeLiveController extends GetxController {
@@ -84,8 +86,12 @@ class FakeLiveController extends GetxController {
     log("object::::  1${fakeHostCommentList.first.message}");
 
     fakeCommentList.add(fakeHostCommentList.first);
-    // onScrollAnimation();
-    fakeLiveModel?.scrollController.animateTo(fakeLiveModel!.scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 50), curve: Curves.easeOut);
+    final sc = fakeLiveModel?.scrollController;
+    if (sc != null && sc.hasClients && sc.positions.length == 1) {
+      try {
+        sc.animateTo(sc.position.maxScrollExtent, duration: const Duration(milliseconds: 50), curve: Curves.easeOut);
+      } catch (_) {}
+    }
     update([AppConstant.onChangeComment]);
   }
 
@@ -300,7 +306,7 @@ class FakeLiveController extends GetxController {
 
   Future<void> onChangeChannelMediaRelay(bool value) async {
     fakeLiveModel?.isChannelMediaRelay = value;
-    update([AppConstant.onEventHandler]);
+    update([AppConstant.onEventHandler, AppConstant.onChangeViewCount]);
   }
 
   void onUpdateTopGiftUser({required List<PkGiftTopUserModel> users, required List<PkGiftTopUserModel> user2}) async {
@@ -564,11 +570,14 @@ class FakeLiveController extends GetxController {
   Future<void> onScrollAnimation() async {
     try {
       await 10.milliseconds.delay();
-      fakeLiveModel?.scrollController.animateTo(
-        fakeLiveModel?.scrollController.position.maxScrollExtent ?? 0,
-        duration: Duration(seconds: 1),
-        curve: Curves.fastOutSlowIn,
-      );
+      final sc = fakeLiveModel?.scrollController;
+      if (sc != null && sc.hasClients && sc.positions.length == 1) {
+        sc.animateTo(
+          sc.position.maxScrollExtent,
+          duration: Duration(seconds: 1),
+          curve: Curves.fastOutSlowIn,
+        );
+      }
     } catch (e) {
       Utils.showLog("Scroll Down Failed => $e");
     }
@@ -579,6 +588,15 @@ class FakeLiveController extends GetxController {
       context: context,
       liveHistoryId: fakeLiveModel?.host1LiveHistoryId ?? "",
       receiverUserId: fakeLiveModel?.host1UserId ?? "",
+      isPk: fakeLiveModel?.isChannelMediaRelay == true && (fakeLiveModel?.host2UserId ?? "").isNotEmpty,
+      pkHost1UserId: fakeLiveModel?.host1UserId,
+      pkHost1Name: fakeLiveModel?.host1Name,
+      pkHost1Image: fakeLiveModel?.host1Image,
+      pkHost1ProfilePicIsBanned: fakeLiveModel?.host1ProfilePicIsBanned ?? false,
+      pkHost2UserId: fakeLiveModel?.host2UserId,
+      pkHost2Name: fakeLiveModel?.host2Name,
+      pkHost2Image: fakeLiveModel?.host2Image,
+      pkHost2ProfilePicIsBanned: fakeLiveModel?.host2ProfilePicIsBanned ?? false,
     );
   }
 
@@ -592,5 +610,27 @@ class FakeLiveController extends GetxController {
   void onClickFollow() async {
     fakeLiveModel?.isFollow = !(fakeLiveModel?.isFollow ?? false);
     update([AppConstant.onClickFollow]);
+  }
+
+  Future<void> onClickVideoCall() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Get.dialog(const LoadingWidget(), barrierDismissible: false);
+
+    Utils.showLog("Video Calling host ${fakeLiveModel?.host1UserId}...");
+    Vibration.vibrate(duration: 50, amplitude: 128);
+
+    AppPermission.onGetCameraPermission(
+      onGranted: () {
+        AppPermission.onGetMicrophonePermission(
+          onGranted: () async {
+            await math.Random().nextInt(500).milliseconds.delay();
+            Get.back(); // Stop Loading...
+            // TODO: Navigate to video call ringing page with host1UserId, host1Name, host1Image
+          },
+          onDenied: () => Get.back(),
+        );
+      },
+      onDenied: () => Get.back(),
+    );
   }
 }

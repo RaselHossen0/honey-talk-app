@@ -91,7 +91,7 @@ class RechargeCoinController extends GetxController {
         //     Get.back(); // Stop Loading...
         //
         //     if (isSuccess.status != null) {
-        //       Utils.showToast(text: EnumLocal.txtCoinRechargeSuccess.name.tr);
+        //       Utils.showToast(text: EnumLocal.txtDiamondRechargeSuccess.name.tr);
         //     } else {
         //       Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
         //     }

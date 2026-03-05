@@ -36,9 +36,9 @@ class LiveView extends GetView<LiveController> {
           PkCameraWidget(),
           Positioned(
             left: 0,
-            bottom: 80,
+            bottom: 115,
             child: Container(
-              height: Get.height / 3.5,
+              height: Get.height / 2.5,
               width: Get.width / 1.8,
               color: AppColor.transparent,
               child: LiveCommentWidget(),

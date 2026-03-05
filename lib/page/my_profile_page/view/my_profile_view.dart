@@ -78,7 +78,7 @@ class MyProfileView extends GetView<MyProfileController> {
               _ProfileRow(
                 label: EnumLocal.txtGender.name.tr,
                 value: controller.gender,
-                onTap: () => Get.toNamed(AppRoutes.editProfilePage),
+                onTap: controller.isGenderLocked ? null : () => Get.toNamed(AppRoutes.editProfilePage),
               ),
               _divider(),
               _ProfileRow(
@@ -90,7 +90,7 @@ class MyProfileView extends GetView<MyProfileController> {
               _ProfileRow(
                 label: EnumLocal.txtRegions.name.tr,
                 value: "${controller.countryFlag} ${controller.country}",
-                onTap: () => Get.toNamed(AppRoutes.editProfilePage),
+                onTap: controller.isCountryLocked ? null : () => Get.toNamed(AppRoutes.editProfilePage),
               ),
               _divider(),
               _ProfileRow(
@@ -250,6 +250,7 @@ class _ProfileRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEditable = onTap != null;
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -275,7 +276,8 @@ class _ProfileRow extends StatelessWidget {
                       maxLines: 1,
                     ),
                   if (value.isNotEmpty) SizedBox(width: 8),
-                  Icon(Icons.arrow_forward_ios, size: 12, color: AppColor.grayText),
+                  if (isEditable)
+                    Icon(Icons.arrow_forward_ios, size: 12, color: AppColor.grayText),
                 ],
               ),
           ],

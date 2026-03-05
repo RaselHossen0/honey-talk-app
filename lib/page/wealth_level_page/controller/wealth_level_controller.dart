@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:tingle/page/wealth_level_page/api/fetch_wealth_level_api.dart';
 import 'package:tingle/page/wealth_level_page/model/fetch_wealth_level_model.dart';
 import 'package:tingle/utils/constant.dart';
+import 'package:tingle/utils/database.dart';
+import 'package:tingle/utils/utils.dart';
 
 class WealthLevelController extends GetxController {
   bool isLoading = true;
@@ -23,6 +25,12 @@ class WealthLevelController extends GetxController {
 
   @override
   void onInit() {
+    final gender = (Database.fetchLoginUserProfile()?.user?.gender ?? '').toLowerCase();
+    if (gender == 'female') {
+      Get.back();
+      Utils.showToast(text: 'Wealth Level is only available for male users.');
+      return;
+    }
     init();
     super.onInit();
   }

@@ -35,7 +35,7 @@ class AudioWiseVideoAppBarWidget {
               ),
             ),
             Text(
-              EnumLocal.txtTopUpCoins.name.tr,
+              EnumLocal.txtTopUpDiamonds.name.tr,
               style: AppFontStyle.styleW700(AppColor.black, 18),
             ),
             45.width,

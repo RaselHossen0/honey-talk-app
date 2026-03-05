@@ -30,7 +30,7 @@ class CoinHistoryController extends GetxController {
     isLoading = true;
     update([AppConstant.onGetCoinHistory]);
 
-    fetchCoinHistoryModel = await FetchCoinHistoryApi.callApi(startDate: "2025-02-23", endDate: "2025-04-23");
+    fetchCoinHistoryModel = await FetchCoinHistoryApi.callApi(startDate: startDate, endDate: endDate);
 
     coinHistory = fetchCoinHistoryModel?.data ?? [];
 

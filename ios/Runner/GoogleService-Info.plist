@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>422786461200-qesrtharn2vk3iurdstrs1pvt3cied8a.apps.googleusercontent.com</string>
+	<string>1035561747062-posfpblbn79psl85gvr4l2944vmf2pqb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.422786461200-qesrtharn2vk3iurdstrs1pvt3cied8a</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>422786461200-6qng7htf6nak1qgmvqcjfv924d5phk65.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.1035561747062-posfpblbn79psl85gvr4l2944vmf2pqb</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDiOtYLNh7oHpPyep_iebP1Sjm6imFHJ8c</string>
+	<string>AIzaSyBg1C_IR90ESk6P3qvik4j54zq9WEicTg4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>422786461200</string>
+	<string>1035561747062</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.incodes.tingle</string>
+	<string>com.app.honeytalk</string>
 	<key>PROJECT_ID</key>
-	<string>tingle-eda4e</string>
+	<string>honeytalk-53099</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tingle-eda4e.firebasestorage.app</string>
+	<string>honeytalk-53099.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:422786461200:ios:fd007b56727837032e6495</string>
-	<key>DATABASE_URL</key>
-	<string>https://tingle-eda4e-default-rtdb.firebaseio.com</string>
+	<string>1:1035561747062:ios:a2cd1a09cf54d4403b5557</string>
 </dict>
 </plist>

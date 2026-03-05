@@ -40,21 +40,53 @@ class SplashScreenController extends GetxController {
   }
 
   Future<void> onGetProfile() async {
-    await FetchSettingApi.callApi(uid: uid, token: token); // CALL ADMIN SETTING API
-
-    if (FetchSettingApi.fetchSettingModel?.data != null) {
-      await FetchLoginUserProfileApi.callApi(token: token, uid: uid); // CALL FETCH LOGIN USER PROFILE API
-      if (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user != null) {
-        if (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.isBlock == true) {
-          Utils.showToast(text: EnumLocal.txtYouAreBlockedByAdmin.name.tr);
-        } else {
-          Get.offAllNamed(AppRoutes.bottomBarPage);
-        }
-      } else {
-        Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
-      }
-    } else {
+    if (uid.isEmpty || token.isEmpty) {
+      Utils.showLog("Splash: No uid or token - redirect to login");
       Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+      Database.onSetIsNewUser(true);
+      Get.offAllNamed(AppRoutes.loginPage);
+      return;
     }
+
+    await FetchSettingApi.callApi(uid: uid, token: token);
+
+    if (FetchSettingApi.fetchSettingModel?.data == null) {
+      Utils.showLog("Splash: Settings API failed - check API URL (${Database.accessToken.isEmpty ? 'no token' : 'has token'})");
+      Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+      Get.offAllNamed(AppRoutes.loginPage);
+      return;
+    }
+
+    await FetchLoginUserProfileApi.callApi(token: token, uid: uid);
+
+    if (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user == null) {
+      Utils.showLog("Splash: User profile API failed - token may be expired");
+      Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+      Get.offAllNamed(AppRoutes.loginPage);
+      return;
+    }
+
+    if (FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user?.isBlock == true) {
+      Utils.showToast(text: EnumLocal.txtYouAreBlockedByAdmin.name.tr);
+      return;
+    }
+
+    // Show fill profile only when profile is incomplete (first-time / placeholder)
+    if (!_isProfileComplete) {
+      Get.offAllNamed(AppRoutes.fillProfilePage);
+      return;
+    }
+
+    Get.offAllNamed(AppRoutes.bottomBarPage);
+  }
+
+  bool get _isProfileComplete {
+    final user = FetchLoginUserProfileApi.fetchLoginUserProfileModel?.user;
+    if (user == null) return false;
+    final un = (user.userName ?? '').trim();
+    final age = user.age ?? 0;
+    if (un.isEmpty || age <= 0) return false;
+    if (RegExp(r'^user_\d+$').hasMatch(un)) return false;
+    return true;
   }
 }

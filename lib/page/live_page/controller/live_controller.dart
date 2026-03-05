@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math' show Random;
 // import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tingle/page/live_page/widget/live_gift_bottom_sheet_widget.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
+import 'package:tingle/utils/permission.dart';
+import 'package:vibration/vibration.dart';
+import 'package:tingle/page/live_page/widget/live_gift_bottom_sheet_widget.dart';
 import 'package:tingle/page/audio_room_page/model/live_top_gift_user_model.dart';
 import 'package:tingle/page/audio_room_page/model/live_viewer_user_model.dart';
 import 'package:tingle/page/live_page/model/live_comment_model.dart';
@@ -234,7 +237,7 @@ class LiveController extends GetxController {
 
   Future<void> onChangeChannelMediaRelay(bool value) async {
     liveModel?.isChannelMediaRelay = value;
-    update([AppConstant.onEventHandler]);
+    update([AppConstant.onEventHandler, AppConstant.onChangeViewCount]);
   }
 
   void onUpdateTopGiftUser({required List<PkGiftTopUserModel> users, required String liveHistoryId}) async {
@@ -271,6 +274,28 @@ class LiveController extends GetxController {
       liveModel?.commentController.clear();
       update([AppConstant.onChangeComment]);
     }
+  }
+
+  Future<void> onClickVideoCall() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Get.dialog(const LoadingWidget(), barrierDismissible: false);
+
+    Utils.showLog("Video Calling host ${liveModel?.host1UserId}...");
+    Vibration.vibrate(duration: 50, amplitude: 128);
+
+    AppPermission.onGetCameraPermission(
+      onGranted: () {
+        AppPermission.onGetMicrophonePermission(
+          onGranted: () async {
+            await Random().nextInt(500).milliseconds.delay();
+            Get.back(); // Stop Loading...
+            // TODO: Navigate to video call ringing page with host1UserId, host1Name, host1Image
+          },
+          onDenied: () => Get.back(),
+        );
+      },
+      onDenied: () => Get.back(),
+    );
   }
 
   Future<void> onSendPkRequest({required String host2UserId}) async {}
@@ -497,10 +522,11 @@ class LiveController extends GetxController {
   Future<void> onScrollAnimation() async {
     try {
       await 10.milliseconds.delay();
+      // ListView is reverse: true, so 0 = newest at bottom
       liveModel?.scrollController.animateTo(
-        liveModel?.scrollController.position.maxScrollExtent ?? 0,
-        duration: Duration(seconds: 1),
-        curve: Curves.fastOutSlowIn,
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
       );
     } catch (e) {
       Utils.showLog("Scroll Down Failed => $e");
@@ -509,10 +535,22 @@ class LiveController extends GetxController {
 
   void onClickGift(BuildContext context) {
     FocusManager.instance.primaryFocus?.unfocus();
+    final isPk = liveModel?.isChannelMediaRelay == true && (liveModel?.host2UserId ?? "").isNotEmpty;
     LiveGiftBottomSheetWidget.show(
       context: context,
       liveHistoryId: liveModel?.host1LiveHistoryId ?? "",
       receiverUserId: liveModel?.host1UserId ?? "",
+      isPk: isPk,
+      pkHost1UserId: liveModel?.host1UserId,
+      pkHost1Name: liveModel?.host1Name,
+      pkHost1Image: liveModel?.host1Image,
+      pkHost1LiveHistoryId: liveModel?.host1LiveHistoryId,
+      pkHost1ProfilePicIsBanned: liveModel?.host1ProfilePicIsBanned,
+      pkHost2UserId: liveModel?.host2UserId,
+      pkHost2Name: liveModel?.host2Name,
+      pkHost2Image: liveModel?.host2Image,
+      pkHost2LiveHistoryId: liveModel?.host2LiveHistoryId,
+      pkHost2ProfilePicIsBanned: liveModel?.host2ProfilePicIsBanned,
     );
   }
 

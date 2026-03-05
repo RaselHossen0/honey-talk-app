@@ -173,8 +173,8 @@ class PreviewSVGADaiLog {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(EnumLocal.txtPayTheCoins.name.tr, style: AppFontStyle.styleW600(AppColor.white, 14)),
-                                  Image.asset(AppAssets.icCoinStar, height: 22, width: 22),
+                                  Text(EnumLocal.txtPayTheDiamonds.name.tr, style: AppFontStyle.styleW600(AppColor.white, 14)),
+                                  Image.asset(AppAssets.icMyDiamond, height: 22, width: 22),
                                   5.width,
                                   CoinText(coin: frameData.coin.toString()),
                                 ],

@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:tingle/common/api/fetch_setting_api.dart';
 import 'package:tingle/firebase/authentication/firebase_access_token.dart';
 import 'package:tingle/firebase/authentication/firebase_uid.dart';
 import 'package:tingle/page/feed_page/model/fetch_post_model.dart';
 import 'package:tingle/page/feed_video_page/model/fetch_video_model.dart';
 import 'package:tingle/page/preview_user_profile_page/api/fetch_user_wise_post_api.dart';
 import 'package:tingle/page/preview_user_profile_page/api/fetch_user_wise_video_api.dart';
-import 'package:tingle/page/profile_page/api/fetch_user_profile_api.dart';
+import 'package:tingle/page/profile_page/api/fetch_user_profile_api.dart' show fetchUserProfile;
 import 'package:tingle/page/profile_page/model/fetch_user_profile_model.dart';
 import 'package:tingle/routes/app_routes.dart';
 import 'package:tingle/utils/constant.dart';
@@ -37,6 +38,9 @@ class PreviewUserProfileController extends GetxController {
   bool isLoadingVideo = false;
   bool isVideoPagination = false;
 
+  /// True when viewing the logged-in user's own profile; false when visiting another user.
+  bool get isOwnProfile => userId.isNotEmpty && userId == Database.loginUserId;
+
   @override
   void onInit() {
     if (Get.arguments != null) {
@@ -60,6 +64,11 @@ class PreviewUserProfileController extends GetxController {
   }
 
   void init() async {
+    final uid = FirebaseUid.onGet() ?? "";
+    final token = await FirebaseAccessToken.onGet() ?? "";
+    if (FetchSettingApi.fetchSettingModel == null) {
+      await FetchSettingApi.callApi(uid: uid, token: token);
+    }
     onGetProfile();
     onRefreshPost();
     onRefreshVideo();
@@ -85,7 +94,11 @@ class PreviewUserProfileController extends GetxController {
     isLoading = true;
     update([AppConstant.onGetProfile]);
 
-    fetchUserProfileModel = getDummyFetchUserProfile();
+    final loginUserId = Database.loginUserId;
+    fetchUserProfileModel = await fetchUserProfile(
+      userId: userId,
+      loginUserId: loginUserId,
+    );
 
     isLoading = false;
     update([AppConstant.onGetProfile]);

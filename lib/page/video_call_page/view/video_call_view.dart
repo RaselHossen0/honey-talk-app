@@ -2,6 +2,7 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:tingle/common/function/convert_second_to_time.dart';
 import 'package:tingle/common/widget/preview_network_image_widget.dart';
@@ -139,11 +140,30 @@ class VideoCallView extends GetView<VideoCallController> {
                         color: AppColor.grey,
                         callback: controller.onClickCamera,
                       ),
-                      IconWidget(
-                        icon: AppAssets.icCallDecline,
-                        iconSize: 25,
-                        color: AppColor.red,
-                        callback: controller.onClickCallCut,
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: controller.onClickCallCut,
+                            child: Container(
+                              height: 45,
+                              width: 45,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: AppColor.red,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Lottie.asset(
+                                AppAssets.lottieCallReject,
+                                width: 25,
+                                height: 25,
+                                fit: BoxFit.contain,
+                                repeat: false,
+                                errorBuilder: (_, __, ___) => Image.asset(AppAssets.icCallDecline, width: 25, color: AppColor.white),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),

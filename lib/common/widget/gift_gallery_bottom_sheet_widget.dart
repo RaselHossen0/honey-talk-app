@@ -46,7 +46,8 @@ class GiftGalleryBottomSheetWidget {
     final uid = FirebaseUid.onGet() ?? "";
     final token = await FirebaseAccessToken.onGet() ?? "";
 
-    fetchMyGiftGalleryModel = await FetchGiftGalleryApi.callApi(uid: uid, token: token, userId: userID);
+    fetchMyGiftGalleryModel = await FetchGiftGalleryApi.callApi(
+        uid: uid, token: token, userId: userID);
 
     giftGallery.addAll(fetchMyGiftGalleryModel?.data ?? []);
 
@@ -58,14 +59,17 @@ class GiftGalleryBottomSheetWidget {
   }
 
   static void onPagination() async {
-    if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !isPagination.value) {
+    if (scrollController.position.pixels ==
+            scrollController.position.maxScrollExtent &&
+        !isPagination.value) {
       isPagination.value = true;
       await onGetGiftGallery();
       isPagination.value = false;
     }
   }
 
-  static Future<void> show({required BuildContext context, required String userId}) async {
+  static Future<void> show(
+      {required BuildContext context, required String userId}) async {
     userID = userId;
     init();
     await showModalBottomSheet(
@@ -115,8 +119,13 @@ class GiftGalleryBottomSheetWidget {
                           width: 30,
                           margin: const EdgeInsets.only(right: 20),
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: AppColor.white)),
-                          child: Image.asset(width: 18, AppAssets.icClose, color: AppColor.white),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: AppColor.white)),
+                          child: Image.asset(
+                              width: 18,
+                              AppAssets.icClose,
+                              color: AppColor.white),
                         ),
                       ),
                     ],
@@ -135,7 +144,8 @@ class GiftGalleryBottomSheetWidget {
                                   itemCount: giftGallery.length,
                                   padding: EdgeInsets.all(12),
                                   physics: NeverScrollableScrollPhysics(),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 4,
                                     crossAxisSpacing: 8,
                                     mainAxisSpacing: 8,
@@ -215,7 +225,8 @@ class GiftItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: 5, right: 7, top: 2, bottom: 2),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 7, top: 2, bottom: 2),
                       decoration: BoxDecoration(
                         color: AppColor.lightYellow.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(100),
@@ -223,11 +234,12 @@ class GiftItemWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(AppAssets.icCoinStar, width: 12),
+                          Image.asset(AppAssets.icMyDiamond, width: 12),
                           3.width,
                           Text(
                             CustomFormatNumber.onConvert(gift?.giftCoin ?? 0),
-                            style: AppFontStyle.styleW700(AppColor.lightYellow, 10),
+                            style: AppFontStyle.styleW700(
+                                AppColor.lightYellow, 10),
                           ),
                         ],
                       ),
