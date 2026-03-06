@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:math' show Random;
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tingle/common/api/fetch_agora_token_api.dart';
 import 'package:tingle/common/function/convert_second_to_time.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/routes/app_routes.dart';
@@ -16,7 +19,7 @@ class VideoCallController extends GetxController with WidgetsBindingObserver {
   Timer? coinCutTimer;
   int countTime = 0;
 
-  // RtcEngine? engine;
+  RtcEngine? engine;
   bool isLoading = true;
 
   int hostUid = 0; // Do NOT CHANGE FOR VIDEO CALL...
@@ -124,13 +127,18 @@ class VideoCallController extends GetxController with WidgetsBindingObserver {
 
   Future<void> onCreateEngine() async {
     try {
-      // engine = createAgoraRtcEngine();
-      // await engine?.initialize(
-      //   RtcEngineContext(
-      //     appId: Utils.agoraAppId,
-      //     channelProfile: ChannelProfileType.channelProfileCommunication,
-      //   ),
-      // );
+      if (Utils.agoraAppId.isEmpty) {
+        log("Agora App ID not set");
+        onJoinChannel();
+        return;
+      }
+      engine = createAgoraRtcEngine();
+      await engine!.initialize(
+        RtcEngineContext(
+          appId: Utils.agoraAppId,
+          channelProfile: ChannelProfileType.channelProfileCommunication,
+        ),
+      );
       log("Create Engine Success");
       onEventHandler();
     } catch (e) {
@@ -140,56 +148,63 @@ class VideoCallController extends GetxController with WidgetsBindingObserver {
 
   Future<void> onEventHandler() async {
     try {
-      // engine?.registerEventHandler(
-      //   RtcEngineEventHandler(
-      //     onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-      //       log("Event Handler => Host Join Channel Success : ${connection.toJson()} ");
-      //       isLoading = false;
-      //       update([AppConstant.onEventHandler]);
-      //     },
-      //     onUserJoined: (RtcConnection connection, int remoteId, int elapsed) {
-      //       log("Event Handler => User Join Channel Success : ${connection.toJson()} $remoteId");
-      //       remoteUid = remoteId;
-      //       update([AppConstant.onEventHandler]);
-      //     },
-      //     onUserOffline: (RtcConnection connection, int remoteId, UserOfflineReasonType reason) {
-      //       log("Event Handler => User Offline : ${connection.toJson()} $remoteId");
-      //     },
-      //     onLeaveChannel: (RtcConnection connection, RtcStats stats) {
-      //       log("Event Handler => Host Leave Channel Success : ${connection.toJson()} ");
-      //     },
-      //     onUserMuteVideo: (RtcConnection connection, int remoteUid, bool muted) {
-      //       log("Event Handler => User Mute Video : $muted ");
-      //       onChangeRemoteVideoState(muted);
-      //     },
-      //     onUserMuteAudio: (RtcConnection connection, int remoteUid, bool muted) {
-      //       log("Event Handler => User Mute Audio : $muted ");
-      //       onChangeRemoteAudioState(muted);
-      //     },
-      //     onError: (ErrorCodeType e, String message) => log("Event Handler Error => $e"),
-      //   ),
-      // );
-      onJoinChannel();
+      engine?.registerEventHandler(
+        RtcEngineEventHandler(
+          onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+            log("Event Handler => Host Join Channel Success : ${connection.channelId} ");
+            isLoading = false;
+            update([AppConstant.onEventHandler]);
+          },
+          onUserJoined: (RtcConnection connection, int remoteId, int elapsed) {
+            log("Event Handler => User Join Channel Success $remoteId");
+            remoteUid = remoteId;
+            update([AppConstant.onEventHandler]);
+          },
+          onUserOffline: (RtcConnection connection, int remoteId, UserOfflineReasonType reason) {
+            log("Event Handler => User Offline $remoteId");
+          },
+          onLeaveChannel: (RtcConnection connection, RtcStats stats) {
+            log("Event Handler => Host Leave Channel Success");
+          },
+          onUserMuteVideo: (RtcConnection connection, int remoteUid, bool muted) {
+            onChangeRemoteVideoState(muted);
+          },
+          onUserMuteAudio: (RtcConnection connection, int remoteUid, bool muted) {
+            onChangeRemoteAudioState(muted);
+          },
+          onError: (ErrorCodeType e, String message) => log("Event Handler Error => $e"),
+        ),
+      );
+      await onJoinChannel();
 
-      // await engine?.enableVideo();
-      // await engine?.enableAudio();
-
-      // await engine?.adjustRecordingSignalVolume(400);
-      // await engine?.adjustPlaybackSignalVolume(400);
-      // await engine?.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+      await engine?.enableVideo();
+      await engine?.enableAudio();
+      await engine?.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
     } catch (e) {
       log("Event Handler Failed => $e");
     }
   }
 
-  void onJoinChannel() async {
+  Future<void> onJoinChannel() async {
     try {
-      // await engine?.joinChannel(
-      //   token: token,
-      //   channelId: channelId,
-      //   uid: hostUid,
-      // options: const ChannelMediaOptions(),
-      // );
+      String useToken = token;
+      String useChannel = channelId;
+      int useUid = hostUid;
+      if (useToken.isEmpty || useToken.startsWith('dummy') || useChannel.isEmpty) {
+        useChannel = callId.isNotEmpty ? callId : 'call_${DateTime.now().millisecondsSinceEpoch}';
+        useUid = 300000 + Random().nextInt(700000);
+        final payload = await FetchAgoraTokenApi.callApi(channelName: useChannel, uid: useUid, role: 'publisher');
+        if (payload != null) {
+          useToken = payload.token;
+          useUid = payload.uid;
+        }
+      }
+      await engine?.joinChannel(
+        token: useToken,
+        channelId: useChannel,
+        uid: useUid,
+        options: const ChannelMediaOptions(),
+      );
     } catch (e) {
       log("Join Channel Failed => $e");
     }
@@ -198,24 +213,24 @@ class VideoCallController extends GetxController with WidgetsBindingObserver {
   Future<void> onClickMic() async {
     if (isMicMute) {
       isMicMute = false;
-      // engine?.muteLocalAudioStream(true);
+      await engine?.muteLocalAudioStream(true);
     } else {
       isMicMute = true;
-      // engine?.muteLocalAudioStream(false);
+      await engine?.muteLocalAudioStream(false);
     }
     update([AppConstant.onClickMic]);
   }
 
   Future<void> onClickCamera() async {
     Vibration.vibrate(duration: 50, amplitude: 128);
-    Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-    // await engine?.switchCamera();
-    Get.back(); // Stop Loading...
+    Get.dialog(const LoadingWidget(), barrierDismissible: false);
+    await engine?.switchCamera();
+    Get.back();
   }
 
   Future<void> onClickVideo() async {
     isVideoOn = !isVideoOn;
-    // await engine?.enableLocalVideo(isVideoOn);
+    await engine?.enableLocalVideo(isVideoOn);
     update([AppConstant.onClickVideo]);
   }
 
@@ -227,8 +242,8 @@ class VideoCallController extends GetxController with WidgetsBindingObserver {
 
   void onDisposeAgora() {
     try {
-      // engine?.release();
-      // engine = null;
+      engine?.release();
+      engine = null;
     } catch (e) {
       Utils.showLog("Agora Dispose Failed => $e");
     }

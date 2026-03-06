@@ -1,13 +1,13 @@
-import 'dart:async';
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:tingle/common/function/fetch_user_coin.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/firebase/authentication/firebase_access_token.dart';
 import 'package:tingle/firebase/authentication/firebase_uid.dart';
-import 'package:tingle/page/recharge_coin_page/api/create_coin_plan_history_api.dart';
+import 'package:tingle/page/recharge_coin_page/api/create_razorpay_order_api.dart';
 import 'package:tingle/page/recharge_coin_page/api/fetch_coin_plan_api.dart';
-import 'package:tingle/page/recharge_coin_page/model/create_coin_plan_history_model.dart';
+import 'package:tingle/page/recharge_coin_page/api/verify_razorpay_payment_api.dart';
 import 'package:tingle/page/recharge_coin_page/model/fetch_coin_plan_model.dart';
 import 'package:tingle/payment/razor_pay/razor_pay_view.dart';
 import 'package:tingle/utils/constant.dart';
@@ -20,10 +20,7 @@ class RechargeCoinController extends GetxController {
   List<Data> coinPlans = [];
   FetchCoinPlanModel? fetchCoinPlanModel;
 
-  int selectedPaymentIndex = 0;
   bool isAllowAgreement = false;
-
-  CreateCoinPlanHistoryModel? createCoinPlanHistoryModel;
 
   @override
   void onInit() {
@@ -31,16 +28,17 @@ class RechargeCoinController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    RazorPayService.dispose();
+    super.onClose();
+  }
+
   Future<void> init() async {
     onGetCoinPlan();
     FetchUserCoin.coin;
     FetchUserCoin.init();
     Database.onSetMyCoins(FetchUserCoin.coin.value);
-  }
-
-  void onChangePayment(int value) {
-    selectedPaymentIndex = value;
-    update([AppConstant.onChangePayment]);
   }
 
   void onToggleAgreement() {
@@ -62,48 +60,93 @@ class RechargeCoinController extends GetxController {
     update([AppConstant.onGetCoinPlan]);
   }
 
-  void onClickPayNow(int index) async {
-    if (selectedPaymentIndex == 0) {
-    } else if (selectedPaymentIndex == 1) {
-      log("message>>>>$selectedPaymentIndex>>>>> Razor Pay");
+  Future<void> onClickPayNow(int index) async {
+    if (coinPlans.isEmpty || index >= coinPlans.length) return;
+    if (Utils.razorpayTestKey.isEmpty) {
+      Utils.showToast(text: 'Razorpay is not configured. Please try later.');
+      return;
+    }
 
-      Utils.showLog("Razorpay Payment Working....");
+    final coinPlanId = coinPlans[index].id ?? "";
+    if (coinPlanId.isEmpty) return;
 
-      try {
-        Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-        // RazorPayService().init(
-        //   razorKey: Utils.razorpayTestKey,
-        //   callback: () async {
-        //     Utils.showLog("Stripe Payment Success Method Called....");
-        //
-        //     Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-        //
-        //     final uid = FirebaseUid.onGet() ?? "";
-        //     final token = await FirebaseAccessToken.onGet() ?? "";
-        //
-        //     final isSuccess = await CreateCoinPlanHistoryApi.callApi(
-        //       token: token,
-        //       uid: uid,
-        //       coinPlanId: coinPlans[index].id ?? "",
-        //       paymentGateway: "Stripe",
-        //     );
-        //
-        //     Get.back(); // Stop Loading...
-        //
-        //     if (isSuccess.status != null) {
-        //       Utils.showToast(text: EnumLocal.txtDiamondRechargeSuccess.name.tr);
-        //     } else {
-        //       Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
-        //     }
-        //   },
-        // );
-        await 1.seconds.delay();
+    final token = await FirebaseAccessToken.onGet() ?? "";
+    final profile = Database.fetchLoginUserProfile();
+    final userName = profile?.user?.name ?? "";
+    final userEmail = profile?.user?.email ?? "";
 
-        Get.back(); // Stop Loading...
-      } catch (e) {
-        Get.back(); // Stop Loading...
-        Utils.showLog("RazorPay Payment Failed => $e");
+    try {
+      Get.dialog(const LoadingWidget(), barrierDismissible: false);
+      final orderRes = await CreateRazorpayOrderApi.callApi(
+        token: token,
+        coinPlanId: coinPlanId,
+      );
+      Get.back();
+
+      final status = orderRes['status'] as bool?;
+      final data = orderRes['data'] as Map<String, dynamic>?;
+      final orderId = data?['orderId'] as String?;
+      final keyId = data?['keyId'] as String?;
+
+      if (status != true || orderId == null || keyId == null) {
+        Utils.showToast(
+          text: CreateRazorpayOrderApi.messageFromResponse(orderRes, fallback: 'Failed to create order'),
+        );
+        return;
       }
+
+      RazorPayService.onPaymentSuccess = (PaymentSuccessResponse response) async {
+        RazorPayService.onPaymentSuccess = null;
+        RazorPayService.onPaymentError = null;
+        Get.dialog(const LoadingWidget(), barrierDismissible: false);
+        try {
+          final verifyRes = await VerifyRazorpayPaymentApi.callApi(
+            token: token,
+            razorpayOrderId: response.orderId ?? '',
+            razorpayPaymentId: response.paymentId ?? '',
+            razorpaySignature: response.signature ?? '',
+          );
+          Get.back();
+          final ok = verifyRes['status'] as bool? ?? false;
+          final verifyData = verifyRes['data'] as Map<String, dynamic>?;
+          final totalCoins = verifyData?['totalCoins'];
+          if (ok && totalCoins != null) {
+            Database.onSetMyCoins(totalCoins is int ? totalCoins : 0);
+            FetchUserCoin.init();
+            Utils.showToast(text: EnumLocal.txtDiamondRechargeSuccess.name.tr);
+            update([AppConstant.onGetCoinPlan]);
+          } else {
+            Utils.showToast(
+              text: VerifyRazorpayPaymentApi.messageFromResponse(
+                verifyRes,
+                fallback: EnumLocal.txtSomeThingWentWrong.name.tr,
+              ),
+            );
+          }
+        } catch (e) {
+          Get.back();
+          log("Verify Razorpay error: $e");
+          Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
+        }
+      };
+
+      RazorPayService.onPaymentError = (String message) {
+        RazorPayService.onPaymentSuccess = null;
+        RazorPayService.onPaymentError = null;
+        Utils.showToast(text: message.isNotEmpty ? message : 'Payment failed');
+      };
+
+      RazorPayService.init();
+      RazorPayService.openCheckout(
+        orderId: orderId,
+        keyId: keyId,
+        userName: userName,
+        userEmail: userEmail,
+      );
+    } catch (e) {
+      Get.back();
+      log("Razorpay order/payment error: $e");
+      Utils.showToast(text: EnumLocal.txtSomeThingWentWrong.name.tr);
     }
   }
 }

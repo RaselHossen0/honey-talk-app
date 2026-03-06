@@ -6,10 +6,17 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
 
 
-    <uses-permission android:name="android.permission.INTERNET"/> <!--Network Image Show-->
-    <uses-permission android:name="android.permission.CAMERA"/> <!--Image Piker-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/> <!-- Agora: voice / live -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/> <!-- Agora -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> <!-- Agora / general -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> <!-- Agora -->
     <uses-permission android:name="android.permission.VIBRATE"/> <!--Like Button Vibrate-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />  <!--Live Time Stop Sleep -->
+    <!-- Android 12+ Bluetooth for Agora (optional, for BT headsets) -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 
 
 

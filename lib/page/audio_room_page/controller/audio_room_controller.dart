@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tingle/common/api/fetch_agora_token_api.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/common/widget/stand_up_seat_dialog_widget.dart';
 
@@ -105,8 +107,9 @@ class AudioRoomController extends GetxController {
 
   Future<void> onDispose() async {
     try {
-      // await audioRoomModel?.engine?.leaveChannel();
-      // await audioRoomModel?.engine?.release();
+      await audioRoomModel?.engine?.leaveChannel();
+      await audioRoomModel?.engine?.release();
+      audioRoomModel?.engine = null;
     } catch (e) {
       Utils.showLog("Dispose Failed => $e");
     }
@@ -229,11 +232,11 @@ class AudioRoomController extends GetxController {
         audioRoomModel?.mute = 0;
       }
 
-      // await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
-      // await audioRoomModel?.engine?.muteLocalAudioStream(true);
+      await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+      await audioRoomModel?.engine?.muteLocalAudioStream(true);
     } else {
-      // await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleAudience);
-      // await audioRoomModel?.engine?.muteLocalAudioStream(true);
+      await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleAudience);
+      await audioRoomModel?.engine?.muteLocalAudioStream(true);
     }
     update([AppConstant.onSeatUpdate]);
   }
@@ -250,7 +253,7 @@ class AudioRoomController extends GetxController {
 
         update([AppConstant.onSwitchMic]);
 
-        // await audioRoomModel?.engine?.muteLocalAudioStream(true);
+        await audioRoomModel?.engine?.muteLocalAudioStream(true); // mute by admin
 
         // Current My Mic Muted By Admin && Future Admin UnMute My Mic
       } else if (audioRoomModel?.mute == 3 && audioRoomModel?.audioRoomSeats[audioRoomModel?.selectedSeat ?? 0].mute != 3) {
@@ -258,7 +261,7 @@ class AudioRoomController extends GetxController {
 
         update([AppConstant.onSwitchMic]);
 
-        // await audioRoomModel?.engine?.muteLocalAudioStream(true);
+        await audioRoomModel?.engine?.muteLocalAudioStream(true);
       }
     }
 
@@ -266,8 +269,8 @@ class AudioRoomController extends GetxController {
 
     if (available == false) {
       audioRoomModel?.selectedSeat = null;
-      // await audioRoomModel?.engine?.muteLocalAudioStream(true);
-      // await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleAudience);
+      await audioRoomModel?.engine?.muteLocalAudioStream(true);
+      await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleAudience);
       Utils.showLog("Admin Kick Out Me => ${audioRoomModel?.mute}");
     }
   }
@@ -306,8 +309,8 @@ class AudioRoomController extends GetxController {
         audioRoomModel?.mute = 0;
 
         audioRoomModel?.selectedSeat = position;
-        // await audioRoomModel?.engine?.muteLocalAudioStream(true);
-        // await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
+        await audioRoomModel?.engine?.muteLocalAudioStream(true);
+        await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
       },
       onDecline: () {
         Get.back();
@@ -332,7 +335,7 @@ class AudioRoomController extends GetxController {
 
     audioRoomModel?.mute = 0;
     update([AppConstant.onSwitchMic]);
-    // await audioRoomModel?.engine?.muteLocalAudioStream(true);
+    await audioRoomModel?.engine?.muteLocalAudioStream(true);
     Get.back();
   }
 
@@ -422,13 +425,18 @@ class AudioRoomController extends GetxController {
 
   Future<void> onCreateEngine() async {
     try {
-      // audioRoomModel?.engine = createAgoraRtcEngine();
-      // await audioRoomModel?.engine?.initialize(
-      //   RtcEngineContext(
-      //     appId: Utils.agoraAppId,
-      //     channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
-      //   ),
-      // );
+      if (Utils.agoraAppId.isEmpty) {
+        Utils.showLog("Agora App ID not set");
+        await onJoinChannel();
+        return;
+      }
+      audioRoomModel?.engine = createAgoraRtcEngine();
+      await audioRoomModel?.engine!.initialize(
+        RtcEngineContext(
+          appId: Utils.agoraAppId,
+          channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+        ),
+      );
       await onJoinChannel();
     } catch (e) {
       Utils.showLog("Event Handler => Create Engine Failed => $e");
@@ -439,41 +447,57 @@ class AudioRoomController extends GetxController {
     try {
       await onEventHandler();
 
-      // await audioRoomModel?.engine?.joinChannel(
-      //   uid: audioRoomModel?.isHost == true ? (audioRoomModel?.hostUid ?? 0) : (audioRoomModel?.userUid ?? 0),
-      //   token: audioRoomModel?.token ?? "",
-      //   channelId: audioRoomModel?.channel ?? "",
-      //   // options: ChannelMediaOptions(),
-      // );
+      String useToken = audioRoomModel?.token ?? "";
+      String useChannel = audioRoomModel?.channel ?? "";
+      int useUid = audioRoomModel?.isHost == true ? (audioRoomModel?.hostUid ?? 0) : (audioRoomModel?.userUid ?? 0);
 
-      // await audioRoomModel?.engine?.enableAudio();
-      // await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleAudience);
+      if (useToken.isEmpty || useToken.startsWith('dummy')) {
+        final payload = await FetchAgoraTokenApi.callApi(
+          channelName: useChannel,
+          uid: useUid > 0 ? useUid : (400000 + DateTime.now().millisecondsSinceEpoch % 500000),
+          role: audioRoomModel?.isHost == true ? 'publisher' : 'subscriber',
+        );
+        if (payload != null) {
+          useToken = payload.token;
+          useUid = payload.uid;
+        }
+      }
+
+      await audioRoomModel?.engine?.joinChannel(
+        token: useToken,
+        channelId: useChannel,
+        uid: useUid,
+        options: const ChannelMediaOptions(),
+      );
+
+      await audioRoomModel?.engine?.enableAudio();
+      await audioRoomModel?.engine?.setClientRole(role: ClientRoleType.clientRoleAudience);
     } catch (e) {
       Utils.showLog("Event Handler => Join Channel Failed => $e");
     }
   }
 
   Future<void> onEventHandler() async {
-    // audioRoomModel?.engine?.registerEventHandler(
-    //   // RtcEngineEventHandler(
-    //     onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-    //       Utils.showLog("Event Handler => Host Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid}");
-    //     },
-    //     onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-    //       Utils.showLog("Event Handler => User Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid} RemoteUid => $remoteUid");
-    //       update([AppConstant.onEventHandler]);
-    //     },
-    //     onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
-    //       Utils.showLog("Event Handler => User Leave Channel Success");
-    //     },
-    //     onLocalAudioStateChanged: (connection, state, reason) {
-    //       Utils.showLog("onLocalAudioStateChanged ${connection.localUid}**** $state -------$reason");
-    //     },
-    //     onError: (e, message) {
-    //       Utils.showLog("Event Handler => Join Channel Failed => $e");
-    //     },
-    //   ),
-    // );
+    audioRoomModel?.engine?.registerEventHandler(
+      RtcEngineEventHandler(
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          Utils.showLog("Event Handler => Host Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid}");
+        },
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          Utils.showLog("Event Handler => User Join Success => RemoteUid => $remoteUid");
+          update([AppConstant.onEventHandler]);
+        },
+        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+          Utils.showLog("Event Handler => User Leave Channel Success");
+        },
+        onLocalAudioStateChanged: (RtcConnection connection, LocalAudioStreamState state, LocalAudioStreamReason reason) {
+          Utils.showLog("onLocalAudioStateChanged ${connection.localUid}**** $state -------$reason");
+        },
+        onError: (ErrorCodeType e, String message) {
+          Utils.showLog("Event Handler => Join Channel Failed => $e");
+        },
+      ),
+    );
   }
 
   Future<void> onSwitchMic() async {
@@ -488,12 +512,12 @@ class AudioRoomController extends GetxController {
                 audioRoomModel?.mute = 2;
                 update([AppConstant.onSwitchMic]);
                 onSeatMutedSocket(position: audioRoomModel?.selectedSeat ?? 0, mute: 2, userId: Database.loginUserId);
-                // await audioRoomModel?.engine?.muteLocalAudioStream(false);
+                await audioRoomModel?.engine?.muteLocalAudioStream(false);
               } else {
                 audioRoomModel?.mute = 1;
                 update([AppConstant.onSwitchMic]);
                 onSeatMutedSocket(position: audioRoomModel?.selectedSeat ?? 0, mute: 1, userId: Database.loginUserId);
-                // await audioRoomModel?.engine?.muteLocalAudioStream(true);
+                await audioRoomModel?.engine?.muteLocalAudioStream(true);
               }
             } else {
               Utils.showToast(text: "You are mute by admin");

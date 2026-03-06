@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tingle/page/audio_room_page/model/audio_room_seat_users_model.dart';
 import 'package:tingle/page/audio_room_page/model/fetch_audio_room_bloc_user_model.dart';
@@ -10,7 +11,7 @@ import 'package:tingle/page/live_page/model/live_comment_model.dart';
 import 'package:tingle/page/stream_page/model/fetch_live_user_model.dart';
 
 class AudioRoomModel {
-  // RtcEngine? engine;
+  RtcEngine? engine;
   String token;
   String channel;
   String? streamSource;
@@ -58,7 +59,7 @@ class AudioRoomModel {
   int? seatLength = 0;
 
   AudioRoomModel({
-    // this.engine,
+    this.engine,
     required this.isHost,
     required this.hostUserId,
     required this.hostUniqueId,

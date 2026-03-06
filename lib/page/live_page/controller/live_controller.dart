@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:math' show Random;
-// import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
+import 'package:tingle/common/api/fetch_agora_token_api.dart';
 import 'package:get/get.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/utils/permission.dart';
@@ -76,9 +77,6 @@ class LiveController extends GetxController {
 
   Future<void> initAgora() async {
     try {
-      // await liveModel?.engine?.leaveChannel();
-      // await liveModel?.engine?.release();
-      // liveModel?.engine = null;
       onCreateEngine();
     } catch (e) {
       Utils.showLog("Dispose Failed => $e");
@@ -87,8 +85,9 @@ class LiveController extends GetxController {
 
   Future<void> onDisposeAgora() async {
     try {
-      // await liveModel?.engine?.leaveChannel();
-      // await liveModel?.engine?.release();
+      await liveModel?.engine?.leaveChannel();
+      await liveModel?.engine?.release();
+      liveModel?.engine = null;
     } catch (e) {
       Utils.showLog("Dispose Failed => $e");
     }
@@ -96,13 +95,18 @@ class LiveController extends GetxController {
 
   Future<void> onCreateEngine() async {
     try {
-      // liveModel?.engine = createAgoraRtcEngine();
-      // await liveModel?.engine?.initialize(
-      //   RtcEngineContext(
-      //     appId: Utils.agoraAppId,
-      //     channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
-      //   ),
-      // );
+      if (Utils.agoraAppId.isEmpty) {
+        Utils.showLog("Agora App ID not set. Fetch settings first.");
+        await onJoinChannel();
+        return;
+      }
+      liveModel?.engine = createAgoraRtcEngine();
+      await liveModel?.engine!.initialize(
+        RtcEngineContext(
+          appId: Utils.agoraAppId,
+          channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+        ),
+      );
       await onJoinChannel();
     } catch (e) {
       Utils.showLog("Event Handler => Create Engine Failed => $e");
@@ -112,75 +116,80 @@ class LiveController extends GetxController {
   Future<void> onJoinChannel() async {
     try {
       await onEventHandler();
-      //
-      // await liveModel?.engine?.joinChannel(
-      //   uid: (liveModel?.isHost == true) ? (liveModel?.host1Uid ?? 0) : (liveModel?.host2Uid ?? 0),
-      //   token: liveModel?.host1Token ?? "",
-      //   channelId: liveModel?.host1Channel ?? "",
-      //   options: ChannelMediaOptions(),
-      // );
-      //
-      // await liveModel?.engine?.enableVideo();
-      //
-      // await liveModel?.engine?.setClientRole(role: (liveModel?.isHost == true) ? ClientRoleType.clientRoleBroadcaster : ClientRoleType.clientRoleAudience);
-      //
-      // if (liveModel?.isHost == true) {
-      //   await liveModel?.engine?.startPreview();
-      // }
+
+      String token = liveModel?.host1Token ?? "";
+      String channelId = liveModel?.host1Channel ?? "";
+      int uid = liveModel?.isHost == true ? (liveModel?.host1Uid ?? 0) : (liveModel?.host2Uid ?? 0);
+
+      if (liveModel?.isHost != true && (token.isEmpty || token.startsWith('dummy'))) {
+        final viewerUid = 200000 + Random().nextInt(800000);
+        final payload = await FetchAgoraTokenApi.callApi(
+          channelName: channelId,
+          uid: viewerUid,
+          role: 'subscriber',
+        );
+        if (payload != null) {
+          token = payload.token;
+          uid = payload.uid;
+        }
+      }
+
+      await liveModel?.engine?.joinChannel(
+        token: token,
+        channelId: channelId,
+        uid: uid,
+        options: const ChannelMediaOptions(),
+      );
+
+      await liveModel?.engine?.enableVideo();
+      await liveModel?.engine?.setClientRole(
+        role: (liveModel?.isHost == true) ? ClientRoleType.clientRoleBroadcaster : ClientRoleType.clientRoleAudience,
+      );
+
+      if (liveModel?.isHost == true) {
+        await liveModel?.engine?.startPreview();
+      }
     } catch (e) {
       Utils.showLog("Event Handler => Join Channel Failed => $e");
     }
   }
 
   Future<void> onEventHandler() async {
-    // liveModel?.engine?.registerEventHandler(
-    //   RtcEngineEventHandler(
-    //     onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-    //       Utils.showLog("Event Handler => Host Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid}");
-    //       if (liveModel?.engine != null && liveModel?.isHost == true) {
-    //         liveModel?.isLoading = false;
-    //         update([AppConstant.onEventHandler]);
-    //       }
-    //     },
-    //     onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-    //       Utils.showLog("Event Handler => User Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid} RemoteUid => $remoteUid");
-    //       liveModel?.isLoading = false;
-    //       update([AppConstant.onEventHandler]);
-    //     },
-    //     onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
-    //       Utils.showLog("Event Handler => User Leave Channel Success");
-    //     },
-    //     onError: (e, message) {
-    //       Utils.showLog("Event Handler => Join Channel Failed => $e");
-    //     },
-    //     onChannelMediaRelayStateChanged: (ChannelMediaRelayState state, ChannelMediaRelayError code) {
-    //       Utils.showLog("Event Handler => Channel Media Relay State Changed : $state");
-    //       switch (state) {
-    //         case ChannelMediaRelayState.relayStateIdle:
-    //           Utils.showLog("Event Handler => Channel Media Relay State Changed : ");
-    //           break;
-    //         case ChannelMediaRelayState.relayStateRunning:
-    //           Utils.showLog("Event Handler => Channel Media Relay State Changed : ");
-    //           break;
-    //         case ChannelMediaRelayState.relayStateFailure:
-    //           Utils.showLog("Event Handler => Channel Media Relay State Changed : ");
-    //           break;
-    //         default:
-    //           Utils.showLog("Event Handler => Channel Media Relay State Changed : ");
-    //           break;
-    //       }
-    //     },
-    //   ),
-    // );
+    liveModel?.engine?.registerEventHandler(
+      RtcEngineEventHandler(
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          Utils.showLog("Event Handler => Host Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid}");
+          if (liveModel?.engine != null && liveModel?.isHost == true) {
+            liveModel?.isLoading = false;
+            update([AppConstant.onEventHandler]);
+          }
+        },
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          Utils.showLog("Event Handler => User Join Success => ChannelId => ${connection.channelId} LocalUid => ${connection.localUid} RemoteUid => $remoteUid");
+          liveModel?.isLoading = false;
+          update([AppConstant.onEventHandler]);
+        },
+        onUserOffline: (RtcConnection connection, int remoteUid, UserOfflineReasonType reason) {
+          Utils.showLog("Event Handler => User Leave Channel Success");
+        },
+        onError: (ErrorCodeType err, String message) {
+          Utils.showLog("Event Handler => Join Channel Failed => $err $message");
+        },
+        onChannelMediaRelayStateChanged: (ChannelMediaRelayState state, ChannelMediaRelayError code) {
+          Utils.showLog("Event Handler => Channel Media Relay State Changed : $state");
+        },
+      ),
+    );
   }
 
   Future<void> onSwitchCamera() async {
     try {
-      Get.dialog(const LoadingWidget(), barrierDismissible: false); // Start Loading...
-      // await liveModel?.engine?.switchCamera();
-      Get.back(); // Stop Loading...
+      Get.dialog(const LoadingWidget(), barrierDismissible: false);
+      await liveModel?.engine?.switchCamera();
+      Get.back();
     } catch (e) {
       Utils.showLog("Event Handler => Switch Camera Failed => $e");
+      Get.back();
     }
   }
 
@@ -190,11 +199,11 @@ class LiveController extends GetxController {
       if (liveModel?.isMute == true) {
         liveModel?.isMute = false;
         update([AppConstant.onSwitchMic]);
-        // await liveModel?.engine?.muteLocalAudioStream(false);
+        await liveModel?.engine?.muteLocalAudioStream(false);
       } else {
         liveModel?.isMute = true;
         update([AppConstant.onSwitchMic]);
-        // await liveModel?.engine?.muteLocalAudioStream(true);
+        await liveModel?.engine?.muteLocalAudioStream(true);
       }
     } catch (e) {
       Utils.showLog("Event Handler => Switch Mic Failed => $e");
@@ -203,24 +212,23 @@ class LiveController extends GetxController {
 
   Future<void> onStartChannelMediaRelay() async {
     try {
-      // await liveModel?.engine?.startOrUpdateChannelMediaRelay(
-      //   ChannelMediaRelayConfiguration(
-      //     srcInfo: ChannelMediaInfo(
-      //       channelName: liveModel?.host1Channel ?? "",
-      //       token: liveModel?.host1Token ?? "",
-      //       uid: 0,
-      //     ),
-      //     destInfos: [
-      //       ChannelMediaInfo(
-      //         channelName: liveModel?.host2Channel ?? "",
-      //         token: liveModel?.host2Token ?? "",
-      //         uid: 1,
-      //       ),
-      //     ],
-      //     destCount: 1,
-      //   ),
-      // );
-
+      await liveModel?.engine?.startOrUpdateChannelMediaRelay(
+        ChannelMediaRelayConfiguration(
+          srcInfo: ChannelMediaInfo(
+            channelName: liveModel?.host1Channel ?? "",
+            token: liveModel?.host1Token ?? "",
+            uid: liveModel?.host1Uid ?? 0,
+          ),
+          destInfos: [
+            ChannelMediaInfo(
+              channelName: liveModel?.host2Channel ?? "",
+              token: liveModel?.host2Token ?? "",
+              uid: liveModel?.host2Uid ?? 0,
+            ),
+          ],
+          destCount: 1,
+        ),
+      );
       Utils.showLog("On Start Relay Method Call Success");
     } catch (e) {
       Utils.showLog("Stop Channel Media Relay Failed => $e");
@@ -229,7 +237,7 @@ class LiveController extends GetxController {
 
   Future<void> onStopChannelMediaRelay() async {
     try {
-      // await liveModel?.engine?.stopChannelMediaRelay();
+      await liveModel?.engine?.stopChannelMediaRelay();
     } catch (e) {
       Utils.showLog("Stop Channel Media Relay Failed => $e");
     }

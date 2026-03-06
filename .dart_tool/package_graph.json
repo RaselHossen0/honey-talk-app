@@ -7,6 +7,7 @@
       "name": "tingle",
       "version": "1.0.0+1",
       "dependencies": [
+        "agora_rtc_engine",
         "animated_flip_counter",
         "audioplayers",
         "blurrycontainer",
@@ -43,6 +44,7 @@
         "marquee",
         "path_provider",
         "permission_handler",
+        "razorpay_flutter",
         "readmore",
         "share_plus",
         "shimmer",
@@ -145,6 +147,14 @@
       ]
     },
     {
+      "name": "razorpay_flutter",
+      "version": "1.4.1",
+      "dependencies": [
+        "eventify",
+        "flutter"
+      ]
+    },
+    {
       "name": "date_picker_plus",
       "version": "6.0.0",
       "dependencies": [
@@ -192,6 +202,20 @@
       "dependencies": [
         "flutter",
         "uuid"
+      ]
+    },
+    {
+      "name": "agora_rtc_engine",
+      "version": "6.5.3",
+      "dependencies": [
+        "async",
+        "ffi",
+        "flutter",
+        "flutter_web_plugins",
+        "iris_method_channel",
+        "js",
+        "json_annotation",
+        "meta"
       ]
     },
     {
@@ -762,6 +786,11 @@
       ]
     },
     {
+      "name": "eventify",
+      "version": "1.0.1",
+      "dependencies": []
+    },
+    {
       "name": "dio_web_adapter",
       "version": "2.1.1",
       "dependencies": [
@@ -857,6 +886,34 @@
       ]
     },
     {
+      "name": "js",
+      "version": "0.7.2",
+      "dependencies": []
+    },
+    {
+      "name": "iris_method_channel",
+      "version": "2.2.4",
+      "dependencies": [
+        "async",
+        "ffi",
+        "flutter",
+        "flutter_web_plugins",
+        "js"
+      ]
+    },
+    {
+      "name": "ffi",
+      "version": "2.2.0",
+      "dependencies": []
+    },
+    {
+      "name": "json_annotation",
+      "version": "4.11.0",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
       "name": "crypto",
       "version": "3.0.7",
       "dependencies": [
@@ -942,11 +999,6 @@
     {
       "name": "web",
       "version": "1.1.1",
-      "dependencies": []
-    },
-    {
-      "name": "ffi",
-      "version": "2.2.0",
       "dependencies": []
     },
     {

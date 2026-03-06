@@ -87,7 +87,8 @@ dependencies:
   marquee: any
 
 
-  #  LIVE RELATED
+  #  LIVE RELATED (Agora RTC)
+  agora_rtc_engine: ^6.5.3
 
 #  path_provider: ^2.1.5
 
@@ -107,6 +108,7 @@ dependencies:
 #  PAYMENT METHOD
   dio: any
   date_picker_plus: any
+  razorpay_flutter: any
 
 
 

@@ -77,11 +77,11 @@ abstract class Utils {
   static final String currencyCode = "USD";
   static final String countryCode = "USA";
 
-  // >>>>> >>>>> Show Payment Method <<<<< <<<<<
-  static final bool isShowStripePaymentMethod = true;
+  // >>>>> >>>>> Show Payment Method (Razorpay only in app) <<<<< <<<<<
+  static final bool isShowStripePaymentMethod = false;
   static final bool isShowRazorPayPaymentMethod = true;
-  static final bool isShowFlutterWavePaymentMethod = true;
-  static final bool isShowInAppPurchasePaymentMethod = true;
+  static final bool isShowFlutterWavePaymentMethod = false;
+  static final bool isShowInAppPurchasePaymentMethod = false;
 
   // >>>>> >>>>> RAZORPAY PAYMENT CREDENTIAL <<<<< <<<<<
   static String razorpayTestKey = "";

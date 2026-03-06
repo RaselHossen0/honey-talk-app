@@ -17,11 +17,15 @@ class LoginApi {
   }) async {
     final client = ApiClient.instance;
 
-    // 1) Backend login (Firebase UID) -> accessToken
-    final loginRes = await client.post('/auth/login', body: {
+    // 1) Backend login (Firebase UID) -> accessToken; send name/email/image so backend stores them (e.g. Google)
+    final body = <String, dynamic>{
       'firebaseUid': uid,
       'token': token,
-    });
+    };
+    if (name != null && name!.isNotEmpty) body['name'] = name;
+    if (email.isNotEmpty) body['email'] = email;
+    if (image != null && image!.isNotEmpty) body['image'] = image;
+    final loginRes = await client.post('/auth/login', body: body);
     final accessToken = loginRes['accessToken'] as String?;
     if (accessToken == null || accessToken.isEmpty) {
       return LoginModel(

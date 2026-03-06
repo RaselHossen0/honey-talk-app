@@ -1,6 +1,6 @@
 # Mobile API Integration
 
-Base URL is configured in `lib/core/network/api_config.dart` (`kApiBaseUrl`). Default: `http://localhost:3000/api/v1`. Override with `--dart-define=API_BASE_URL=<url>` for device/emulator (e.g. `http://10.0.2.2:3000/api/v1` for Android emulator).
+Base URL is configured in `lib/core/network/api_config.dart` (`kApiBaseUrl`). Default: **remote API** (same as admin panel, e.g. `http://217.216.78.43:3000/api/v1`). For local dev or emulator, build with `--dart-define=API_BASE_URL=http://10.0.2.2:3000/api/v1` (Android) or `--dart-define=API_BASE_URL=http://localhost:3000/api/v1` (iOS).
 
 ## Integrated (real backend)
 

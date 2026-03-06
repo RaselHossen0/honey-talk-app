@@ -34,11 +34,39 @@
 				<string>com.googleusercontent.apps.1035561747062-posfpblbn79psl85gvr4l2944vmf2pqb</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Razorpay</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>razorpaypayments</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- Razorpay: allow checkout to query installed PSP apps (GPay, PhonePe, etc.) -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tez</string>
+		<string>phonepe</string>
+		<string>paytmmp</string>
+		<string>credpay</string>
+		<string>mobikwik</string>
+		<string>in.fampay.app</string>
+		<string>bhim</string>
+		<string>amazonpay</string>
+		<string>razorpaypayments</string>
+	</array>
+	<!-- Agora: background audio for live / audio room -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Take a photo for display</string>
 	<key>NSMicrophoneUsageDescription</key>

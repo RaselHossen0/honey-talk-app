@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tingle/page/audio_room_page/model/live_top_gift_user_model.dart';
 import 'package:tingle/page/audio_room_page/model/live_viewer_user_model.dart';
@@ -50,7 +51,7 @@ class LiveModel {
 
   // >>>>>>>>>> NOT PASS PARAMETER <<<<<<<<<<
 
-  // RtcEngine? engine;
+  RtcEngine? engine;
   Timer? liveTimer;
   Timer? pkTimer;
   int liveCountTime = 0;

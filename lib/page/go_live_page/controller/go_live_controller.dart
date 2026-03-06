@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tingle/common/api/fetch_agora_token_api.dart';
 import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/page/live_page/model/live_model.dart';
 import 'package:tingle/routes/app_routes.dart';
+import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/permission.dart';
 import 'package:tingle/utils/utils.dart';
@@ -53,39 +55,44 @@ class GoLiveController extends GetxController {
   Future<void> onVideoLive() async {
     Get.dialog(barrierDismissible: false, PopScope(canPop: false, child: const LoadingWidget())); // Start Loading...
 
-    // createLiveUserModel = await StartLiveSteamingApi.callApi(
-    //   token: token,
-    //   uid: uid,
-    //   userId: Database.loginUserId,
-    //   liveType: 1,
-    //   channel: channelId,
-    //   agoraUID: agoraId.toString(),
-    // );
+    final tokenPayload = await FetchAgoraTokenApi.callApi(
+      channelName: channelId,
+      uid: agoraId,
+      role: 'publisher',
+    );
 
     Get.back(); // Stop Loading...
+
+    if (tokenPayload == null) {
+      Utils.showToast(text: "Could not get live token. Check login and Agora config.");
+      return;
+    }
+
+    final profile = Database.fetchLoginUserProfile();
+    final user = profile?.user;
 
     Get.offAndToNamed(AppRoutes.livePage,
         arguments: LiveModel(
           isHost: true,
           isFollow: false,
-          liveType: 1, // 1 = public live (example)
+          liveType: 1, // 1 = public live
           isChannelMediaRelay: false,
 
           // >>>>>>>>>> HOST_1_AGORA_INFO <<<<<<<<<<
-          host1Token: "dummy_agora_token_123456",
-          host1Channel: "dummy_channel_abc",
-          host1Uid: 123456,
-          host1LiveHistoryId: "live_history_7890",
+          host1Token: tokenPayload.token,
+          host1Channel: tokenPayload.channelName,
+          host1Uid: tokenPayload.uid,
+          host1LiveHistoryId: "live_${channelId}_$agoraId",
 
           // >>>>>>>>>> HOST_1_USER_INFO <<<<<<<<<<
-          host1UserId: "user_101",
-          host1Name: "HostUserOne",
-          host1UserName: "host_user1",
-          host1UniqueId: "unique_id_101",
-          host1Image: "https://randomuser.me/api/portraits/men/10.jpg",
-          host1ProfilePicIsBanned: false,
-          host1WealthLevelImage: "wealth_level_2.png",
-          host1Coin: 5000,
+          host1UserId: user?.id ?? Database.loginUserId,
+          host1Name: user?.name ?? "Host",
+          host1UserName: user?.userName ?? "host",
+          host1UniqueId: user?.uniqueId ?? "",
+          host1Image: user?.image ?? "",
+          host1ProfilePicIsBanned: user?.isProfilePicBanned ?? false,
+          host1WealthLevelImage: user?.wealthLevel ?? "",
+          host1Coin: user?.coin ?? 0,
 
           // >>>>>>>>>> HOST_2_USER_INFO <<<<<<<<<<
           host2UserId: "",

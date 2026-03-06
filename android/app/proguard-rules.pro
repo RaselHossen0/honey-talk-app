@@ -20,6 +20,12 @@
 -dontwarn proguard.annotation.KeepClassMembers
 
 -keep class com.stripe.android.pushProvisioning.** { *; }
+
+# Razorpay (required for release build)
+-keepattributes *Annotation*
+-dontwarn com.razorpay.**
+-keep class com.razorpay.** { *; }
 -keep class com.razorpay.AnalyticsEvent { *; }
 -keepclassmembers class com.razorpay.AnalyticsEvent { *; }
-# Gujarati => app release mode ma run noti thati atle stream_pk_item_widget.dart.dart line add karvi padi je ahi thi puri thai chhe
+-optimizations !method/inlining/
+-keepclasseswithmembers class * { public void onPayment*(...); }

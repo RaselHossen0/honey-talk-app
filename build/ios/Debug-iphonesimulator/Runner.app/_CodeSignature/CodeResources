@@ -44,9 +44,289 @@
 		<data>
 		nFC1waP0YzYOchnqa85lPwrC73s=
 		</data>
+		<key>Frameworks/AgoraAiEchoCancellationExtension.framework/AgoraAiEchoCancellationExtension</key>
+		<data>
+		0FJcutZExioZ6L/gm1TFdOWMyLs=
+		</data>
+		<key>Frameworks/AgoraAiEchoCancellationExtension.framework/Info.plist</key>
+		<data>
+		6hSDy5i3fdK9j6RVwfXqVz31xg4=
+		</data>
+		<key>Frameworks/AgoraAiEchoCancellationExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		DLs5AyGr6qmYLkHXsnpPaT341No=
+		</data>
+		<key>Frameworks/AgoraAiEchoCancellationLLExtension.framework/AgoraAiEchoCancellationLLExtension</key>
+		<data>
+		POFwrGzZO4faZQ6RRXpeQmlJKqY=
+		</data>
+		<key>Frameworks/AgoraAiEchoCancellationLLExtension.framework/Info.plist</key>
+		<data>
+		ywf2I0vfm2fjQVZUBDhzEYNTKKM=
+		</data>
+		<key>Frameworks/AgoraAiEchoCancellationLLExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		3Pn60tRx4oZ8ya75OACnLJk7GnA=
+		</data>
+		<key>Frameworks/AgoraAiNoiseSuppressionExtension.framework/AgoraAiNoiseSuppressionExtension</key>
+		<data>
+		lDJrDDskzwn2BpAtBAsPm30PLqY=
+		</data>
+		<key>Frameworks/AgoraAiNoiseSuppressionExtension.framework/Info.plist</key>
+		<data>
+		Cv70223bdKPY2dQ26GrDtV8BDWo=
+		</data>
+		<key>Frameworks/AgoraAiNoiseSuppressionExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		3/4UJ4gxkPW2wnbCE3VP1JB5hBE=
+		</data>
+		<key>Frameworks/AgoraAiNoiseSuppressionLLExtension.framework/AgoraAiNoiseSuppressionLLExtension</key>
+		<data>
+		KURwvEhoaVOb5KkwsExDL0QZ+U4=
+		</data>
+		<key>Frameworks/AgoraAiNoiseSuppressionLLExtension.framework/Info.plist</key>
+		<data>
+		rGbhb+tsEsx4YdkidLQ1DX9tPXo=
+		</data>
+		<key>Frameworks/AgoraAiNoiseSuppressionLLExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		aUF1PgbW1gROSfYS5XU69lKC7Pw=
+		</data>
+		<key>Frameworks/AgoraAudioBeautyExtension.framework/AgoraAudioBeautyExtension</key>
+		<data>
+		0nojUoT7iYshP9ss9eTRx1jEqhE=
+		</data>
+		<key>Frameworks/AgoraAudioBeautyExtension.framework/Info.plist</key>
+		<data>
+		RNaCTabJwkhuCmYj1hKBX+0YAps=
+		</data>
+		<key>Frameworks/AgoraAudioBeautyExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		mwHHKAWgR8jsz8s2dEmPVE6z+3I=
+		</data>
+		<key>Frameworks/AgoraClearVisionExtension.framework/AgoraClearVisionExtension</key>
+		<data>
+		aSanCEJHIhXAlL+crUG2y6fHmpA=
+		</data>
+		<key>Frameworks/AgoraClearVisionExtension.framework/Info.plist</key>
+		<data>
+		hSmrNNQh204R9SY0/xT+6zBwlLY=
+		</data>
+		<key>Frameworks/AgoraClearVisionExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		6KrdA71LYBTH/xZ0/j9sHgtIb2s=
+		</data>
+		<key>Frameworks/AgoraContentInspectExtension.framework/AgoraContentInspectExtension</key>
+		<data>
+		4oaE1AukbGzZ9oHOjwLhgq+hat4=
+		</data>
+		<key>Frameworks/AgoraContentInspectExtension.framework/Info.plist</key>
+		<data>
+		hpf4bG8QJvvmvziKVedqoBLT+WM=
+		</data>
+		<key>Frameworks/AgoraContentInspectExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Rqu3jlt8hDvPKqTN4/CkLscOLpM=
+		</data>
+		<key>Frameworks/AgoraFaceCaptureExtension.framework/AgoraFaceCaptureExtension</key>
+		<data>
+		Cps5jp9BhEl3wyDS0gc7extCKOo=
+		</data>
+		<key>Frameworks/AgoraFaceCaptureExtension.framework/Info.plist</key>
+		<data>
+		yfYi2l5tpzV9fhBuRC0ypEDElNM=
+		</data>
+		<key>Frameworks/AgoraFaceCaptureExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		ek7p1sTqXLaMFgUq9iGzEb2xLXc=
+		</data>
+		<key>Frameworks/AgoraFaceDetectionExtension.framework/AgoraFaceDetectionExtension</key>
+		<data>
+		BpUDEAkYsdyeRxqXbB0/FvRoaRw=
+		</data>
+		<key>Frameworks/AgoraFaceDetectionExtension.framework/Info.plist</key>
+		<data>
+		HAc9efacVMStH50kI2bO7tp+nxc=
+		</data>
+		<key>Frameworks/AgoraFaceDetectionExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		xFBwnWKRGzCEHR4zlcu6g7Vdiow=
+		</data>
+		<key>Frameworks/AgoraLipSyncExtension.framework/AgoraLipSyncExtension</key>
+		<data>
+		Rko/ep9iQoOBx8TraTtP+3MbKoQ=
+		</data>
+		<key>Frameworks/AgoraLipSyncExtension.framework/Info.plist</key>
+		<data>
+		Sj7FvcZDWL883Ys8wJgqsYXTQKM=
+		</data>
+		<key>Frameworks/AgoraLipSyncExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		qlIcD/JP4XpWL2M7e8TLlLPnqF0=
+		</data>
+		<key>Frameworks/AgoraReplayKitExtension.framework/AgoraReplayKitExtension</key>
+		<data>
+		ASrgEOjUaBxrAO+D8Yx5rNNDvqM=
+		</data>
+		<key>Frameworks/AgoraReplayKitExtension.framework/Info.plist</key>
+		<data>
+		ooFWCnVlB+VIZrK9DavjZjClb8o=
+		</data>
+		<key>Frameworks/AgoraReplayKitExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Dy5dbmdAO7/Pv7vPQsam+4hdeiE=
+		</data>
+		<key>Frameworks/AgoraRtcKit.framework/AgoraRtcKit</key>
+		<data>
+		owam62+KzRVscXWV8uybJX2WUpo=
+		</data>
+		<key>Frameworks/AgoraRtcKit.framework/Info.plist</key>
+		<data>
+		9F4ojyJObp3yG/CroIywDNFrSRo=
+		</data>
+		<key>Frameworks/AgoraRtcKit.framework/PrivacyInfo.xcprivacy</key>
+		<data>
+		ZxnHRZP8hmIedoM9Q/zg3kTUNWg=
+		</data>
+		<key>Frameworks/AgoraRtcKit.framework/_CodeSignature/CodeResources</key>
+		<data>
+		ptJnM5z4QffG+3ZDOzkKKUVHjHU=
+		</data>
+		<key>Frameworks/AgoraRtcWrapper.framework/AgoraRtcWrapper</key>
+		<data>
+		LoGLpNr8bQqqhNxLhxJcwOPJSxE=
+		</data>
+		<key>Frameworks/AgoraRtcWrapper.framework/Info.plist</key>
+		<data>
+		cxtRaZ8CyewEhHcALvEBhS2OKHw=
+		</data>
+		<key>Frameworks/AgoraRtcWrapper.framework/_CodeSignature/CodeResources</key>
+		<data>
+		3Fh63U9CUvzs/498r4WcIeTzXws=
+		</data>
+		<key>Frameworks/AgoraSoundTouch.framework/AgoraSoundTouch</key>
+		<data>
+		5GJP5MtZM7f/6NMAh36P/sfVv5I=
+		</data>
+		<key>Frameworks/AgoraSoundTouch.framework/Info.plist</key>
+		<data>
+		2MTF7p/Pk75jgI+25YmrOEI4BGo=
+		</data>
+		<key>Frameworks/AgoraSoundTouch.framework/_CodeSignature/CodeResources</key>
+		<data>
+		rmxgqQvAPomsIonscsyTR/ifMDU=
+		</data>
+		<key>Frameworks/AgoraSpatialAudioExtension.framework/AgoraSpatialAudioExtension</key>
+		<data>
+		C7zkgmKe+04dwRiM4GidxYMHPpo=
+		</data>
+		<key>Frameworks/AgoraSpatialAudioExtension.framework/Info.plist</key>
+		<data>
+		SJvF0p7Lo70Fmc8oyJh+IG/sdbI=
+		</data>
+		<key>Frameworks/AgoraSpatialAudioExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		vCWvNovjIhsq1ihM2+EPvxtcRFY=
+		</data>
+		<key>Frameworks/AgoraVideoAv1DecoderExtension.framework/AgoraVideoAv1DecoderExtension</key>
+		<data>
+		pIGs+yh8sN+LIdBZkn451RlQb10=
+		</data>
+		<key>Frameworks/AgoraVideoAv1DecoderExtension.framework/Info.plist</key>
+		<data>
+		MLel35a1t/oWziGEnAPlbE5FiCM=
+		</data>
+		<key>Frameworks/AgoraVideoAv1DecoderExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		HYk3n3+SCNlXGkGE4VwFzKSr4f0=
+		</data>
+		<key>Frameworks/AgoraVideoAv1EncoderExtension.framework/AgoraVideoAv1EncoderExtension</key>
+		<data>
+		JlRK1Qwiq98uIHdUlIYxphmU64o=
+		</data>
+		<key>Frameworks/AgoraVideoAv1EncoderExtension.framework/Info.plist</key>
+		<data>
+		NsEk23ZZhSqAf8UmPLZWU5MyBU0=
+		</data>
+		<key>Frameworks/AgoraVideoAv1EncoderExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		7mxAW+MkkzTuYvuRtjfoFZBOHe0=
+		</data>
+		<key>Frameworks/AgoraVideoDecoderExtension.framework/AgoraVideoDecoderExtension</key>
+		<data>
+		DpDQIlKKjs6iD+hSytjvg2XBTL4=
+		</data>
+		<key>Frameworks/AgoraVideoDecoderExtension.framework/Info.plist</key>
+		<data>
+		QTpQluGhbIR34YIeCkyrIc0/JNg=
+		</data>
+		<key>Frameworks/AgoraVideoDecoderExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		FIBPfzOc/m0Num7NZaiJvBBlbIg=
+		</data>
+		<key>Frameworks/AgoraVideoEncoderExtension.framework/AgoraVideoEncoderExtension</key>
+		<data>
+		ZCYxxMAwlmx4fPYhzVFGmOvGqio=
+		</data>
+		<key>Frameworks/AgoraVideoEncoderExtension.framework/Info.plist</key>
+		<data>
+		waXzorsYRgL1aJoG/RChUCT4XlM=
+		</data>
+		<key>Frameworks/AgoraVideoEncoderExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		iObs2bHJe2CPVabL5naQLaUHb+o=
+		</data>
+		<key>Frameworks/AgoraVideoQualityAnalyzerExtension.framework/AgoraVideoQualityAnalyzerExtension</key>
+		<data>
+		twRwFYiLQCIKGqcTvsrP36bv67k=
+		</data>
+		<key>Frameworks/AgoraVideoQualityAnalyzerExtension.framework/Info.plist</key>
+		<data>
+		P8UJCsKMs5lUUD/xTlYOpYE4UMU=
+		</data>
+		<key>Frameworks/AgoraVideoQualityAnalyzerExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		QWVezK6GdSX5TxNcy3XibL1zyJY=
+		</data>
+		<key>Frameworks/AgoraVideoSegmentationExtension.framework/AgoraVideoSegmentationExtension</key>
+		<data>
+		h5AqasLQI71c1h2Xwuxva/jKGkI=
+		</data>
+		<key>Frameworks/AgoraVideoSegmentationExtension.framework/Info.plist</key>
+		<data>
+		XxPhw6P8Ar/vOzErth1mkBs8KEs=
+		</data>
+		<key>Frameworks/AgoraVideoSegmentationExtension.framework/_CodeSignature/CodeResources</key>
+		<data>
+		9EvSnjTYtao4Hs0Jhg8Vm3iT6qM=
+		</data>
+		<key>Frameworks/Agorafdkaac.framework/Agorafdkaac</key>
+		<data>
+		3W4Ygq3CquZFB83J1AzWs0LSvxw=
+		</data>
+		<key>Frameworks/Agorafdkaac.framework/Info.plist</key>
+		<data>
+		vWuHVKLtvX4ICgkBfFu054Gthsc=
+		</data>
+		<key>Frameworks/Agorafdkaac.framework/_CodeSignature/CodeResources</key>
+		<data>
+		6sEXvBPntmLtwIFU8MoT/+tkD3Q=
+		</data>
+		<key>Frameworks/Agoraffmpeg.framework/Agoraffmpeg</key>
+		<data>
+		TWc7kCSTln+mj7aK12A00SQJBuA=
+		</data>
+		<key>Frameworks/Agoraffmpeg.framework/Info.plist</key>
+		<data>
+		+Ho/fk+ZidgXSN7qdzcAYb/cxmk=
+		</data>
+		<key>Frameworks/Agoraffmpeg.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Eu2cX8GARpXmmj0/8alHXZUsjZE=
+		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		6F9rR0l3WTl8itnwg8oUgnXaiK8=
+		qTbSuHv8QbOVJqszyNb5eFGZy2U=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +334,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		m9iw8IE5yGpdtrHwebhn2ysz/8A=
+		3TCtwXwTzR73JVLEhs12Pg8jy4w=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -66,7 +346,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		sWrYhszWawGVqkXrEtSH2ZyC06s=
+		VGePxYZqiUm3mz/CIyd7VHPpbpY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NativeAssetsManifest.json</key>
 		<data>
@@ -1438,7 +1718,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		6sHTfW+k976hszAyr/3YEhRlDvo=
+		/sxCqgkOZd2DhZLDI8yELDkVOz0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -2250,6 +2530,106 @@
 		<data>
 		tfTHQMM0bVyGkSx16mlNkWaSQZs=
 		</data>
+		<key>Frameworks/Razorpay.framework/Info.plist</key>
+		<data>
+		xmgSu8xLeHZ8YWwFHPTB3Lo/Tqs=
+		</data>
+		<key>Frameworks/Razorpay.framework/Razorpay</key>
+		<data>
+		lwOZUrVFoffqB51UzlrzjzR+qP4=
+		</data>
+		<key>Frameworks/Razorpay.framework/_CodeSignature/CodeResources</key>
+		<data>
+		gYJSjtIhiKCJgvH2JCoyZsMSNn8=
+		</data>
+		<key>Frameworks/RazorpayCore.framework/Info.plist</key>
+		<data>
+		m6fw0EBcpKmfjtzqKZ+Q+91pQF4=
+		</data>
+		<key>Frameworks/RazorpayCore.framework/RazorpayCore</key>
+		<data>
+		H6oFgEX/z/nZYI6m/PWVlnn6w00=
+		</data>
+		<key>Frameworks/RazorpayCore.framework/_CodeSignature/CodeResources</key>
+		<data>
+		GqBUPtvLIBVurMbrbX8O/FaiP7M=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Assets.car</key>
+		<data>
+		9EtCg2Ey2Zi4Ua584kuKWTJN01U=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/Info.plist</key>
+		<data>
+		DFcy10+V49NKtjJ4RLpByN10P1k=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/MagicXNavController.nib</key>
+		<data>
+		yuYb6MBZumAG+Sav0qEaBcmHLmQ=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/OpinionatedAlertVC.nib</key>
+		<data>
+		lJpTvBonbn9RRzATPmzJI1M3iVg=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/QhR-ml-Zo4-view-36U-4g-R9b.nib</key>
+		<data>
+		u1GRVcFKKCTe6/LYlbwPWibHKm4=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/RBq-mH-fUs-view-vI7-59-shd.nib</key>
+		<data>
+		LnMjZioO4EfsgvrZPhu7iJHWN+Y=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/RazorpayCheckoutVC.nib</key>
+		<data>
+		ENBWg/fxi+P7OShg+NGXd0X+mWQ=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/RazorpayMagicxVC.nib</key>
+		<data>
+		Ia0hGvI0wvIaseYa7wMvQf/q438=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/UINavigationController-ODs-ga-9IN.nib</key>
+		<data>
+		bGP6Gn0m2IGZrunJeitvjtfD6dM=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/ytB-xX-zk3-view-vP9-Lh-TPB.nib</key>
+		<data>
+		GuaLaOgcxzpvPP6jj7CE6UW1x54=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/CommonAssets/Razorpay_Logo.png</key>
+		<data>
+		C/QPifs1kjcxzxgwUgDFDlLjpRw=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/CommonAssets/check_mark.png</key>
+		<data>
+		6d4pPz33KoUobYRDPpGmnPiTVMs=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/CommonAssets/warning.png</key>
+		<data>
+		gxArEMTCcu4a+ueYNB3oMoIh48o=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/EncryptedOtpelf.js</key>
+		<data>
+		A893KbMpygzZy6/G1xrQkAudMxw=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Hash.txt</key>
+		<data>
+		gN8QKnsfFYPlPa6NstmuiJETxJ8=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/Info.plist</key>
+		<data>
+		xLqxXRkEJzTDvHSGcj7fwKE5KGo=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/PrivacyInfo.xcprivacy</key>
+		<data>
+		62HpNLqPh8tKsg+iNP/pSbF2S6M=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/RazorpayStandard</key>
+		<data>
+		a+lzkpMkpRWSTn+y2LbNFksSn50=
+		</data>
+		<key>Frameworks/RazorpayStandard.framework/_CodeSignature/CodeResources</key>
+		<data>
+		nVsbLCicB2bZUcqiYr1gPNqRD3c=
+		</data>
 		<key>Frameworks/RecaptchaInterop.framework/Info.plist</key>
 		<data>
 		AS7Og+0jrVfX2/94JEYlSG90jmI=
@@ -2261,6 +2641,30 @@
 		<key>Frameworks/RecaptchaInterop.framework/_CodeSignature/CodeResources</key>
 		<data>
 		VzwCR3JitVkIMVgu6YKGH7l6EPE=
+		</data>
+		<key>Frameworks/agora_rtc_engine.framework/Info.plist</key>
+		<data>
+		Zab7jttDv8txejWX+8NXCqHiNhI=
+		</data>
+		<key>Frameworks/agora_rtc_engine.framework/_CodeSignature/CodeResources</key>
+		<data>
+		YWkabXCXSwGD7y3bvtwXo4u4rZI=
+		</data>
+		<key>Frameworks/agora_rtc_engine.framework/agora_rtc_engine</key>
+		<data>
+		PkMipnQcWPjR9ZnaVhmgJXOqOMM=
+		</data>
+		<key>Frameworks/aosl.framework/Info.plist</key>
+		<data>
+		2EWlH9eos284bVoaYwLguGtnNKA=
+		</data>
+		<key>Frameworks/aosl.framework/_CodeSignature/CodeResources</key>
+		<data>
+		98FUUD7+fe0xfoGdxlTyMtjPbeU=
+		</data>
+		<key>Frameworks/aosl.framework/aosl</key>
+		<data>
+		UQo/USVQbfydGT6+/PdNFzel/6Y=
 		</data>
 		<key>Frameworks/audioplayers_darwin.framework/Info.plist</key>
 		<data>
@@ -2430,6 +2834,18 @@
 		<data>
 		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
 		</data>
+		<key>Frameworks/iris_method_channel.framework/Info.plist</key>
+		<data>
+		FT59H6lI97vBr6PGI6IvallzRM4=
+		</data>
+		<key>Frameworks/iris_method_channel.framework/_CodeSignature/CodeResources</key>
+		<data>
+		i5rWfp25CyR2DLo0rFFOyMexnXs=
+		</data>
+		<key>Frameworks/iris_method_channel.framework/iris_method_channel</key>
+		<data>
+		npLX9Dtba9qWAfSgdoSirWIXLSQ=
+		</data>
 		<key>Frameworks/libwebp.framework/Info.plist</key>
 		<data>
 		3+S3iAygjQuS82X34X2D7N/IDXI=
@@ -2494,6 +2910,18 @@
 		<data>
 		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
 		</data>
+		<key>Frameworks/razorpay_flutter.framework/Info.plist</key>
+		<data>
+		c9UWq8z2ceHYex29R81eceVieZA=
+		</data>
+		<key>Frameworks/razorpay_flutter.framework/_CodeSignature/CodeResources</key>
+		<data>
+		lX9RIKo9Kw4eGznxQGFZaIFAR30=
+		</data>
+		<key>Frameworks/razorpay_flutter.framework/razorpay_flutter</key>
+		<data>
+		12g1HBedu17VUjb928wT8p8LgKQ=
+		</data>
 		<key>Frameworks/share_plus.framework/Info.plist</key>
 		<data>
 		xHVJiDujQQScMTnyISlQ6bxkSvE=
@@ -2553,6 +2981,30 @@
 		<key>Frameworks/vibration.framework/vibration_privacy.bundle/PrivacyInfo.xcprivacy</key>
 		<data>
 		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
+		<key>Frameworks/video_dec.framework/Info.plist</key>
+		<data>
+		B6G2Zti8QbG36tGdyqCpKCHR5gs=
+		</data>
+		<key>Frameworks/video_dec.framework/_CodeSignature/CodeResources</key>
+		<data>
+		EdPMxX5uqw3O0XHzIeE25DJF9M0=
+		</data>
+		<key>Frameworks/video_dec.framework/video_dec</key>
+		<data>
+		aXRIsbI/bkldNuk/Tr61EPaEO7w=
+		</data>
+		<key>Frameworks/video_enc.framework/Info.plist</key>
+		<data>
+		gftbcwYxfno6WNCXYmPI/9bkK3w=
+		</data>
+		<key>Frameworks/video_enc.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Yew+b7QPENmqYca26JRFYYsxUuc=
+		</data>
+		<key>Frameworks/video_enc.framework/video_enc</key>
+		<data>
+		f7XwZoStt3i8brFsTKKQZ5N4Ecg=
 		</data>
 		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
 		<data>
@@ -2620,7 +3072,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		KxvfsKIAUf0Y3OAHmNn3OnqrrOQ=
+		LXeLlzHvKbLw4KD23hLtWiQXW14=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -2628,11 +3080,11 @@
 		</data>
 		<key>Runner.debug.dylib</key>
 		<data>
-		5aqXVwabhIsGQWDc8azq0F+eGMk=
+		Vf2FlZmhbAjUb7scY67aeyLUIog=
 		</data>
 		<key>__preview.dylib</key>
 		<data>
-		I+y9JnLxtxglYS1ZKmvQYGki8vU=
+		7zy7WtlmY37j/JHkxIZHskt9nho=
 		</data>
 		<key>firebase_messaging_Privacy.bundle/Info.plist</key>
 		<data>
@@ -2727,11 +3179,501 @@
 			y90o2JQjssm+7ysnziyWCNMNbGqdLnZ595pTgURE5T8=
 			</data>
 		</dict>
+		<key>Frameworks/AgoraAiEchoCancellationExtension.framework/AgoraAiEchoCancellationExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oYXrG4Ncat+HoVz8h6g9tmxNkM6ztHviT5fhYIn9ymk=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiEchoCancellationExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8trnYICKBhVTWoTnNtBCEDDiAjDn90jSvfmuE/uHZ8U=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiEchoCancellationExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vLfRV8V2rotIxsBCGQN92ql3rwA9X+vkfthgbPcSQ3U=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiEchoCancellationLLExtension.framework/AgoraAiEchoCancellationLLExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			diU287xAslDK/TUCoXFPvqJpXduukVA0HlfdO5Q7y5o=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiEchoCancellationLLExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			M/PUi0aRhu4bU89uVzxPuGV1+asgUI8wrvf/f9atCMo=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiEchoCancellationLLExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Cnu4BmmsIME2K8cOEsCWKzZXoPzwSdSoSwn0L0Wu0CY=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiNoiseSuppressionExtension.framework/AgoraAiNoiseSuppressionExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			e0+iD5aAjvUVp0wEG/Pw8N8h5rUDG2qOhlzAHyxSMCw=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiNoiseSuppressionExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GTRvohCLXn4jTz0oQf9/c/VChLUV6j0nfPDQMsk7vTQ=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiNoiseSuppressionExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5mSZY1efNw7Ku85ZcX8kwNMce/fZFAsEYYTH+ipZ9z8=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiNoiseSuppressionLLExtension.framework/AgoraAiNoiseSuppressionLLExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/dd04kknAaSOXynXg3s6rdhS1vXgJqE2Q/O7sX7SiBU=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiNoiseSuppressionLLExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EbFEp2h6J9rjz7lrFx0JMVIM9sbbupth2Rwwnuy15V0=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAiNoiseSuppressionLLExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			n9+Q7tsDL82PHiNsA1HqvTDQD8+WEwvgVOLMMBOxBWs=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAudioBeautyExtension.framework/AgoraAudioBeautyExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Wm190hOncFmYUJssdbhA5IYwtuVDYIlJFbVQCJTfxNQ=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAudioBeautyExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3zIFMHiJTAQJ2uvd2o2BZK7f9ez0DCsYJfoSgLW7HxY=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraAudioBeautyExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			6E+M+COohrQ8W2xwgrChAutJaMKN7rIQjnTajmicy1A=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraClearVisionExtension.framework/AgoraClearVisionExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VA5nef4RLXxWAg8E3zOOApGmhneqlstvb4fooM5kRm8=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraClearVisionExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Z+xxSvGlcdmzkvfMIdUDNpZinA0UDnmRLEY51iWoV5c=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraClearVisionExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/2enabPhxQ2ZeLQcgxKRLFDPvabeA20g/2rDKTyD1KQ=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraContentInspectExtension.framework/AgoraContentInspectExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hhlYe2TUN0fTC2Qw9aidsAQ/9vcS38O4Vin747T88IA=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraContentInspectExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tzNvsRBA3Xw6xsLAGRUGPIw+gEcGI17UXgb371/N7oM=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraContentInspectExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			P3oGOjj1j41Ex08kj9qnxd64jLAly9qdEZHc6t64134=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraFaceCaptureExtension.framework/AgoraFaceCaptureExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			nrOPWOzwxRHgtfaL3AliyxzqC2r+8anTgTvv/DixId0=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraFaceCaptureExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bXhIxBcifwxp4cYah2WBsCgkP7+Sz2/GKHKlY/c3mJs=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraFaceCaptureExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			WTb99qPhbppEf0ILSbZSMe7uyksgwKrN45YdPSWvjOA=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraFaceDetectionExtension.framework/AgoraFaceDetectionExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JgR/qOB/TeCJYsrYnCib7exx0fRypSlIyn4sJn3oncQ=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraFaceDetectionExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			WKXtUfbfq715u0Io64/8E7eNX6+gfE64KlPhBECtKEY=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraFaceDetectionExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			B/37IDrI+aExluvIPSerkAGEGWGUxM8jOQsseiShjb8=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraLipSyncExtension.framework/AgoraLipSyncExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XjQFFj/TiMr9HrO726PJ6phDIET94L10aPJkOWjxe2M=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraLipSyncExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			W1kIcZXYK5jrmHOvKu5S9i7CL+EMhmVkKPsJQuItUzo=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraLipSyncExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dg9+Vl/HdPNriED6qJEhbRtWBpP0B31VJ38bxZq4Bwg=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraReplayKitExtension.framework/AgoraReplayKitExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7/rnoW9nDBu5kXXDY/YZlqBLsS2pndRt81Wl1xnXkT4=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraReplayKitExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			c9h/dfOVUjzHHt+zkzCgBlgFYQqa7dWukQ2Z1uFUGj0=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraReplayKitExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			h3k/i/5hMZSvuNS80KVhDU1nKfzffK3NgvF5g9RGLug=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcKit.framework/AgoraRtcKit</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			yb5oi3sCXLNZIVY43PMKl75l87jokvCjJMKF8xVCIHw=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcKit.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			f1oJvjh9c+fR3rFzicPfNdogycSl0ptjdYx8EZB9vTo=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcKit.framework/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+QR911c2LM3SS4qnHDBaGzyjpZ34YQ/GHIyLudYZN2Y=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcKit.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ue9YSXfCsg9OsG7bQWaOTZmXt02pepsV0jlA4rfC3ww=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcWrapper.framework/AgoraRtcWrapper</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ma597M06GNag9AVfKglg9TemroMc21El1lvwxDSIzCM=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcWrapper.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zkX65w0ESf7aYn2xmHajsjKaqj+/0r3LFNwuw+pZAS0=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraRtcWrapper.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QtEu343fcfNFEhhqGLagSsmz0i5ORNxj2QrVbvtmW+I=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraSoundTouch.framework/AgoraSoundTouch</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qP42+Huv4fBg1zge7comj0iHOwDeLjFVq2KH436JRnA=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraSoundTouch.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lESOeoMpVF1baD63xnhTXAVsNyaF620pzOy17ROhGmw=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraSoundTouch.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GVU73AZRKvuxWqt3LV8c7/OP+R8MbKVJqf/0ium00eM=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraSpatialAudioExtension.framework/AgoraSpatialAudioExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			t35uejHz31NxVsv+5J6rT7tGxDT0/jXED9gVm5zCq3o=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraSpatialAudioExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XrcWNDlAZHV2YvMoCM1Eva5nt7zt6zleke+OQiYGUMM=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraSpatialAudioExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OeFHcdMGlTNGYOt3oNgK9oNDnlteMfAXq8oqIZotMZk=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoAv1DecoderExtension.framework/AgoraVideoAv1DecoderExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5SMC8cxev68fXmubtq1yfnGRXggp8Y7x7rJufchLJws=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoAv1DecoderExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bn9OPcmfXuVv8L1nP7yUEq5/LWGOo4j74ihiNOXdhxs=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoAv1DecoderExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			M3otq47MCMIDmu79knBJV2TtAWilli4Z3j1YjFSIt/k=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoAv1EncoderExtension.framework/AgoraVideoAv1EncoderExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ROYFYszhFoPAcScQCDC4BOICMbOSl0Zp7t1wj/YPoZ8=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoAv1EncoderExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3CMGKIqw3VKQN4GIBVzsXxXOIY5TSDo/jE0YrV/95yE=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoAv1EncoderExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			yt5zXL39JngX0NZbA0CWO4hoNJX8/lLaWQPwcpEgo6Y=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoDecoderExtension.framework/AgoraVideoDecoderExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Zeuh0KAxpRZ3/GD6AuXVkPTvmw5eZ9z1lAmAUqNE2jY=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoDecoderExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QCBR1TnCbQV8986JVXyhltvaMTNw32fnkED/FjLfx/Y=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoDecoderExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RKf0tWZmPcoBkiqrkuUE0IRfDxvfc9Gc7zxEBHpBwT4=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoEncoderExtension.framework/AgoraVideoEncoderExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RpCaSiw/3sOWVUqIUKwlZD/uZWT3/Cw99Hr3lq0Hexo=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoEncoderExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ch5+8u94KqWnxm8NsuTxxUSHqSbdse0n7u7anlDGVbk=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoEncoderExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			H0MkOR0DxVulwAeiUafHOzMGUkqTnNx1OfV1JmtFpIE=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoQualityAnalyzerExtension.framework/AgoraVideoQualityAnalyzerExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9Wi9aYkTR09YGVIFefMjY/fXHrY48btPaoSgXAGqCfQ=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoQualityAnalyzerExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			cCr1KVSoTBRJAjNuKD4vYjX3mkIZEoBHTtgBsBeMR20=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoQualityAnalyzerExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xQQe2xK9ypovcLG4j20xr5XfMi8d3k7ApJJpNK16XjY=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoSegmentationExtension.framework/AgoraVideoSegmentationExtension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hmymsZsqCr8OsSxk+AA5+0tgSqxMFwoxElz0SZJAXdk=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoSegmentationExtension.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			830bEmhLG4mqsF2OsKblUicgbY7zXmBXB94rd0SLWlA=
+			</data>
+		</dict>
+		<key>Frameworks/AgoraVideoSegmentationExtension.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7R9OxKrlciNVp/2xH5ukKXWSzO7hZt1FN5NI2xt0CFM=
+			</data>
+		</dict>
+		<key>Frameworks/Agorafdkaac.framework/Agorafdkaac</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			V3DGYEHFiGGfzcrqHBCe7H72jK9MuzJyD5M5ohqgoeE=
+			</data>
+		</dict>
+		<key>Frameworks/Agorafdkaac.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			h9JRJCyFkkv2l1gx5Apwixi9pzQsZJU6oITt+waUPWA=
+			</data>
+		</dict>
+		<key>Frameworks/Agorafdkaac.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			jAp4qbHvYRZduY949RIplxaRtIq6BG20gLYB7ffOVbI=
+			</data>
+		</dict>
+		<key>Frameworks/Agoraffmpeg.framework/Agoraffmpeg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+Nzm2rJgpa6A4fCtSx2zDIbs5xBXYpLo27FqlFPVSXM=
+			</data>
+		</dict>
+		<key>Frameworks/Agoraffmpeg.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			shbsQtQQCt3noGqEsBufT2G0VAxW1soMHzeflCutdVE=
+			</data>
+		</dict>
+		<key>Frameworks/Agoraffmpeg.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iyHz+Vo1lxm3Eie9kZGQTMfUjsqYCXuHVuHLsZsNQgc=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/App</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2c+7nWqjtJ591rxx/sfuxTYCntmyJ3szJJOzmCzjYYs=
+			TH3u8QaJ9iTtdUXwGJMidUOfC4ZA3sOrWHgvh6P4buk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -2745,7 +3687,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			L5pX48y72p69MGXrIjDyJt7R5f3mL+5X6hAL2S/gh+k=
+			KT97dxLL4RO9LuZVSn+CstHiORUg8HZ2ZYJyY81BoW4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -2766,7 +3708,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ek4Qhcs8MIgMbC2jkmSkCsLNAgX+HaBaGHLQcirSIq0=
+			DVZQlBLCLdNBUAy4YDtMHpV+EbNqbbuK2BJZ0RvFiI8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NativeAssetsManifest.json</key>
@@ -5167,7 +6109,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			gHG1QDDtQ6pJ2VVcZP5xMkpedyM9ktEQRgieU4O7JmI=
+			tN5VE43VDg7jpdMXdvqyKrkZgC8BdaAFvIfJkvmEqgg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -6331,6 +7273,181 @@
 			MeHsjsx4spuAyb89QpzF1jR3NjUpcvMG7eiQdRnB25A=
 			</data>
 		</dict>
+		<key>Frameworks/Razorpay.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			32OmHbPx+vpiLU5aC9pQohTLqx0K+A3yv4rblzG1898=
+			</data>
+		</dict>
+		<key>Frameworks/Razorpay.framework/Razorpay</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			eB/JCZhEav0GV143fvXyy73AtCQooqRfdf7zUdEviGo=
+			</data>
+		</dict>
+		<key>Frameworks/Razorpay.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JZWAqaCIj6YnBckBpWI83O7RXINzI5DhQn4wtTHkMQU=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayCore.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rsXTfHOYE5JC6Rf2tTy30DMhWwxMFHhHcTdiFNH5CQc=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayCore.framework/RazorpayCore</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			eXGu1aXSoq9EE41FtX8Ln/z0pEq1iIGQZT+nc6PzdNI=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayCore.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			z6QBNgN6GdqzUOUstVxvJpSwYqQCZtjTMNkAlFccBpk=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Assets.car</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HcTTFmbApmRduIkc+LudaGbZclscDoJ6VJdjQDMk5z8=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XV+Km0uI0aCCx6b8FFBL8ctnAUqg/+iH2HKwpDJJDns=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/MagicXNavController.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JjgmMeT2zi/Fn/dX/Tn9EpWaf/h/V97phbgzJf/s5tw=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/OpinionatedAlertVC.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1Ob3FOiPt2f1zqM9W5jcgrrvwexTDpCAdk1nfgxbpS4=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/QhR-ml-Zo4-view-36U-4g-R9b.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			o1hGLzJ9glnF9lqEsP5EdKt+YdW/PdpPRFUAN40yJAI=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/RBq-mH-fUs-view-vI7-59-shd.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oEAId1xsSOT9rm963O2fq5I3PS7fO1BR7exfoYZucxs=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/RazorpayCheckoutVC.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0D+N+GRb1ZrUQlq4dTQIQfubTWQC44SvjHUHVlVbgeg=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/RazorpayMagicxVC.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			l6Hz4xHGp/8dMGEWk8KuCnewyrV7Y1XGhWysBUgItFY=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/UINavigationController-ODs-ga-9IN.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XAGglA3qk1jngwkCRgRerHHORm3W2aHuyxBFwuGUyik=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Checkout.storyboardc/ytB-xX-zk3-view-vP9-Lh-TPB.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			I8p2+VocnQu/7nTAHxHwPLoZ9J+et+y957CgfHi+MQo=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/CommonAssets/Razorpay_Logo.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			udRErjoaEwN536HIEl+2sH6KQ0Q2KzlKwLYCkQlBGKE=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/CommonAssets/check_mark.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			s+l4gXoMSGUj0xR2eSdXwQTHoyRU5F4+aTSVjO+I8wU=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/CommonAssets/warning.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			S7OOo4xdlAEiEgfkEuic4ap4JZlhvtYIwFSHWu034SA=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/EncryptedOtpelf.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			85Tocsg1aPekBFPeMKMV2IruNGVkOyyV6xlbQkQOH3A=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Hash.txt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			B20CsAEe8H45a3Ivw23aBTWNU7qGh1JYKb/iAwwaIEQ=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KzMG98i+M+arHNO7m+TC3HFYKsu2mo5de67HNiUBCBI=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0GK4q+J5XVD2O8agumlONknk2PSlkzr97y/P84XeCyg=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/RazorpayStandard</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			g/S57/r7UVzmfoXYjEIfWNqnv2xVdYtR8slrgGxmPOk=
+			</data>
+		</dict>
+		<key>Frameworks/RazorpayStandard.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Kxx0tRGOJekP6nVfMLNZhCnEg1M2r6zlvD7wqHbUQZU=
+			</data>
+		</dict>
 		<key>Frameworks/RecaptchaInterop.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -6350,6 +7467,48 @@
 			<key>hash2</key>
 			<data>
 			m7QgsU4FrPY0nNXgAAbugthJwIALxhSuGj9kf8wnLv0=
+			</data>
+		</dict>
+		<key>Frameworks/agora_rtc_engine.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8ZPllqCA/vML9IU2s6cbtBqgJEiHjq/HsJVPTMO71Wk=
+			</data>
+		</dict>
+		<key>Frameworks/agora_rtc_engine.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/Vzirn0gZa58UVOtBSNgvTzCcN18M3XP9RHOExnwU1I=
+			</data>
+		</dict>
+		<key>Frameworks/agora_rtc_engine.framework/agora_rtc_engine</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3/ADUMjNYuzb4cc2bGmHdKQrTCNijIHqH3vS1D6oLJE=
+			</data>
+		</dict>
+		<key>Frameworks/aosl.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vPr6lJqJRX+tG4S7574txdTP//NDZVetnWqfU1prBx8=
+			</data>
+		</dict>
+		<key>Frameworks/aosl.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XoCV8lPNiiFcy3HgOAraS+juciOVvjc6uPGOpB7fftI=
+			</data>
+		</dict>
+		<key>Frameworks/aosl.framework/aosl</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			aiJ+VfPHQcHlWpdj73NK/0ej13coEqjk5rR9wJvy2A8=
 			</data>
 		</dict>
 		<key>Frameworks/audioplayers_darwin.framework/Info.plist</key>
@@ -6646,6 +7805,27 @@
 			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
 			</data>
 		</dict>
+		<key>Frameworks/iris_method_channel.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			k1ZiC65inXjkpL4PMhWvABykutkE/FZ5HRW6YBUCAyI=
+			</data>
+		</dict>
+		<key>Frameworks/iris_method_channel.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			wQV7h3g7GjIsPU57+5T1z03jUNK5ZUJke/1cXq6alTA=
+			</data>
+		</dict>
+		<key>Frameworks/iris_method_channel.framework/iris_method_channel</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rlUYDf5c3rUchaG+snQKTNb4gPaf9RKpQUt3m7r6LSQ=
+			</data>
+		</dict>
 		<key>Frameworks/libwebp.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -6758,6 +7938,27 @@
 			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
 			</data>
 		</dict>
+		<key>Frameworks/razorpay_flutter.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DWPA1/VbcVh+VPuIP7XSihe+iUF4BSTZuojMamtgC74=
+			</data>
+		</dict>
+		<key>Frameworks/razorpay_flutter.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7NPYMCRcjeqMxYQqPL9Bo2ybvXVlLbCQBlhgsdDqASM=
+			</data>
+		</dict>
+		<key>Frameworks/razorpay_flutter.framework/razorpay_flutter</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			axOG//hPHIZDMSBPR2NprsZq/SQoX5v5/NAbsluyctQ=
+			</data>
+		</dict>
 		<key>Frameworks/share_plus.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -6861,6 +8062,48 @@
 			<key>hash2</key>
 			<data>
 			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
+			</data>
+		</dict>
+		<key>Frameworks/video_dec.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			cAv8f/2rvuASeQ73KCI395HUZ3kHUEPCq16I1wbkx0g=
+			</data>
+		</dict>
+		<key>Frameworks/video_dec.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hDw8diXuXG9LYAzq139fk2tIHYymuKffh1wtePvOFVE=
+			</data>
+		</dict>
+		<key>Frameworks/video_dec.framework/video_dec</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0kNTV7M+0wgWizGqp2ZO8e0iYjyxvAii1yNV3bylfU0=
+			</data>
+		</dict>
+		<key>Frameworks/video_enc.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SenspKHe6IFbzfChEXrcTWvsJ/HebG5M0O+pT1obqUk=
+			</data>
+		</dict>
+		<key>Frameworks/video_enc.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zv90krAS1MKtCPzbd1i4RTP/acF3hxR6ke1zDOY9bqc=
+			</data>
+		</dict>
+		<key>Frameworks/video_enc.framework/video_enc</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DtqlLeF30cxvG9NMciOBW0YqF7wdslRor+b20zRu6B8=
 			</data>
 		</dict>
 		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
@@ -6979,14 +8222,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kBPqq2OfsF86FHJ4up3nwTPB0vjd0/WpZ+3dhNqeiPk=
+			wBMgbOG6N/JNZsDR7A8Vv5xvrdovoKrz6fyHWmKzYAI=
 			</data>
 		</dict>
 		<key>__preview.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kUyUanNNawLv0rjwiyO4pQLu5+mDV1Wxhw6jT/nOa88=
+			6sXSbpAXGXTF3aIvLNOs26dxSI8ZT14xGLyT4m9kfbc=
 			</data>
 		</dict>
 		<key>firebase_messaging_Privacy.bundle/Info.plist</key>

@@ -7,9 +7,11 @@ import 'package:tingle/common/widget/loading_widget.dart';
 import 'package:tingle/custom/function/custom_image_picker.dart';
 import 'package:tingle/custom/widget/custom_image_picker_bottom_sheet_widget.dart';
 
+import 'package:tingle/common/api/fetch_agora_token_api.dart';
 import 'package:tingle/page/audio_room_page/model/audio_room_model.dart';
 import 'package:tingle/page/stream_page/model/fetch_live_user_model.dart';
 import 'package:tingle/routes/app_routes.dart';
+import 'package:tingle/utils/database.dart';
 import 'package:tingle/utils/constant.dart';
 import 'package:tingle/utils/utils.dart';
 
@@ -80,36 +82,36 @@ class CreateAudioRoomController extends GetxController {
     } else {
       Get.dialog(barrierDismissible: false, PopScope(canPop: false, child: const LoadingWidget())); // Start Loading...
 
-      // createLiveUserModel = await CreateAudioRoomApi.callApi(
-      //   token: token,
-      //   uid: uid,
-      //   channel: channelId,
-      //   liveType: 2, // Audio Live
-      //   agoraUID: agoraId,
-      //   audioLiveType: isPrivate ? 1 : 2,
-      //   privateCode: isPrivate ? privateCode : 0,
-      //   roomName: nameController.text.trim(),
-      //   roomWelcome: descriptionController.text.trim(),
-      //   roomImage: pickImage ?? "",
-      //   bgTheme: Database.fetchLoginUserProfile()?.user?.activeTheme?.image ?? "",
-      // );
+      final tokenPayload = await FetchAgoraTokenApi.callApi(
+        channelName: channelId,
+        uid: agoraId,
+        role: 'publisher',
+      );
 
       Get.back(); // Stop Loading...
+
+      if (tokenPayload == null) {
+        Utils.showToast(text: "Could not get audio room token. Check login and Agora config.");
+        return;
+      }
+
+      final profile = Database.fetchLoginUserProfile();
+      final user = profile?.user;
 
       Get.offAndToNamed(
         AppRoutes.audioRoomPage,
         arguments: AudioRoomModel(
           isHost: true,
-          hostUserId: "user_12345",
-          hostUid: 56789,
+          hostUserId: user?.id ?? Database.loginUserId,
+          hostUid: tokenPayload.uid,
           hostIsMuted: false,
-          liveHistoryId: "live_history_98765",
-          liveUserObjId: "live_user_obj_123",
-          roomName: "Chill Vibes Room 🎶",
-          roomImage: "https://picsum.photos/400/400?random=1",
-          roomWelcome: "Welcome to the best chill zone!",
-          token: "dummy_agora_token_abc123",
-          channel: "chill_vibes_channel",
+          liveHistoryId: "audio_${channelId}_$agoraId",
+          liveUserObjId: "audio_room_$agoraId",
+          roomName: nameController.text.trim().isNotEmpty ? nameController.text.trim() : "Audio Room",
+          roomImage: pickImage ?? "",
+          roomWelcome: descriptionController.text.trim(),
+          token: tokenPayload.token,
+          channel: tokenPayload.channelName,
           userUid: 0,
           mute: 0,
           audioLiveType: 1, // 1 = public, 2 = private (example)

@@ -77,6 +77,7 @@ class Data {
     String? createdAt,
     String? updatedAt,
     List<String>? profilePhotoList,
+    String? agoraAppId,
   }) {
     _currency = currency;
     _id = id;
@@ -111,6 +112,7 @@ class Data {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _profilePhotoList = profilePhotoList;
+    _agoraAppId = agoraAppId;
   }
 
   Data.fromJson(dynamic json) {
@@ -147,6 +149,7 @@ class Data {
     _createdAt = json['createdAt'];
     _updatedAt = json['updatedAt'];
     _profilePhotoList = json['profilePhotoList'] != null ? json['profilePhotoList'].cast<String>() : [];
+    _agoraAppId = json['agoraAppId'];
   }
   Currency? _currency;
   String? _id;
@@ -181,6 +184,7 @@ class Data {
   String? _createdAt;
   String? _updatedAt;
   List<String>? _profilePhotoList;
+  String? _agoraAppId;
   Data copyWith({
     Currency? currency,
     String? id,
@@ -215,6 +219,7 @@ class Data {
     String? createdAt,
     String? updatedAt,
     List<String>? profilePhotoList,
+    String? agoraAppId,
   }) =>
       Data(
         currency: currency ?? _currency,
@@ -250,6 +255,7 @@ class Data {
         createdAt: createdAt ?? _createdAt,
         updatedAt: updatedAt ?? _updatedAt,
         profilePhotoList: profilePhotoList ?? _profilePhotoList,
+        agoraAppId: agoraAppId ?? _agoraAppId,
       );
   Currency? get currency => _currency;
   String? get id => _id;
@@ -284,6 +290,7 @@ class Data {
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
   List<String>? get profilePhotoList => _profilePhotoList;
+  String? get agoraAppId => _agoraAppId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -324,6 +331,7 @@ class Data {
     map['createdAt'] = _createdAt;
     map['updatedAt'] = _updatedAt;
     map['profilePhotoList'] = _profilePhotoList;
+    map['agoraAppId'] = _agoraAppId;
     return map;
   }
 }
